@@ -19,7 +19,7 @@ class _WelcomeState extends State<Welcome> {
             CircleAvatar(
               radius: 50.0,
               backgroundColor: const Color(0xFFCFD8DC),
-              backgroundImage: AssetImage('images/playstore.png'),
+              backgroundImage: AssetImage('images/app_icon_2.png'),
             ),
             Text(
               'Fun starts at a Farm',

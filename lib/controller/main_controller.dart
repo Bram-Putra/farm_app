@@ -6,6 +6,8 @@ import 'package:farmapp/widget/dashboard_widget.dart';
 import 'package:farmapp/widget/laporan_widget.dart';
 import 'package:farmapp/widget/transaksi_widget.dart';
 import 'package:farmapp/widget/welcome_widget.dart';
+import 'package:farmapp/icon/custom_icon_barn.dart';
+import 'package:farmapp/icon/custom_icon_dashboard.dart';
 
 class MainController {
   String _title = 'Farm House';

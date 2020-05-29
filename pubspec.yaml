@@ -58,6 +58,12 @@ flutter:
   - family: Lobster
     fonts:
       - asset: fonts/Lobster-Regular.ttf
+  - family: CustomIconBarn
+    fonts:
+      - asset: fonts/CustomIconBarn.ttf
+  - family: CustomIconDashboard
+    fonts:
+      - asset: fonts/CustomIconDashboard.ttf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
