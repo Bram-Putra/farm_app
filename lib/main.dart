@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[0].icon),
+                      leading: Icon(mainController.choices[0].icon, color: const Color(0xFFFFFFFF),),
                       title: Text(mainController.choices[0].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[0]);
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[1].icon),
+                      leading: Icon(mainController.choices[1].icon, color: const Color(0xFFFFFFFF),),
                       title: Text(mainController.choices[1].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[1]);
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[2].icon),
+                      leading: Icon(mainController.choices[2].icon, color: const Color(0xFFFFFFFF),),
                       title: Text(mainController.choices[2].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[2]);
@@ -102,7 +102,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[3].icon),
+                      leading: Icon(mainController.choices[3].icon, color: const Color(0xFFFFFFFF),),
                       title: Text(mainController.choices[3].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[3]);
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[4].icon),
+                      leading: Icon(mainController.choices[4].icon, color: const Color(0xFFFFFFFF),),
                       title: Text(mainController.choices[4].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[4]);
