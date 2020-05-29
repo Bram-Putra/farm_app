@@ -14,30 +14,36 @@ class _WelcomeState extends State<Welcome> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            CircleAvatar(
-              radius: 50.0,
-              backgroundColor: const Color(0xFFCFD8DC),
-              backgroundImage: AssetImage('images/app_icon_2.png'),
-            ),
-            Text(
-              'Fun starts at a Farm',
-              style: TextStyle(
-                fontFamily: 'Lobster',
-                fontSize: 30.0,
-                color: const Color(0xFF9E9E9E),
-                fontWeight: FontWeight.bold,
+            Center(
+              child: CircleAvatar(
+                radius: 50.0,
+                backgroundColor: const Color(0xFFCFD8DC),
+                backgroundImage: AssetImage('images/app_icon_2.png'),
               ),
             ),
-            Text(
-              'v 0.0.2',
-              style: TextStyle(
-                fontFamily: 'Source Sans Pro',
-                fontSize: 15.0,
-                color: const Color(0xFF757575),
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2.0,
+            Center(
+              child: Text(
+                'Fun starts at a Farm',
+                style: TextStyle(
+                  fontFamily: 'Lobster',
+                  fontSize: 30.0,
+                  color: const Color(0xFF9E9E9E),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                'v 0.0.2',
+                style: TextStyle(
+                  fontFamily: 'Source Sans Pro',
+                  fontSize: 15.0,
+                  color: const Color(0xFF757575),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2.0,
+                ),
               ),
             ),
           ],
