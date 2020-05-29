@@ -42,6 +42,7 @@ class CageMasterListController {
   void deleteCage(BuildContext context, int indexX) {
     _listCage.removeAt(indexX);
     Scaffold.of(context)
-        .showSnackBar(SnackBar(content: Text('Kandang $indexX is deleted')));
+        .showSnackBar(SnackBar(content: Text('Kandang $indexX is deleted'),
+    behavior: SnackBarBehavior.floating,));
   }
 }

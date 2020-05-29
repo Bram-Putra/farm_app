@@ -40,6 +40,7 @@ class MaterialMasterListController {
   void deleteMaterial(BuildContext context, int indexX) {
     _listMaterial.removeAt(indexX);
     Scaffold.of(context)
-        .showSnackBar(SnackBar(content: Text('Material $indexX is deleted')));
+        .showSnackBar(SnackBar(content: Text('Material $indexX is deleted'),
+    behavior: SnackBarBehavior.floating,));
   }
 }
