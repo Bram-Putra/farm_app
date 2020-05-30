@@ -1,6 +1,7 @@
 import 'package:farmapp/controller/main_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:farmapp/podo/drawer_choice.dart';
@@ -26,6 +27,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Builder(
