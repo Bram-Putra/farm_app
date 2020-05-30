@@ -67,7 +67,7 @@ class _CageMasterListState extends State<CageMasterList> {
           secondaryActions: <Widget>[
             IconSlideAction(
               caption: 'Delete',
-              color: Colors.red,
+              color: const Color(0xFFFF5252),
               icon: Icons.delete,
               onTap: () {
                 _deleteRow(context, index);
