@@ -3,14 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CageMasterListController {
+
+  //TODO: [Mr. I] populate Cage here:
   Cage _cage1 = Cage();
   Cage _cage2 = Cage();
   Cage _cage3 = Cage();
   Cage _cage4 = Cage();
   List<Cage> _listCage = [];
 
-  //TODO: [Bram] populate Cage here:
   CageMasterListController() {
+    //TODO: [Mr. I] dummy data:
     _cage1.cageId = 1;
     _cage1.notes = 'Kandang pertama';
     _cage2.cageId = 2;

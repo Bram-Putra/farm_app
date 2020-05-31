@@ -40,42 +40,49 @@ class _CageMasterListState extends State<CageMasterList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: cmlController.getListSize(),
-      itemBuilder: (context, index) {
-        int cageId = cmlController.getCageId(index);
-        return Slidable(
-          actionPane: SlidableDrawerActionPane(),
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFFCFD8DC),
-              border: Border(
-                bottom: BorderSide(
-                    color: const Color(0xFFBDBDBD),
-                    width: 1.0,
-                    style: BorderStyle.solid),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: const Color(0xFF455A64),
+        onPressed: (){_callCageDetail(null);},
+      ),
+      body: ListView.builder(
+        itemCount: cmlController.getListSize(),
+        itemBuilder: (context, index) {
+          int cageId = cmlController.getCageId(index);
+          return Slidable(
+            actionPane: SlidableDrawerActionPane(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFCFD8DC),
+                border: Border(
+                  bottom: BorderSide(
+                      color: const Color(0xFFBDBDBD),
+                      width: 1.0,
+                      style: BorderStyle.solid),
+                ),
+              ),
+              child: ListTile(
+                title: Text('Kandang: $cageId'),
+                subtitle: Text(cmlController.getCageNotes(index)),
+                onTap: () {
+                  _callCageDetail(cmlController.getCage(index));
+                },
               ),
             ),
-            child: ListTile(
-              title: Text('Kandang: $cageId'),
-              subtitle: Text(cmlController.getCageNotes(index)),
-              onTap: () {
-                _callCageDetail(cmlController.getCage(index));
-              },
-            ),
-          ),
-          secondaryActions: <Widget>[
-            IconSlideAction(
-              caption: 'Delete',
-              color: const Color(0xFFFF5252),
-              icon: Icons.delete,
-              onTap: () {
-                _deleteRow(context, index);
-              },
-            ),
-          ],
-        );
-      },
+            secondaryActions: <Widget>[
+              IconSlideAction(
+                caption: 'Delete',
+                color: const Color(0xFFFF5252),
+                icon: Icons.delete,
+                onTap: () {
+                  _deleteRow(context, index);
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

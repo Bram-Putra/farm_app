@@ -2,6 +2,8 @@ import 'package:farmapp/icon/custom_icon_barn.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:farmapp/controller/master_list_controller.dart';
+import 'package:farmapp/widget/cage_detail_widget.dart';
+import 'package:farmapp/podo/cage.dart';
 
 class MasterList extends StatefulWidget {
   @override
