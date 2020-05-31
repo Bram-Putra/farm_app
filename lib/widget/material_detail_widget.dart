@@ -1,9 +1,14 @@
 import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/materi.dart';
+import 'package:farmapp/podo/materi_type.dart';
+import 'package:farmapp/widget/material_type_dropdownbutton_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'livestock_type_dropdownbutton_widget.dart';
+import 'dart:convert';
+import 'dart:ui';
+import 'package:http/http.dart' as http;
 
 class MaterialDetail extends StatefulWidget {
   final Materi material;
@@ -15,40 +20,48 @@ class MaterialDetail extends StatefulWidget {
 class _MaterialDetailState extends State<MaterialDetail> {
   MainController mainController = MainController();
 
-  final tc1 = TextEditingController();
-  final tc2 = TextEditingController();
-  final tc3 = TextEditingController();
-  final tc4 = TextEditingController();
-  final tc5 = TextEditingController();
-  final tc6 = TextEditingController();
-  final tc7 = TextEditingController();
-  final tc8 = TextEditingController();
-  final tc9 = TextEditingController();
-  final tc10 = TextEditingController();
-  final tc11 = TextEditingController();
-  final tc12 = TextEditingController();
-  final tc13 = TextEditingController();
+  final tcMaterialId = TextEditingController();
+  final tcMaterialName = TextEditingController();
+  final tcUom = TextEditingController();
+  final tcNotes = TextEditingController();
+  MateriType selectedType;
+//  MaterialTypeDropdownButton dbTipe = MaterialTypeDropdownButton();
+  final tcTipe = TextEditingController();
 
-  void tertekan() {
-    setState(() {
-      Alert(
-        context: context,
-        title: 'Notice',
-        desc: tc1.text +
-            tc2.text +
-            tc3.text +
-            tc4.text +
-            tc5.text +
-            tc6.text +
-            tc7.text +
-            tc8.text +
-            tc9.text +
-            tc10.text +
-            tc11.text +
-            tc12.text +
-            tc13.text,
-      ).show();
-    });
+  void tertekan() async {
+    Materi entity = Materi();
+    entity.materialId = int.parse(tcMaterialId.text);
+    entity.materialName = tcMaterialName.text;
+    entity.uom = tcUom.text;
+    MateriType tipe = MateriType();
+    tipe.typeId = int.parse(tcTipe.text);
+//    print(tcTipe.text);
+    entity.materialType = tipe;
+    entity.notes = tcNotes.text;
+
+//    var url = 'http://192.168.1.7:9999/barn/v1/materials';
+    var url = 'http://165.22.61.234:9999/barn/v1/materials';
+    var json = jsonEncode(entity.toJson());
+    print(json);
+    var res = await http.post(url, body: json, headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },);
+//    print(res.body);
+    int code = res.statusCode;
+    print(code);
+    if (code == 200) {
+      setState(() {
+//        Alert(
+//            context: context,
+//            title: 'Notice',
+//            desc: res.body,
+//        ).show();
+        Navigator.pop(context);
+      });
+    } else {
+      print("Something went wrong");
+    }
+
   }
 
   @override
@@ -59,6 +72,13 @@ class _MaterialDetailState extends State<MaterialDetail> {
     } else {
       m = widget.material;
     }
+    tcMaterialId.text = m.materialId.toString();
+    tcMaterialName.text = m.materialName;
+    tcUom.text = m.uom;
+    tcNotes.text = m.notes;
+    selectedType = m.materialType;
+    tcTipe.text = m.materialType.typeId.toString();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF455A64),
@@ -70,33 +90,30 @@ class _MaterialDetailState extends State<MaterialDetail> {
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
             ListTile(
-              title: Text('Material ID'),
-              subtitle: Text(m.notes),
+              title: Text('Material'),
+              subtitle: Text(m.materialName),
             ),
             TextFormField(
               decoration: InputDecoration(labelText: 'Material Name'),
-              controller: tc2,
+              controller: tcMaterialName,
             ),
             TextFormField(
               decoration: InputDecoration(labelText: 'UOM'),
-              controller: tc3,
+              controller: tcUom
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Material Type'),
-              controller: tc4,
-            ),
+            MaterialTypeDropdownButton(tipe: tcTipe),
             TextFormField(
               decoration: InputDecoration(labelText: 'Notes'),
-              controller: tc5,
+              controller: tcNotes
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Deleted'),
-              controller: tc6,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'User'),
-              controller: tc7,
-            ),
+//            TextFormField(
+//              decoration: InputDecoration(labelText: 'Deleted'),
+//              controller: tc6,
+//            ),
+//            TextFormField(
+//              decoration: InputDecoration(labelText: 'User'),
+//              controller: tc7,
+//            ),
             RaisedButton(
               onPressed: () {
                 tertekan();
@@ -112,19 +129,23 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
   @override
   void dispose() {
-    tc1.dispose();
-    tc2.dispose();
-    tc3.dispose();
-    tc4.dispose();
-    tc5.dispose();
-    tc6.dispose();
-    tc7.dispose();
-    tc8.dispose();
-    tc9.dispose();
-    tc10.dispose();
-    tc11.dispose();
-    tc12.dispose();
-    tc13.dispose();
+//    tc1.dispose();
+//    tc2.dispose();
+//    tc3.dispose();
+//    tc4.dispose();
+//    tc5.dispose();
+//    tc6.dispose();
+//    tc7.dispose();
+//    tc8.dispose();
+//    tc9.dispose();
+//    tc10.dispose();
+//    tc11.dispose();
+//    tc12.dispose();
+//    tc13.dispose();
+    tcMaterialId.dispose();
+    tcMaterialName.dispose();
+    tcUom.dispose();
+    tcNotes.dispose();
     super.dispose();
   }
 }

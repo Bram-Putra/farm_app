@@ -31,6 +31,8 @@ dependencies:
   convex_bottom_bar: ^2.1.1
   rflutter_alert: ^1.0.3
   flutter_slidable: ^0.5.4
+  http: ^0.12.1
+
 
 dev_dependencies:
   flutter_test:

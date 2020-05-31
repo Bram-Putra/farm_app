@@ -3,6 +3,9 @@ import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/widget/material_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'dart:convert';
+import 'dart:ui';
+import 'package:http/http.dart' as http;
 
 class MaterialMasterList extends StatefulWidget {
   @override
@@ -11,6 +14,29 @@ class MaterialMasterList extends StatefulWidget {
 
 class _MaterialMasterListState extends State<MaterialMasterList> {
   MaterialMasterListController mmlController = MaterialMasterListController();
+  List<Materi> _listMaterial;
+
+  loadData() async {
+    _listMaterial = mmlController.getList();
+
+    var url = 'http://165.22.61.234:9999/barn/v1/materials/all';
+    var res = await http.get(url);
+    List decodedJson = jsonDecode(res.body);
+
+    int code = res.statusCode;
+    if (code == 200) {
+      setState(() {
+        _listMaterial.clear();
+        for (int i = 0; i < decodedJson.length; i++) {
+          Materi m = Materi.fromJson(decodedJson[i]);
+          _listMaterial.add(m);
+        }
+      });
+
+    } else {
+      print("Something went wrong");
+    }
+  }
 
   void _deleteRow(BuildContext context, int indexX) {
     bool confirmDelete = false;
@@ -39,6 +65,12 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: mmlController.getListSize(),
@@ -57,8 +89,8 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
               ),
             ),
             child: ListTile(
-              title: Text('Material: $materialId'),
-              subtitle: Text(mmlController.getMaterialNotes(index)),
+              title: Text('Material: '+mmlController.getMaterial(index).materialName),
+              subtitle: Text(mmlController.getMaterial(index).uom),
               onTap: (){_callMaterialDetail(mmlController.getMaterial(index));},
             ),
           ),
@@ -77,7 +109,11 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
     );
   }
 
-  void _callMaterialDetail(Materi materialX) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => MaterialDetail(materialX)));
+  void _callMaterialDetail(Materi materialX) async {
+    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => MaterialDetail(materialX)));
+
+    setState(() {
+      loadData();
+    });
   }
 }
