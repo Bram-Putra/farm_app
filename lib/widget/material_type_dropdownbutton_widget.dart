@@ -1,3 +1,4 @@
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:ui';
@@ -17,7 +18,7 @@ class _MaterialTypeDropdownButtonState extends State<MaterialTypeDropdownButton>
   List<MateriType> types = [];
 
   loadData() async{
-    var url = 'http://165.22.61.234:9999/barn/v1/materialTypes/all';
+    var url = url_path+'materialTypes/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
 

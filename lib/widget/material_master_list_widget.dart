@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
+import 'package:farmapp/podo/barn_constant.dart';
 
 class MaterialMasterList extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
   loadData() async {
     _listMaterial = mmlController.getList();
 
-    var url = 'http://165.22.61.234:9999/barn/v1/materials/all';
+    var url = url_path+'materials/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
 

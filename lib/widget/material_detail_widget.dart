@@ -1,14 +1,15 @@
 import 'package:farmapp/controller/main_controller.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/podo/materi_type.dart';
 import 'package:farmapp/widget/material_type_dropdownbutton_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'livestock_type_dropdownbutton_widget.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
+import 'package:farmapp/podo/barn_constant.dart';
 
 class MaterialDetail extends StatefulWidget {
   final Materi material;
@@ -39,8 +40,7 @@ class _MaterialDetailState extends State<MaterialDetail> {
     entity.materialType = tipe;
     entity.notes = tcNotes.text;
 
-//    var url = 'http://192.168.1.7:9999/barn/v1/materials';
-    var url = 'http://165.22.61.234:9999/barn/v1/materials';
+    var url = url_path+'materials';
     var json = jsonEncode(entity.toJson());
     print(json);
     var res = await http.post(url, body: json, headers: <String, String>{
