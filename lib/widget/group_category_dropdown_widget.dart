@@ -46,8 +46,8 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                 elevation: 16,
                 style: TextStyle(color: const Color(0xFF00796B)),
                 underline: Container(
-                  height: 1,
-                  color: const Color(0xFF00796B),
+                  height: 1.2,
+                  color: const Color(0xFF9E9E9E),
                 ),
                 onChanged: (GroupCategory newValue) {
                   updateDropdownButton(newValue, null, null);
@@ -74,8 +74,8 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                 elevation: 16,
                 style: TextStyle(color: const Color(0xFF00796B)),
                 underline: Container(
-                  height: 1,
-                  color: const Color(0xFF00796B),
+                  height: 1.2,
+                  color: const Color(0xFF9E9E9E),
                 ),
                 onChanged: (GroupCategory newValue) {
                   updateDropdownButton(null, newValue, null);
@@ -102,8 +102,8 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                 elevation: 16,
                 style: TextStyle(color: const Color(0xFF00796B)),
                 underline: Container(
-                  height: 1,
-                  color: const Color(0xFF00796B),
+                  height: 1.2,
+                  color: const Color(0xFF9E9E9E),
                 ),
                 onChanged: (GroupCategory newValue) {
                   updateDropdownButton(null, null, newValue);

@@ -3,7 +3,7 @@ import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'livestock_type_dropdownbutton_widget.dart';
+import 'livestock_type_dropdown_widget.dart';
 
 class MaterialDetail extends StatefulWidget {
   final Materi material;

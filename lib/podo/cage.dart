@@ -1,15 +1,18 @@
+import 'package:farmapp/podo/group_category.dart';
+import 'package:farmapp/podo/livestock_type.dart';
+
 class Cage {
   int cageId;
   String tag;
-  String region;
-  String farm;
-  String unit;
+  GroupCategory region;
+  GroupCategory farm;
+  GroupCategory unit;
   double size;
   int drinkingCup;
   int feedingTray;
   int fan;
   String notes;
-  String livestockType;
+  LivestockType livestockType;
   bool deleted;
   String user;
 }

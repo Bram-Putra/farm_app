@@ -1,9 +1,9 @@
 import 'package:farmapp/controller/main_controller.dart';
+import 'package:farmapp/controller/cage_detail_controller.dart';
 import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/widget/group_category_dropdown_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'livestock_type_dropdownbutton_widget.dart';
+import 'livestock_type_dropdown_widget.dart';
 
 class CageDetail extends StatefulWidget {
   final Cage cage;
@@ -14,6 +14,7 @@ class CageDetail extends StatefulWidget {
 
 class _CageDetailState extends State<CageDetail> {
   MainController mainController = MainController();
+  CageDetailController _cageDetailController = CageDetailController();
 
   final tc1 = TextEditingController();
   final tc2 = TextEditingController();
@@ -29,35 +30,50 @@ class _CageDetailState extends State<CageDetail> {
   final tc12 = TextEditingController();
   final tc13 = TextEditingController();
 
-  void tertekan() {
-    setState(() {
-      Alert(
-        context: context,
-        title: 'Notice',
-        desc: tc1.text +
-            tc2.text +
-            tc3.text +
-            tc4.text +
-            tc5.text +
-            tc6.text +
-            tc7.text +
-            tc8.text +
-            tc9.text +
-            tc10.text +
-            tc11.text +
-            tc12.text +
-            tc13.text,
-      ).show();
+  void _save() {
+    bool confirmSave = false;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Save'),
+        content: Text('Save data?'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Confirm')),
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel')),
+        ],
+      ),
+    ).then((value) {
+      confirmSave = value;
+      if (confirmSave) {
+        //TODO: [Mr. I] please add the save command here:
+        Cage cage = Cage();
+        _cageDetailController.saveCage(context, cage);
+        setState(() {
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Cage c;
+    Cage cageLocal;
     if (widget.cage == null) {
-      c = Cage();
+      cageLocal = Cage();
+      cageLocal.cageId = null;
+      cageLocal.tag = '';
+      cageLocal.size = 0.0;
+      cageLocal.drinkingCup = 0;
+      cageLocal.feedingTray = 0;
+      cageLocal.fan = 0;
+      cageLocal.notes = '';
+      cageLocal.deleted = false;
+      cageLocal.user = '';
     } else {
-      c = widget.cage;
+      cageLocal = widget.cage;
     }
     return Scaffold(
       appBar: AppBar(
@@ -72,7 +88,7 @@ class _CageDetailState extends State<CageDetail> {
             GroupCategoryDropdown(),
             ListTile(
               title: Text('Cage ID'),
-              subtitle: Text(c.notes),
+              subtitle: Text(cageLocal.cageId.toString()),
             ),
             TextFormField(
               decoration: InputDecoration(labelText: 'Tag'),
@@ -98,7 +114,7 @@ class _CageDetailState extends State<CageDetail> {
               decoration: InputDecoration(labelText: 'Notes'),
               controller: tc10,
             ),
-            LivestockTypeDropdownButton(),
+            LivestockTypeDropdown(),
             TextFormField(
               decoration: InputDecoration(labelText: 'Deleted'),
               controller: tc12,
@@ -109,7 +125,7 @@ class _CageDetailState extends State<CageDetail> {
             ),
             RaisedButton(
               onPressed: () {
-                tertekan();
+                _save();
               },
               color: Colors.teal,
               child: Text('Save'),
