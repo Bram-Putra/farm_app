@@ -1,5 +1,6 @@
 import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/cage.dart';
+import 'package:farmapp/widget/group_category_dropdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'livestock_type_dropdownbutton_widget.dart';
@@ -68,6 +69,7 @@ class _CageDetailState extends State<CageDetail> {
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
+            GroupCategoryDropdown(),
             ListTile(
               title: Text('Cage ID'),
               subtitle: Text(c.notes),
@@ -75,18 +77,6 @@ class _CageDetailState extends State<CageDetail> {
             TextFormField(
               decoration: InputDecoration(labelText: 'Tag'),
               controller: tc2,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Region'),
-              controller: tc3,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Farm'),
-              controller: tc4,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Unit'),
-              controller: tc5,
             ),
             TextFormField(
               decoration: InputDecoration(labelText: 'Size'),
