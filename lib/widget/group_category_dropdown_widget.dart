@@ -106,18 +106,21 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
         regionValue = getGroupById(int.parse(widget.tcRegion.text));
       } else {
         regionValue = getGroupCategoryByParent(parentGroup);
+        widget.tcRegion.text = regionValue.groupCategoryId.toString();
       }
 //      print('region value: '+regionValue.groupCategoryId.toString());
       if(widget.tcFarm.text!=''){
         farmValue = getGroupById(int.parse(widget.tcFarm.text));
       } else {
         farmValue = getGroupCategoryByParent(regionValue);
+        widget.tcFarm.text = farmValue.groupCategoryId.toString();
       }
 //      print('farm value: '+farmValue.groupCategoryId.toString());
       if(widget.tcUnit.text!=''){
         unitValue = getGroupById(int.parse(widget.tcUnit.text));
       } else {
         unitValue = getGroupCategoryByParent(farmValue);
+        widget.tcUnit.text = unitValue.groupCategoryId.toString();
       }
 //    print('unit value: '+unitValue.groupCategoryId.toString());
     });
