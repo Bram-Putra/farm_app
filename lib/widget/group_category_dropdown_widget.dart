@@ -30,7 +30,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     List<GroupCategory> farms = [];
     List<GroupCategory> units = [];
 
-    var url = url_path+'groupCategories?id=1';
+    var url = url_path+'v1/groupCategories?id=1';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
 //    print(decodedJson);
@@ -52,7 +52,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     /* --GET FARM-- */
     for(int x=0; x<regions.length; x++) {
       GroupCategory r = regions[x];
-      url = url_path+'groupCategories?id='+r.groupCategoryId.toString();
+      url = url_path+'v1/groupCategories?id='+r.groupCategoryId.toString();
       res = await http.get(url);
       List decodedJson = jsonDecode(res.body);
 //      print(decodedJson);
@@ -73,11 +73,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     }
 //    print(farms.length.toString());
     /* --GET UNIT-- */
-//    var url = 'http://165.22.61.234:9999/barn/v1/cages/all';
     for(int x=0; x<farms.length; x++) {
       GroupCategory f = farms[x];
       print(f.groupCategoryId.toString());
-      url = url_path+'groupCategories?id='+f.groupCategoryId.toString();
+      url = url_path+'v1/groupCategories?id='+f.groupCategoryId.toString();
       res = await http.get(url);
       List decodedJson = jsonDecode(res.body);
 //      print(decodedJson);

@@ -1,8 +1,7 @@
-import 'package:farmapp/podo/cage.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/dummy/group_category_dummy.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
 
 class GroupCategoryController {
@@ -21,8 +20,8 @@ class GroupCategoryController {
     List<GroupCategory> regions = [];
     List<GroupCategory> farms = [];
     List<GroupCategory> units = [];
-//    var url = 'http://165.22.61.234:9999/barn/v1/cages/all';
-    var url = 'http://192.168.1.7:9999/barn/v1/groupCategories?id=1';
+
+    var url = url_path+'v1/groupCategories?id=1';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
     print(decodedJson);
@@ -40,10 +39,9 @@ class GroupCategoryController {
     }
 
     /* --GET FARM-- */
-//    var url = 'http://165.22.61.234:9999/barn/v1/cages/all';
     for(int x=0; x<regions.length; x++) {
       GroupCategory r = regions[x];
-      url = 'http://192.168.1.4:9999/barn/v1/groupCategories?id='+r.groupCategoryId.toString();
+      url = url_path+'v1/groupCategories?id='+r.groupCategoryId.toString();
       res = await http.get(url);
       List decodedJson = jsonDecode(res.body);
       print(decodedJson);
@@ -61,10 +59,9 @@ class GroupCategoryController {
     }
 
     /* --GET UNIT-- */
-//    var url = 'http://165.22.61.234:9999/barn/v1/cages/all';
     for(int x=0; x<farms.length; x++) {
       GroupCategory f = farms[x];
-      url = 'http://192.168.1.7:9999/barn/v1/groupCategories?id='+f.groupCategoryId.toString();
+      url = url_path+'v1/groupCategories?id='+f.groupCategoryId.toString();
       res = await http.get(url);
       List decodedJson = jsonDecode(res.body);
       print(decodedJson);

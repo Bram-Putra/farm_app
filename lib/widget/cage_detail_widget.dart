@@ -81,21 +81,6 @@ class _CageDetailState extends State<CageDetail> {
 
   @override
   Widget build(BuildContext context) {
-//    Cage cageLocal;
-//    if (widget.cage == null) {
-//      cageLocal = Cage();
-//      cageLocal.cageId = null;
-//      cageLocal.tag = '';
-//      cageLocal.size = 0.0;
-//      cageLocal.drinkingCup = 0;
-//      cageLocal.feedingTray = 0;
-//      cageLocal.fan = 0;
-//      cageLocal.notes = '';
-////      cageLocal.deleted = false;
-////      cageLocal.user = '';
-//    } else {
-//      cageLocal = widget.cage;
-//    }
     if(widget.cage!=null){
       tcCageId.text = widget.cage.cageId.toString();
       tcTag.text = widget.cage.tag;
@@ -148,14 +133,6 @@ class _CageDetailState extends State<CageDetail> {
               controller: tcNotes,
             ),
             LivestockTypeDropdown(),
-//            TextFormField(
-//              decoration: InputDecoration(labelText: 'Deleted'),
-//              controller: tc12,
-//            ),
-//            TextFormField(
-//              decoration: InputDecoration(labelText: 'User'),
-//              controller: tc13,
-//            ),
             RaisedButton(
               onPressed: () {
                 _save();

@@ -20,7 +20,7 @@ class _CageMasterListState extends State<CageMasterList> {
   loadData() async {
     _listCage = cmlController.getList();
 
-    var url = url_path+'cages/all';
+    var url = url_path+'v1/cages/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
     print(decodedJson);

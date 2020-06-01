@@ -20,7 +20,7 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
   loadData() async {
     _listMaterial = mmlController.getList();
 
-    var url = url_path+'materials/all';
+    var url = url_path+'v1/materials/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
 

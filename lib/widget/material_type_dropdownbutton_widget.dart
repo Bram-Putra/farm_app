@@ -18,7 +18,7 @@ class _MaterialTypeDropdownButtonState extends State<MaterialTypeDropdownButton>
   List<MateriType> types = [];
 
   loadData() async{
-    var url = url_path+'materialTypes/all';
+    var url = url_path+'v1/materialTypes/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
 

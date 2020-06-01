@@ -9,7 +9,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
-import 'package:farmapp/podo/barn_constant.dart';
+
 
 class MaterialDetail extends StatefulWidget {
   final Materi material;
@@ -40,7 +40,7 @@ class _MaterialDetailState extends State<MaterialDetail> {
     entity.materialType = tipe;
     entity.notes = tcNotes.text;
 
-    var url = url_path+'materials';
+    var url = url_path+'v1/materials';
     var json = jsonEncode(entity.toJson());
     print(json);
     var res = await http.post(url, body: json, headers: <String, String>{

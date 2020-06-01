@@ -7,10 +7,9 @@ import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
 
 class CageDetailController {
-  //TODO: [Mr. I] please add the save command here:
+
    saveCage(BuildContext context, Cage cage) async {
-    var url = url_path+'cages';
-//    var url = 'http://165.22.61.234:9999/barn/v1/cages';
+    var url = url_path+'v1/cages';
     var json = jsonEncode(cage.toJson());
     print(json);
     var res = await http.post(url,
