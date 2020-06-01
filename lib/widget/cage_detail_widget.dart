@@ -114,6 +114,9 @@ class _CageDetailState extends State<CageDetail> {
               decoration: InputDecoration(labelText: 'Notes'),
               controller: tc10,
             ),
+            SizedBox(
+              height: 20.0,
+            ),
             LivestockTypeDropdown(),
             TextFormField(
               decoration: InputDecoration(labelText: 'Deleted'),

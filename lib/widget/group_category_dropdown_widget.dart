@@ -36,6 +36,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        SizedBox(height: 10),
         Row(
           children: <Widget>[
             Expanded(
@@ -64,6 +65,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
             ),
           ],
         ),
+        SizedBox(height: 10),
         Row(
           children: <Widget>[
             Expanded(
@@ -92,6 +94,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
             ),
           ],
         ),
+        SizedBox(height: 10),
         Row(
           children: <Widget>[
             Expanded(
