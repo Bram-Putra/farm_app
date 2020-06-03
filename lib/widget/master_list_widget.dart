@@ -1,4 +1,5 @@
 import 'package:farmapp/icon/custom_icon_barn.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:farmapp/controller/master_list_controller.dart';
@@ -26,10 +27,10 @@ class _MasterListState extends State<MasterList> {
       bottomNavigationBar: ConvexAppBar(
         backgroundColor: const Color(0xFF455A64),
         items: [
-          TabItem(icon: CustomIconBarn.barn, title: 'Kandang'),
-          TabItem(icon: Icons.dns, title: 'Material'),
-          TabItem(icon: Icons.donut_large, title: 'Material Type'),
-          TabItem(icon: Icons.change_history, title: 'Livestock'),
+          TabItem(icon: icon_kandang, title: 'Kandang'),
+          TabItem(icon: icon_materi, title: 'Material'),
+          TabItem(icon: icon_materi_type, title: 'Material Type'),
+          TabItem(icon: icon_livestock, title: 'Livestock'),
         ],
         initialActiveIndex: masterListController.getBodyNumber(),
         onTap: (int i) {

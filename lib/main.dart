@@ -1,4 +1,5 @@
 import 'package:farmapp/controller/main_controller.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,8 +51,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[0].icon, color: const Color(0xFFFFFFFF),),
-                      title: Text(mainController.choices[0].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
+                      leading: Icon(mainController.choices[0].icon, color: const Color(color_text_icon),),
+                      title: Text(mainController.choices[0].title, style: TextStyle(color: const Color(color_text_icon)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[0]);
                         Navigator.pop(context);

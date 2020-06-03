@@ -77,7 +77,7 @@ class _CageMasterListState extends State<CageMasterList> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: const Color(0xFF455A64),
+        backgroundColor: const Color(color_primary_dark),
         onPressed: (){_callCageDetail(null);},
       ),
       body: ListView.builder(
@@ -88,10 +88,10 @@ class _CageMasterListState extends State<CageMasterList> {
             actionPane: SlidableDrawerActionPane(),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFCFD8DC),
+                color: const Color(color_primary_light),
                 border: Border(
                   bottom: BorderSide(
-                      color: const Color(0xFFBDBDBD),
+                      color: const Color(color_divider),
                       width: 1.0,
                       style: BorderStyle.solid),
                 ),
@@ -107,7 +107,7 @@ class _CageMasterListState extends State<CageMasterList> {
             secondaryActions: <Widget>[
               IconSlideAction(
                 caption: 'Delete',
-                color: const Color(0xFFFF5252),
+                color: const Color(color_delete),
                 icon: Icons.delete,
                 onTap: () {
                   _deleteRow(context, index);

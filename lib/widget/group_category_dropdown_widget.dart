@@ -164,89 +164,104 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SizedBox(height: 10),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: DropdownButton<GroupCategory>(
-                value: regionValue,
-                icon: Icon(Icons.expand_more),
-                iconSize: 40,
-                elevation: 16,
-                style: TextStyle(color: const Color(0xFF00796B)),
-                underline: Container(
-                  height: 1.2,
-                  color: const Color(0xFF9E9E9E),
+        Container(
+          height: preferred_height,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: DropdownButton<GroupCategory>(
+                    value: regionValue,
+                    icon: Icon(icon_dropdown),
+                    iconSize: dropdown_icon_size,
+                    elevation: dropdown_elevation,
+                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    underline: Container(
+                      height: 1.2,
+                      color: const Color(color_divider),
+                    ),
+                    onChanged: (GroupCategory newValue) {
+                      updateDropdownButton(newValue, null, null);
+                    },
+                    items: getListGroupCategory(parentGroup)
+                        .map<DropdownMenuItem<GroupCategory>>((GroupCategory gc) {
+                      return DropdownMenuItem<GroupCategory>(
+                        value: gc,
+                        child: Text(gc.groupCategoryName),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                onChanged: (GroupCategory newValue) {
-                  updateDropdownButton(newValue, null, null);
-                },
-                items: getListGroupCategory(parentGroup)
-                    .map<DropdownMenuItem<GroupCategory>>((GroupCategory gc) {
-                  return DropdownMenuItem<GroupCategory>(
-                    value: gc,
-                    child: Text(gc.groupCategoryName),
-                  );
-                }).toList(),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-        SizedBox(height: 10),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: DropdownButton<GroupCategory>(
-                value: farmValue,
-                icon: Icon(Icons.expand_more),
-                iconSize: 40,
-                elevation: 16,
-                style: TextStyle(color: const Color(0xFF00796B)),
-                underline: Container(
-                  height: 1.2,
-                  color: const Color(0xFF9E9E9E),
+        Container(
+          height: preferred_height,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: DropdownButton<GroupCategory>(
+                    value: farmValue,
+                    icon: Icon(icon_dropdown),
+                    iconSize: dropdown_icon_size,
+                    elevation: dropdown_elevation,
+                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    underline: Container(
+                      height: 1.2,
+                      color: const Color(color_divider),
+                    ),
+                    onChanged: (GroupCategory newValue) {
+                      updateDropdownButton(null, newValue, null);
+                    },
+                    items: getListGroupCategory(regionValue)
+                        .map<DropdownMenuItem<GroupCategory>>((GroupCategory gc) {
+                      return DropdownMenuItem<GroupCategory>(
+                        value: gc,
+                        child: Text(gc.groupCategoryName),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                onChanged: (GroupCategory newValue) {
-                  updateDropdownButton(null, newValue, null);
-                },
-                items: getListGroupCategory(regionValue)
-                    .map<DropdownMenuItem<GroupCategory>>((GroupCategory gc) {
-                  return DropdownMenuItem<GroupCategory>(
-                    value: gc,
-                    child: Text(gc.groupCategoryName),
-                  );
-                }).toList(),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-        SizedBox(height: 10),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: DropdownButton<GroupCategory>(
-                value: unitValue,
-                icon: Icon(Icons.expand_more),
-                iconSize: 40,
-                elevation: 16,
-                style: TextStyle(color: const Color(0xFF00796B)),
-                underline: Container(
-                  height: 1.2,
-                  color: const Color(0xFF9E9E9E),
+        Container(
+          height: preferred_height,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: DropdownButton<GroupCategory>(
+                    value: unitValue,
+                    icon: Icon(icon_dropdown),
+                    iconSize: dropdown_icon_size,
+                    elevation: dropdown_elevation,
+                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    underline: Container(
+                      height: 1.2,
+                      color: const Color(color_divider),
+                    ),
+                    onChanged: (GroupCategory newValue) {
+                      updateDropdownButton(null, null, newValue);
+                    },
+                    items: getListGroupCategory(farmValue)
+                        .map<DropdownMenuItem<GroupCategory>>((GroupCategory gc) {
+                      return DropdownMenuItem<GroupCategory>(
+                        value: gc,
+                        child: Text(gc.groupCategoryName),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                onChanged: (GroupCategory newValue) {
-                  updateDropdownButton(null, null, newValue);
-                },
-                items: getListGroupCategory(farmValue)
-                    .map<DropdownMenuItem<GroupCategory>>((GroupCategory gc) {
-                  return DropdownMenuItem<GroupCategory>(
-                    value: gc,
-                    child: Text(gc.groupCategoryName),
-                  );
-                }).toList(),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ],
     );

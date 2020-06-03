@@ -1,3 +1,4 @@
+import 'package:farmapp/icon/custom_icon_barn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,14 @@ class _WelcomeState extends State<Welcome> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Center(
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundColor: const Color(0xFFCFD8DC),
-                backgroundImage: AssetImage('images/app_icon_2.png'),
+              child: Icon(
+                CustomIconBarn.barn,
+                size: 120.0,
+                color: const Color(0xFF9E9E9E),
               ),
+            ),
+            SizedBox(
+              height: 20.0,
             ),
             Center(
               child: Text(
@@ -46,7 +50,9 @@ class _WelcomeState extends State<Welcome> {
                 ),
               ),
             ),
-            SizedBox(height: 120.0,),
+            SizedBox(
+              height: 120.0,
+            ),
             Center(
               child: Text(
                 'by',

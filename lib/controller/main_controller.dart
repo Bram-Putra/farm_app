@@ -1,3 +1,5 @@
+import 'package:farmapp/icon/besoft_icons.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/drawer_choice.dart';
 import 'package:farmapp/widget/master_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +20,11 @@ class MainController {
   }
 
   List<DrawerChoice> choices = const <DrawerChoice>[
-    const DrawerChoice(title: 'Dashboard', icon: Icons.multiline_chart),
-    const DrawerChoice(title: 'Transaksi', icon: Icons.update),
-    const DrawerChoice(title: 'Master', icon: Icons.storage),
-    const DrawerChoice(title: 'User', icon: Icons.person),
-    const DrawerChoice(title: 'Laporan', icon: Icons.library_books),
+    const DrawerChoice(title: 'Dashboard', icon: icon_dashboard),
+    const DrawerChoice(title: 'Transaksi', icon: icon_transaksi),
+    const DrawerChoice(title: 'Master', icon: icon_master),
+    const DrawerChoice(title: 'User', icon: icon_user),
+    const DrawerChoice(title: 'Laporan', icon: icon_laporan),
   ];
 
   void setSelectedDrawerChoice(DrawerChoice dc) {
