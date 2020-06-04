@@ -81,10 +81,10 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
           actionPane: SlidableDrawerActionPane(),
           child: Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFCFD8DC),
+              color: const Color(color_primary_light),
               border: Border(
                 bottom: BorderSide(
-                    color: const Color(0xFFBDBDBD),
+                    color: const Color(color_divider),
                     width: 1.0,
                     style: BorderStyle.solid),
               ),
@@ -98,7 +98,7 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
           secondaryActions: <Widget>[
             IconSlideAction(
               caption: 'Delete',
-              color: const Color(0xFFFF5252),
+              color: const Color(color_delete),
               icon: Icons.delete,
               onTap: () {
                 _deleteRow(context, index);

@@ -29,7 +29,7 @@ class _MaterialDetailState extends State<MaterialDetail> {
 //  MaterialTypeDropdownButton dbTipe = MaterialTypeDropdownButton();
   final tcTipe = TextEditingController();
 
-  void tertekan() async {
+  void save() async {
     Materi entity = Materi();
     entity.materialId = int.parse(tcMaterialId.text);
     entity.materialName = tcMaterialName.text;
@@ -46,16 +46,10 @@ class _MaterialDetailState extends State<MaterialDetail> {
     var res = await http.post(url, body: json, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },);
-//    print(res.body);
     int code = res.statusCode;
     print(code);
     if (code == 200) {
       setState(() {
-//        Alert(
-//            context: context,
-//            title: 'Notice',
-//            desc: res.body,
-//        ).show();
         Navigator.pop(context);
       });
     } else {
@@ -89,37 +83,58 @@ class _MaterialDetailState extends State<MaterialDetail> {
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            ListTile(
-              title: Text('Material'),
-              subtitle: Text(m.materialName),
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Material'),
+                  initialValue: tcMaterialName.text,
+                  enabled: false,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Material Name'),
-              controller: tcMaterialName,
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Material Name'),
+                  controller: tcMaterialName,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'UOM'),
-              controller: tcUom
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'UOM'),
+                  controller: tcUom
+                ),
+              ),
             ),
             MaterialTypeDropdownButton(tipe: tcTipe),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Notes'),
-              controller: tcNotes
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Notes'),
+                  controller: tcNotes
+                ),
+              ),
             ),
-//            TextFormField(
-//              decoration: InputDecoration(labelText: 'Deleted'),
-//              controller: tc6,
-//            ),
-//            TextFormField(
-//              decoration: InputDecoration(labelText: 'User'),
-//              controller: tc7,
-//            ),
-            RaisedButton(
-              onPressed: () {
-                tertekan();
-              },
-              color: Colors.teal,
-              child: Text('Save'),
+            SizedBox(height: 10.0,),
+            ButtonTheme(
+              height: raised_button_height,
+              child: RaisedButton(
+                onPressed: () {
+                  save();
+                },
+                color: Colors.teal,
+                child: Text('Save', style: TextStyle(fontSize: raised_button_font_size, color: color_raised_button_text),),
+              ),
             ),
           ],
         ),
@@ -129,19 +144,6 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
   @override
   void dispose() {
-//    tc1.dispose();
-//    tc2.dispose();
-//    tc3.dispose();
-//    tc4.dispose();
-//    tc5.dispose();
-//    tc6.dispose();
-//    tc7.dispose();
-//    tc8.dispose();
-//    tc9.dispose();
-//    tc10.dispose();
-//    tc11.dispose();
-//    tc12.dispose();
-//    tc13.dispose();
     tcMaterialId.dispose();
     tcMaterialName.dispose();
     tcUom.dispose();

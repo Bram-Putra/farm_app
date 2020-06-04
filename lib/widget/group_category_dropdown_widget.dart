@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:farmapp/podo/group_category.dart';
-import 'package:farmapp/controller/group_category_controller.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
@@ -11,12 +10,12 @@ class GroupCategoryDropdown extends StatefulWidget {
   TextEditingController tcFarm;
   TextEditingController tcUnit;
   GroupCategoryDropdown({Key key, this.tcRegion, this.tcFarm, this.tcUnit}) : super(key: key);
+
   @override
   _GroupCategoryDropdownState createState() => _GroupCategoryDropdownState();
 }
 
 class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
-//  static GroupCategoryController groupCategoryController = GroupCategoryController();
   List<GroupCategory> _listGroupCategory = [];
   GroupCategory parentGroup = GroupCategory(groupCategoryId: 1);
   GroupCategory regionValue;
