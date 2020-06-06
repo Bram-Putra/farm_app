@@ -21,9 +21,10 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
 
     var url = url_path+'v1/livestockTypes/all';
     var res = await http.get(url);
-    List decodedJson = jsonDecode(res.body);
+//    print(res.body);
     int code = res.statusCode;
     if (code == 200) {
+      List decodedJson = jsonDecode(res.body);
       _listLivestockType.clear();
       for (int i = 0; i < decodedJson.length; i++) {
         LivestockType lst = LivestockType.fromJson(decodedJson[i]);

@@ -29,23 +29,26 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
   void save() async {
     Materi entity = Materi();
-    entity.materialId = int.parse(tcMaterialId.text);
+    if(tcMaterialId.text!='') {
+      entity.materialId = int.parse(tcMaterialId.text);
+    }
     entity.materialName = tcMaterialName.text;
     entity.uom = tcUom.text;
     MateriType tipe = MateriType();
     tipe.typeId = int.parse(tcTipe.text);
 //    print(tcTipe.text);
     entity.materialType = tipe;
+    entity.materialType = tipe;
     entity.notes = tcNotes.text;
 
     var url = url_path+'v1/materials';
     var json = jsonEncode(entity.toJson());
-    print(json);
+//    print(json);
     var res = await http.post(url, body: json, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },);
     int code = res.statusCode;
-    print(code);
+//    print(code);
     if (code == 200) {
       setState(() {
         Navigator.pop(context);
@@ -63,13 +66,14 @@ class _MaterialDetailState extends State<MaterialDetail> {
       m = Materi();
     } else {
       m = widget.material;
+      tcMaterialId.text = m.materialId.toString();
+      tcMaterialName.text = m.materialName;
+      tcUom.text = m.uom;
+      tcNotes.text = m.notes;
+      selectedType = m.materialType;
+      tcTipe.text = m.materialType.typeId.toString();
     }
-    tcMaterialId.text = m.materialId.toString();
-    tcMaterialName.text = m.materialName;
-    tcUom.text = m.uom;
-    tcNotes.text = m.notes;
-    selectedType = m.materialType;
-    tcTipe.text = m.materialType.typeId.toString();
+
 
     return Scaffold(
       appBar: AppBar(

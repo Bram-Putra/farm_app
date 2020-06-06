@@ -6,8 +6,8 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 
 class CageDropdownButton extends StatefulWidget {
-  TextEditingController cage;
-  CageDropdownButton({Key key, this.cage}) : super(key: key);
+  TextEditingController tcCage;
+  CageDropdownButton({Key key, this.tcCage}) : super(key: key);
 
   @override
   _CageDropdownButtonState createState() => _CageDropdownButtonState();
@@ -20,25 +20,26 @@ class _CageDropdownButtonState extends State<CageDropdownButton> {
   loadData() async{
     var url = url_path+'v1/cages/all';
     var res = await http.get(url);
-    List decodedJson = jsonDecode(res.body);
 
     int code = res.statusCode;
     if (code == 200) {
+      List decodedJson = jsonDecode(res.body);
       setState(() {
         for(int i=0; i<decodedJson.length; i++){
           Cage c = Cage.fromJson(decodedJson[i]);
           cages.add(c);
         }
         if(cages!=null && cages.length>0) {
-          if(widget.cage.text!='') {
+          if(widget.tcCage.text!='') {
             for (int i = 0; i < cages.length; i++) {
-              if (cages[i].cageId.toString() == widget.cage.text) {
+              if (cages[i].cageId.toString() == widget.tcCage.text) {
                 selectedValue = cages[i];
               }
             }
           } else {
             selectedValue = cages[0];
           }
+          widget.tcCage.text = selectedValue.cageId.toString();
         }
       });
     } else {
@@ -67,7 +68,7 @@ class _CageDropdownButtonState extends State<CageDropdownButton> {
       onChanged: (Cage newValue) {
         setState(() {
           selectedValue = newValue;
-          widget.cage.text = newValue.cageId.toString();
+          widget.tcCage.text = newValue.cageId.toString();
         });
       },
       items: cages.map((Cage value){

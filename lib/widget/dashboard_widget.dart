@@ -65,7 +65,7 @@ class _DashboardState extends State<Dashboard> {
                   _listDailyCheck[index].checkNumber +
                   '\n' +
                   'Check Date: ' +
-                  _listDailyCheck[index].checkDate +
+                  _listDailyCheck[index].checkDate.toString() +
                   '\n' +
                   'Alive: ' +
                   _listDailyCheck[index].alive.toString() +

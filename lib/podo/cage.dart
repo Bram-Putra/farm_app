@@ -47,7 +47,7 @@ class Cage {
     var jsonLivestockType = json['livestockType'];
     if(jsonLivestockType!=null) {
       livestockType = LivestockType();
-      livestockType.livestockId = jsonLivestockType['livestockId'];
+      livestockType.livestockId = jsonLivestockType['livestockTypeId'];
       livestockType.livestockName = jsonLivestockType['livestockName'];
     }
   }

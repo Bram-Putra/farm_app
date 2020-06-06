@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 const url_path = 'http://165.22.61.234:9999/barn/';
 //const url_path = 'http://192.168.1.4:9999/barn/';
 
+const app_title = 'Farm House';
+
 //Color:
 const color_primary_dark = 0xFF455A64;
 const color_primary_medium = 0xFF607D8B;

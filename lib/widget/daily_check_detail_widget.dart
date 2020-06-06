@@ -143,7 +143,7 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
 //            Text(
 //              tcCheckDate.text
 //            ),
-            CageDropdownButton(cage: tcCage),
+            CageDropdownButton(tcCage: tcCage),
             TextFormField(
               decoration: InputDecoration(labelText: 'Hidup'),
               controller: tcAlive,
