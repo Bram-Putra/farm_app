@@ -1,4 +1,6 @@
+import 'package:farmapp/controller/group_category_master_list_controller.dart';
 import 'package:farmapp/controller/material_master_list_controller.dart';
+import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/widget/material_detail_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,32 +10,31 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
 
-class MaterialMasterList extends StatefulWidget {
+class GroupCategoryMasterList extends StatefulWidget {
   @override
-  _MaterialMasterListState createState() => _MaterialMasterListState();
+  _GroupCategoryMasterListState createState() => _GroupCategoryMasterListState();
 }
 
-class _MaterialMasterListState extends State<MaterialMasterList> {
-  MaterialMasterListController mmlController = MaterialMasterListController();
-  List<Materi> _listMaterial;
+class _GroupCategoryMasterListState extends State<GroupCategoryMasterList> {
+  GroupCategoryMasterListController gcmlController = GroupCategoryMasterListController();
+  List<GroupCategory> _listGroupCategory;
 
   loadData() async {
-    _listMaterial = mmlController.getList();
+    _listGroupCategory = gcmlController.getList();
 
-    var url = url_path+'v1/materials/all';
+    var url = url_path+'v1/groupCategories/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
 
     int code = res.statusCode;
     if (code == 200) {
       setState(() {
-        _listMaterial.clear();
+        _listGroupCategory.clear();
         for (int i = 0; i < decodedJson.length; i++) {
-          Materi m = Materi.fromJson(decodedJson[i]);
-          _listMaterial.add(m);
+          GroupCategory m = GroupCategory.fromJson(decodedJson[i]);
+          _listGroupCategory.add(m);
         }
       });
-
     } else {
       print("Something went wrong");
     }
@@ -45,7 +46,7 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Delete'),
-        content: Text('Material $indexX will be deleted'),
+        content: Text('Group Category $indexX will be deleted'),
         actions: <Widget>[
           FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
@@ -58,7 +59,7 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
     ).then((value) {
       confirmDelete = value;
       if (confirmDelete) {
-        mmlController.deleteMaterial(context, indexX);
+        gcmlController.deleteGroupCategory(context, indexX);
         setState(() {
         });
       }
@@ -74,31 +75,30 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: mmlController.getListSize(),
+      itemCount: gcmlController.getListSize(),
       itemBuilder: (context, index) {
-        int materialId = mmlController.getMaterialId(index);
         return Slidable(
           actionPane: SlidableDrawerActionPane(),
           child: Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFCFD8DC),
+              color: const Color(color_primary_light),
               border: Border(
                 bottom: BorderSide(
-                    color: const Color(0xFFBDBDBD),
+                    color: const Color(color_divider),
                     width: 1.0,
                     style: BorderStyle.solid),
               ),
             ),
             child: ListTile(
-              title: Text('Material: '+mmlController.getMaterial(index).materialName),
-              subtitle: Text(mmlController.getMaterial(index).uom),
-              onTap: (){_callMaterialDetail(mmlController.getMaterial(index));},
+              title: Text('Group Category: '+gcmlController.getGroupCategory(index).groupCategoryName),
+              subtitle: Text('Parent: '+gcmlController.getGroupCategory(index).parent.groupCategoryName),
+              onTap: (){_callGroupCategoryDetail(gcmlController.getGroupCategory(index));},
             ),
           ),
           secondaryActions: <Widget>[
             IconSlideAction(
               caption: 'Delete',
-              color: const Color(0xFFFF5252),
+              color: const Color(color_delete),
               icon: Icons.delete,
               onTap: () {
                 _deleteRow(context, index);
@@ -110,8 +110,8 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
     );
   }
 
-  void _callMaterialDetail(Materi materialX) async {
-    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => MaterialDetail(materialX)));
+  void _callGroupCategoryDetail(GroupCategory gcX) async {
+//    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => GroupCategoryDetail(gcX)));
 
     setState(() {
       loadData();

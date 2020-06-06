@@ -1,4 +1,5 @@
 import 'package:farmapp/controller/main_controller.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,17 +42,17 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
                     ),
                     child: ListTile(
-                      leading: Icon(mainController.choices[0].icon, color: const Color(0xFFFFFFFF),),
-                      title: Text(mainController.choices[0].title, style: TextStyle(color: const Color(0xFFFFFFFF)),),
+                      leading: Icon(mainController.choices[0].icon, color: const Color(color_text_icon),),
+                      title: Text(mainController.choices[0].title, style: TextStyle(color: const Color(color_text_icon)),),
                       onTap: (){
                         _setSelectedDrawer(mainController.choices[0]);
                         Navigator.pop(context);
@@ -60,10 +61,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -79,10 +80,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -98,10 +99,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -117,10 +118,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -138,8 +139,8 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             appBar: AppBar(
-              backgroundColor: const Color(0xFF455A64),
-              title: const Text('Farm House'),
+              backgroundColor: const Color(color_primary_dark),
+              title: Text(mainController.getTitle()),
             ),
             body: mainController.getSelectedBody(),
           ),

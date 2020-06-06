@@ -1,3 +1,4 @@
+import 'package:farmapp/podo/daily_check.dart';
 import 'dart:convert';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/daily_check_chart.dart';
@@ -5,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class DashboardController {
-
+  List<DailyCheck> _listDailyCheck = [];
   DashboardController() {}
 
   Future<DailyCheckChartModel> selectDailyCheckChart() async {
@@ -61,5 +62,17 @@ class DashboardController {
         data: averageWeights,
       )
     ];
+  }
+
+  List<DailyCheck> getList() {
+    return _listDailyCheck;
+  }
+
+  DailyCheck getDailyCheck(int indexX) {
+    return _listDailyCheck[indexX];
+  }
+
+  int getListSize() {
+    return _listDailyCheck.length;
   }
 }

@@ -50,29 +50,40 @@ class _MaterialTypeDropdownButtonState extends State<MaterialTypeDropdownButton>
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<MateriType>(
-      value: selectedValue,
-      icon: Icon(Icons.expand_more),
-      iconSize: 24,
-      elevation: 16,
-      style: TextStyle(color: const Color(0xFF00796B)),
-      underline: Container(
-        height: 2,
-        color: const Color(0xFF00796B),
+    return Container(
+      height: preferred_height,
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: DropdownButton<MateriType>(
+                value: selectedValue,
+                icon: Icon(icon_dropdown),
+                iconSize: dropdown_icon_size,
+                elevation: dropdown_elevation,
+                style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                underline: Container(
+                  height: 1.2,
+                  color: const Color(color_divider),
+                ),
+                onChanged: (MateriType newValue) {
+                  setState(() {
+                    selectedValue = newValue;
+                    widget.tipe.text = newValue.typeId.toString();
+                  });
+                },
+                items: types.map((MateriType value){
+                  return DropdownMenuItem<MateriType>(
+                    value: value,
+                    child: Text(value.typeName),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
-      onChanged: (MateriType newValue) {
-
-        setState(() {
-          selectedValue = newValue;
-          widget.tipe.text = newValue.typeId.toString();
-        });
-      },
-      items: types.map((MateriType value){
-        return DropdownMenuItem<MateriType>(
-          value: value,
-          child: Text(value.typeName),
-        );
-      }).toList(),
     );
   }
 

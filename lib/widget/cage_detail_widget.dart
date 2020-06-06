@@ -1,5 +1,6 @@
 import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/controller/cage_detail_controller.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/podo/livestock_type.dart';
@@ -15,7 +16,6 @@ class CageDetail extends StatefulWidget {
 }
 
 class _CageDetailState extends State<CageDetail> {
-  MainController mainController = MainController();
   CageDetailController _cageDetailController = CageDetailController();
 
   final tcCageId = TextEditingController();
@@ -96,52 +96,96 @@ class _CageDetailState extends State<CageDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF455A64),
-        title: Text(mainController.getTitle()),
+        title: Text('Kandang'),
       ),
       body: Container(
         color: const Color(0xFFCFD8DC),
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Nama Kandang'),
+                  initialValue: tcTag.text,
+                  enabled: false,
+                ),
+              ),
+            ),
             GroupCategoryDropdown(tcRegion: this.tcRegion, tcFarm: this.tcFarm, tcUnit: this.tcUnit),
-            ListTile(
-              title: Text('Cage'),
-              subtitle: Text(tcTag.text),
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Tag'),
+                  controller: tcTag,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Tag'),
-              controller: tcTag,
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Size'),
+                  controller: tcSize,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Size'),
-              controller: tcSize,
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Drinking Cup'),
+                  controller: tcDrinkingCup,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Drinking Cup'),
-              controller: tcDrinkingCup,
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Feeding Tray'),
+                  controller: tcFeedingTray,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Feeding Tray'),
-              controller: tcFeedingTray,
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Fan'),
+                  controller: tcFan,
+                ),
+              ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Fan'),
-              controller: tcFan,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Notes'),
-              controller: tcNotes,
-            ),
-            SizedBox(
-              height: 20.0,
+            Container(
+              height: preferred_height,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Notes'),
+                  controller: tcNotes,
+                ),
+              ),
             ),
             LivestockTypeDropdown(),
-            RaisedButton(
-              onPressed: () {
-                _save();
-              },
-              color: Colors.teal,
-              child: Text('Save'),
+            SizedBox(height: 10.0,),
+            ButtonTheme(
+              height: raised_button_height,
+              child: RaisedButton(
+                onPressed: () {
+                  _save();
+                },
+                color: color_raised_button,
+                child: Text('Save', style: TextStyle(fontSize: raised_button_font_size, color: color_raised_button_text),),
+              ),
             ),
           ],
         ),
