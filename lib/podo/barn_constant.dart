@@ -31,6 +31,7 @@ const IconData icon_materi_type = Icons.donut_large;
 const IconData icon_transaksi = Icons.multiline_chart;
 const IconData icon_user = Icons.person;
 const IconData icon_dropdown = Icons.expand_more;
+const IconData icon_group_type = Icons.details;
 
 //Size
 const double preferred_font_size = 16.0;

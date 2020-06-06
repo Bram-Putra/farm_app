@@ -16,7 +16,6 @@ class CageDetail extends StatefulWidget {
 }
 
 class _CageDetailState extends State<CageDetail> {
-  MainController mainController = MainController();
   CageDetailController _cageDetailController = CageDetailController();
 
   final tcCageId = TextEditingController();
@@ -97,7 +96,7 @@ class _CageDetailState extends State<CageDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF455A64),
-        title: Text(mainController.getTitle()),
+        title: Text('Kandang'),
       ),
       body: Container(
         color: const Color(0xFFCFD8DC),
@@ -109,7 +108,7 @@ class _CageDetailState extends State<CageDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Kandang'),
+                  decoration: InputDecoration(labelText: 'Nama Kandang'),
                   initialValue: tcTag.text,
                   enabled: false,
                 ),

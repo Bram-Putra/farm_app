@@ -25,12 +25,15 @@ class _MasterListState extends State<MasterList> {
     return Scaffold(
       body: masterListController.getBody(),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: const Color(0xFF455A64),
+        curveSize: 60.0,
+        top: -14.0,
+        backgroundColor: const Color(color_primary_dark),
         items: [
           TabItem(icon: icon_kandang, title: 'Kandang'),
           TabItem(icon: icon_materi, title: 'Material'),
-          TabItem(icon: icon_materi_type, title: 'Material Type'),
+          TabItem(icon: icon_materi_type, title: 'Type'),
           TabItem(icon: icon_livestock, title: 'Livestock'),
+//          TabItem(icon: icon_group_type, title: 'Group')
         ],
         initialActiveIndex: masterListController.getBodyNumber(),
         onTap: (int i) {

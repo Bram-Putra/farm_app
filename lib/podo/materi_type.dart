@@ -17,7 +17,9 @@ class MateriType {
 
   Map<String, dynamic> toJson(){
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['typeId'] = this.typeId;
+    if(this.typeId != null) {
+      data['typeId'] = this.typeId.toString();
+    }
     data['typeName'] = this.typeName;
     data['notes'] = this.notes;
     return data;

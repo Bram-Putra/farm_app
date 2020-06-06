@@ -1,36 +1,35 @@
+import 'package:farmapp/podo/materi_type.dart';
+import 'package:farmapp/widget/materi_type_detail_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:farmapp/controller/livestock_type_master_list_controller.dart';
-import 'package:farmapp/podo/livestock_type.dart';
+import 'package:farmapp/controller/materi_type_master_list_controller.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'dart:convert';
+import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
-import 'dart:convert';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'livestock_type_detail_widget.dart';
 
-class LivestockTypeMasterList extends StatefulWidget {
+class MateriTypeMasterList extends StatefulWidget {
   @override
-  _LivestockTypeMasterListState createState() => _LivestockTypeMasterListState();
+  _MateriTypeMasterListState createState() => _MateriTypeMasterListState();
 }
 
-class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
-  LivestockTypeMasterListController ltmlController = LivestockTypeMasterListController();
-  List<LivestockType> _listLivestockType;
+class _MateriTypeMasterListState extends State<MateriTypeMasterList> {
+  MateriTypeMasterListController mtmlController =
+      MateriTypeMasterListController();
+  List<MateriType> _listMateriType = [];
 
   _loadData() async {
-    _listLivestockType = ltmlController.getList();
-
-    var url = url_path+'v1/livestockTypes/all';
+    var url = url_path + 'v1/materialTypes/all';
     var res = await http.get(url);
     List decodedJson = jsonDecode(res.body);
     int code = res.statusCode;
     if (code == 200) {
-      _listLivestockType.clear();
+      _listMateriType.clear();
       for (int i = 0; i < decodedJson.length; i++) {
-        LivestockType lst = LivestockType.fromJson(decodedJson[i]);
-        _listLivestockType.add(lst);
+        MateriType m = MateriType.fromJson(decodedJson[i]);
+        _listMateriType.add(m);
       }
-      setState(() {
-      });
+      setState(() {});
     } else {
       print("Something went wrong");
     }
@@ -42,7 +41,7 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Delete'),
-        content: Text('Livestock $indexX will be deleted'),
+        content: Text('Material Type $indexX will be deleted'),
         actions: <Widget>[
           FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
@@ -55,12 +54,12 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
     ).then((value) {
       confirmDelete = value;
       if (confirmDelete) {
-        ltmlController.deleteLivestockType(context, indexX);
-        setState(() {
-        });
+        mtmlController.deleteMateriType(context, indexX);
+        setState(() {});
       }
     });
   }
+
 
   @override
   void initState() {
@@ -74,10 +73,10 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: const Color(color_primary_dark),
-        onPressed: (){_callLivestockTypeDetail(null);},
+        onPressed: (){_callMateriTypeDetail(null);},
       ),
       body: ListView.builder(
-        itemCount: _listLivestockType.length,
+        itemCount: _listMateriType.length,
         itemBuilder: (context, index) {
           return Slidable(
             actionPane: SlidableDrawerActionPane(),
@@ -92,10 +91,12 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
                 ),
               ),
               child: ListTile(
-                title: Text('Livestock: '+_listLivestockType[index].livestockName),
-                subtitle: Text('Notes: '+_listLivestockType[index].notes),
+                title: Text('Material Type: ' +
+                    _listMateriType[index].typeName),
+                subtitle:
+                    Text(_listMateriType[index].notes.toString()),
                 onTap: () {
-                  _callLivestockTypeDetail(_listLivestockType[index]);
+                  _callMateriTypeDetail(_listMateriType[index]);
                 },
               ),
             ),
@@ -115,9 +116,10 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
     );
   }
 
-  void _callLivestockTypeDetail(LivestockType lstX) async{
-    final result = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LivestockTypeDetail(lstX)));
+  void _callMateriTypeDetail(MateriType mtX) async {
+    final result = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MateriTypeDetail(mtX)));
+
     setState(() {
       _loadData();
     });

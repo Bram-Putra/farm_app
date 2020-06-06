@@ -14,7 +14,9 @@ class LivestockType {
 
   Map<String, dynamic> toJson(){
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['livestockId'] = this.livestockId.toString();
+    if(this.livestockId != null) {
+      data['livestockId'] = this.livestockId.toString();
+    }
     data['livestockName'] = this.livestockName;
     data['notes'] = this.notes;
     return data;

@@ -1,3 +1,4 @@
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 
 class Transaksi extends StatefulWidget {
@@ -11,7 +12,7 @@ class _TransaksiState extends State<Transaksi> {
     return Scaffold(
       body: Center(
         child: ListTile(
-          leading: Icon(Icons.update),
+          leading: Icon(icon_transaksi),
           title: Text('Transaksi'),
         ),
       ),

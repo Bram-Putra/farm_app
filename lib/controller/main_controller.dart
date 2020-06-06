@@ -9,11 +9,22 @@ import 'package:farmapp/widget/transaksi_widget.dart';
 import 'package:farmapp/widget/welcome_widget.dart';
 
 class MainController {
-  String _title = 'Farm House';
   DrawerChoice _selectedDrawerChoice = DrawerChoice();
 
   String getTitle() {
-    return _title;
+    if(_selectedDrawerChoice.title == 'Transaksi') {
+      return 'Transaksi';
+    } else if(_selectedDrawerChoice.title == 'Master') {
+      return 'Master';
+    } else if(_selectedDrawerChoice.title == 'User') {
+      return 'User';
+    } else if(_selectedDrawerChoice.title == 'Laporan') {
+      return 'Laporan';
+    } else if(_selectedDrawerChoice.title == 'Dashboard') {
+      return 'Dashboard';
+    } else {
+      return 'Farm House';
+    }
   }
 
   List<DrawerChoice> choices = const <DrawerChoice>[

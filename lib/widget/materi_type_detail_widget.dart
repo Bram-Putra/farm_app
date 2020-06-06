@@ -11,34 +11,25 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 
 
-class MaterialDetail extends StatefulWidget {
-  final Materi material;
-  const MaterialDetail(this.material);
+class MateriTypeDetail extends StatefulWidget {
+  final MateriType materiType;
+  const MateriTypeDetail(this.materiType);
   @override
-  _MaterialDetailState createState() => _MaterialDetailState();
+  _MateriTypeDetailState createState() => _MateriTypeDetailState();
 }
 
-class _MaterialDetailState extends State<MaterialDetail> {
-  final tcMaterialId = TextEditingController();
-  final tcMaterialName = TextEditingController();
-  final tcUom = TextEditingController();
+class _MateriTypeDetailState extends State<MateriTypeDetail> {
+  final tcMateriTypeId = TextEditingController();
+  final tcMateriTypeName = TextEditingController();
   final tcNotes = TextEditingController();
-  MateriType selectedType;
-//  MaterialTypeDropdownButton dbTipe = MaterialTypeDropdownButton();
-  final tcTipe = TextEditingController();
 
   void save() async {
-    Materi entity = Materi();
-    entity.materialId = int.parse(tcMaterialId.text);
-    entity.materialName = tcMaterialName.text;
-    entity.uom = tcUom.text;
-    MateriType tipe = MateriType();
-    tipe.typeId = int.parse(tcTipe.text);
-//    print(tcTipe.text);
-    entity.materialType = tipe;
+    MateriType entity = MateriType();
+    entity.typeId = tcMateriTypeId.text==''? null: int.parse(tcMateriTypeId.text);
+    entity.typeName = tcMateriTypeName.text;
     entity.notes = tcNotes.text;
 
-    var url = url_path+'v1/materials';
+    var url = url_path+'v1/materialTypes';
     var json = jsonEncode(entity.toJson());
     print(json);
     var res = await http.post(url, body: json, headers: <String, String>{
@@ -53,31 +44,27 @@ class _MaterialDetailState extends State<MaterialDetail> {
     } else {
       print("Something went wrong");
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-    Materi m;
-    if (widget.material == null) {
-      m = Materi();
+    MateriType m;
+    if (widget.materiType == null) {
+      m = MateriType();
     } else {
-      m = widget.material;
+      m = widget.materiType;
     }
-    tcMaterialId.text = m.materialId.toString();
-    tcMaterialName.text = m.materialName;
-    tcUom.text = m.uom;
+    tcMateriTypeId.text = m.typeId.toString();
+    tcMateriTypeName.text = m.typeName;
     tcNotes.text = m.notes;
-    selectedType = m.materialType;
-    tcTipe.text = m.materialType.typeId.toString();
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: Text('Material'),
+        backgroundColor: const Color(color_primary_dark),
+        title: Text('Material Type'),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: const Color(color_primary_light),
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
@@ -86,8 +73,8 @@ class _MaterialDetailState extends State<MaterialDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Material'),
-                  initialValue: tcMaterialName.text,
+                  decoration: InputDecoration(labelText: 'Material Type'),
+                  initialValue: tcMateriTypeName.text,
                   enabled: false,
                 ),
               ),
@@ -97,22 +84,11 @@ class _MaterialDetailState extends State<MaterialDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Material Name'),
-                  controller: tcMaterialName,
+                  decoration: InputDecoration(labelText: 'Material Type Name'),
+                  controller: tcMateriTypeName,
                 ),
               ),
             ),
-            Container(
-              height: preferred_height,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'UOM'),
-                  controller: tcUom
-                ),
-              ),
-            ),
-            MaterialTypeDropdownButton(tipe: tcTipe),
             Container(
               height: preferred_height,
               child: Align(
@@ -142,9 +118,8 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
   @override
   void dispose() {
-    tcMaterialId.dispose();
-    tcMaterialName.dispose();
-    tcUom.dispose();
+    tcMateriTypeId.dispose();
+    tcMateriTypeName.dispose();
     tcNotes.dispose();
     super.dispose();
   }

@@ -42,10 +42,10 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -61,10 +61,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -80,10 +80,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -99,10 +99,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -118,10 +118,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF455A64),
+                      color: const Color(color_primary_dark),
                       border: Border(
                         bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
+                            color: const Color(color_divider),
                             width: 1.0,
                             style: BorderStyle.solid),
                       ),
@@ -139,8 +139,8 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             appBar: AppBar(
-              backgroundColor: const Color(0xFF455A64),
-              title: const Text('Farm House'),
+              backgroundColor: const Color(color_primary_dark),
+              title: Text(mainController.getTitle()),
             ),
             body: mainController.getSelectedBody(),
           ),

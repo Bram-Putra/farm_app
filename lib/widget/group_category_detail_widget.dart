@@ -1,6 +1,7 @@
 import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/cage.dart';
+import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/podo/materi_type.dart';
 import 'package:farmapp/widget/material_type_dropdownbutton_widget.dart';
@@ -11,34 +12,32 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 
 
-class MaterialDetail extends StatefulWidget {
-  final Materi material;
-  const MaterialDetail(this.material);
+class GroupCategoryDetail extends StatefulWidget {
+  final GroupCategory groupCategory;
+  const GroupCategoryDetail(this.groupCategory);
   @override
-  _MaterialDetailState createState() => _MaterialDetailState();
+  _GroupCategoryDetailState createState() => _GroupCategoryDetailState();
 }
 
-class _MaterialDetailState extends State<MaterialDetail> {
-  final tcMaterialId = TextEditingController();
-  final tcMaterialName = TextEditingController();
-  final tcUom = TextEditingController();
-  final tcNotes = TextEditingController();
-  MateriType selectedType;
-//  MaterialTypeDropdownButton dbTipe = MaterialTypeDropdownButton();
-  final tcTipe = TextEditingController();
+class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
+  MainController mainController = MainController();
+
+  GroupCategory parentGlobal;
+  final tcGroupCategoryId = TextEditingController();
+  final tcGroupCategoryName = TextEditingController();
+  final tcGroupName = TextEditingController();
+  final tcParent = TextEditingController();
 
   void save() async {
-    Materi entity = Materi();
-    entity.materialId = int.parse(tcMaterialId.text);
-    entity.materialName = tcMaterialName.text;
-    entity.uom = tcUom.text;
-    MateriType tipe = MateriType();
-    tipe.typeId = int.parse(tcTipe.text);
-//    print(tcTipe.text);
-    entity.materialType = tipe;
-    entity.notes = tcNotes.text;
+    GroupCategory entity = GroupCategory();
+    entity.groupCategoryId = int.parse(tcGroupCategoryId.text);
+    entity.groupCategoryName = tcGroupCategoryName.text;
+    entity.groupName = tcGroupName.text;
+    GroupCategory parentLocal = GroupCategory();
+    parentLocal.groupCategoryId = int.parse(tcParent.text);
+    entity.parent = parentLocal;
 
-    var url = url_path+'v1/materials';
+    var url = url_path+'v1/groupCategories';
     var json = jsonEncode(entity.toJson());
     print(json);
     var res = await http.post(url, body: json, headers: <String, String>{
@@ -53,28 +52,30 @@ class _MaterialDetailState extends State<MaterialDetail> {
     } else {
       print("Something went wrong");
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-    Materi m;
-    if (widget.material == null) {
-      m = Materi();
+    GroupCategory gc;
+    if (widget.groupCategory == null) {
+      gc = GroupCategory();
     } else {
-      m = widget.material;
+      gc = widget.groupCategory;
     }
-    tcMaterialId.text = m.materialId.toString();
-    tcMaterialName.text = m.materialName;
-    tcUom.text = m.uom;
-    tcNotes.text = m.notes;
-    selectedType = m.materialType;
-    tcTipe.text = m.materialType.typeId.toString();
+    if(gc.parent != null) {
+      parentGlobal = gc.parent;
+    } else {
+      parentGlobal = GroupCategory();
+    }
+    tcGroupCategoryId.text = gc.groupCategoryId.toString();
+    tcGroupCategoryName.text = gc.groupCategoryName;
+    tcGroupName.text = gc.groupName;
+    tcParent.text = gc.parent.groupCategoryName;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF455A64),
-        title: Text('Material'),
+        title: Text(mainController.getTitle()),
       ),
       body: Container(
         color: const Color(0xFFCFD8DC),
@@ -87,7 +88,7 @@ class _MaterialDetailState extends State<MaterialDetail> {
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
                   decoration: InputDecoration(labelText: 'Material'),
-                  initialValue: tcMaterialName.text,
+                  initialValue: tcGroupCategoryName.text,
                   enabled: false,
                 ),
               ),
@@ -98,7 +99,7 @@ class _MaterialDetailState extends State<MaterialDetail> {
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
                   decoration: InputDecoration(labelText: 'Material Name'),
-                  controller: tcMaterialName,
+                  controller: tcGroupCategoryName,
                 ),
               ),
             ),
@@ -108,18 +109,18 @@ class _MaterialDetailState extends State<MaterialDetail> {
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
                   decoration: InputDecoration(labelText: 'UOM'),
-                  controller: tcUom
+                  controller: tcGroupName
                 ),
               ),
             ),
-            MaterialTypeDropdownButton(tipe: tcTipe),
+//            MaterialTypeDropdownButton(tipe: tcTipe),
             Container(
               height: preferred_height,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
                   decoration: InputDecoration(labelText: 'Notes'),
-                  controller: tcNotes
+                  controller: tcParent
                 ),
               ),
             ),
@@ -142,10 +143,10 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
   @override
   void dispose() {
-    tcMaterialId.dispose();
-    tcMaterialName.dispose();
-    tcUom.dispose();
-    tcNotes.dispose();
+    tcGroupCategoryId.dispose();
+    tcGroupCategoryName.dispose();
+    tcGroupName.dispose();
+    tcParent.dispose();
     super.dispose();
   }
 }

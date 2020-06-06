@@ -40,7 +40,7 @@ class _WelcomeState extends State<Welcome> {
             ),
             Center(
               child: Text(
-                'v 0.0.2',
+                'v 0.0.6',
                 style: TextStyle(
                   fontFamily: 'Source Sans Pro',
                   fontSize: 15.0,
@@ -50,33 +50,33 @@ class _WelcomeState extends State<Welcome> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 120.0,
-            ),
-            Center(
-              child: Text(
-                'by',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 10.0,
-                  color: const Color(0xFFBDBDBD),
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0,
-                ),
-              ),
-            ),
-            Center(
-              child: Text(
-                'beSoft',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 14.0,
-                  color: const Color(0xFF9E9E9E),
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0,
-                ),
-              ),
-            ),
+//            SizedBox(
+//              height: 120.0,
+//            ),
+//            Center(
+//              child: Text(
+//                'by',
+//                style: TextStyle(
+//                  fontFamily: 'Source Sans Pro',
+//                  fontSize: 10.0,
+//                  color: const Color(0xFFBDBDBD),
+//                  fontWeight: FontWeight.bold,
+//                  letterSpacing: 2.0,
+//                ),
+//              ),
+//            ),
+//            Center(
+//              child: Text(
+//                'beSoft',
+//                style: TextStyle(
+//                  fontFamily: 'Source Sans Pro',
+//                  fontSize: 14.0,
+//                  color: const Color(0xFF9E9E9E),
+//                  fontWeight: FontWeight.bold,
+//                  letterSpacing: 2.0,
+//                ),
+//              ),
+//            ),
           ],
         ),
       ),
