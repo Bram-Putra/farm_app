@@ -2,9 +2,7 @@ import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:farmapp/podo/cage.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
-import 'package:farmapp/podo/barn_constant.dart';
 
 class CageDetailController {
 
