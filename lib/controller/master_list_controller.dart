@@ -1,4 +1,5 @@
 import 'package:farmapp/podo/group_category.dart';
+import 'package:farmapp/widget/material_master_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:farmapp/widget/cage_master_list_widget.dart';
 import 'package:farmapp/widget/group_category_master_list_widget.dart';
@@ -20,7 +21,7 @@ class MasterListController {
     if(_bodyNumber == 0) {
       return CageMasterList();
     } else if(_bodyNumber == 1){
-      return GroupCategoryMasterList();
+      return MaterialMasterList();
     } else if(_bodyNumber == 2) {
       return MateriTypeMasterList();
     } else {

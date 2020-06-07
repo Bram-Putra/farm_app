@@ -23,22 +23,23 @@ class _LivestockTypeDropdownState extends State<LivestockTypeDropdown> {
     /* --GET LIVESTOCKTYPE-- */
     List<LivestockType> listlst = [];
 
-    var url = url_path+'v1/livestockTypes?id=1';
+    var url = url_path+'v1/livestockTypes/all';
     var res = await http.get(url);
-    List decodedJson = jsonDecode(res.body);
+//    print(res.body);
     int code = res.statusCode;
     if (code == 200) {
+      List decodedJson = jsonDecode(res.body);
       for (int i = 0; i < decodedJson.length; i++) {
         LivestockType r = LivestockType.fromJson(decodedJson[i]);
         _listLivestockType.add(r);
         listlst.add(r);
       }
+      if(widget.tcLivestockType.text!='') {
+        print(widget.tcLivestockType.text);
+        livestockTypeValue = getLivestockTypeById(int.parse(widget.tcLivestockType.text));
+      }
     } else {
       print("Something went wrong");
-    }
-
-    if(widget.tcLivestockType.text!='') {
-      livestockTypeValue = getLivestockTypeById(int.parse(widget.tcLivestockType.text));
     }
     setState(() {
     });

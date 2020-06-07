@@ -22,11 +22,11 @@ class _CageMasterListState extends State<CageMasterList> {
 
     var url = url_path+'v1/cages/all';
     var res = await http.get(url);
-    List decodedJson = jsonDecode(res.body);
-    print(decodedJson);
+//    print(decodedJson);
 
     int code = res.statusCode;
     if (code == 200) {
+      List decodedJson = jsonDecode(res.body);
       setState(() {
         _listCage.clear();
         for (int i = 0; i < decodedJson.length; i++) {

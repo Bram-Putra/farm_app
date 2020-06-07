@@ -1,5 +1,5 @@
 import 'package:farmapp/podo/cage.dart';
-import 'package:farmapp/podo/user.dart';
+import 'package:intl/intl.dart';
 
 class DailyCheck {
   int checkId;
@@ -12,27 +12,46 @@ class DailyCheck {
   double temperature;
   double humidity;
   Cage cage;
-  User user;
+  String notes;
+//  User user;
 
 
-  DailyCheck({this.checkId, this. checkNumber, this.checkDate, this.alive, this.dead, this.harvest, this.averageWeight, this.temperature, this.humidity, this.cage});
+  DailyCheck() {}
 
   DailyCheck.fromJson(Map<String, dynamic> json){
     checkId = json['checkId'];
     checkNumber = json['checkNumber'];
-    String sDate = json['checkDate'];
-    checkDate = DateTime.parse(sDate);
+    if(json['checkDate']!=null) {
+      checkDate = DateTime.parse(json['checkDate']);
+    }
     alive = json['alive'];
     dead = json['dead'];
     harvest = json['harvest'];
     averageWeight = json['averageWeight'];
     temperature = json['temperature'];
     humidity = json['humidity'];
-    var vCage = json['cage'];
-    if(vCage != null) {
-      cage = Cage();
-      cage.cageId = vCage['cageId'];
-      cage.tag = vCage['tag'];
+    notes = json['notes'];
+    var jsonCage = json['cage'];
+    if(jsonCage!=null) {
+      cage = Cage.fromJson(jsonCage);
     }
+  }
+
+  Map<String, dynamic> toJson(){
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if(this.checkId!=null) {
+      data['checkId'] = this.checkId;
+    }
+//    data['checkNumber'] = this.checkNumber;
+//    data['checkDate'] = this.checkDate;
+    data['alive'] = this.alive;
+    data['dead'] = this.dead;
+    data['harvest'] = this.harvest;
+    data['averageWeight'] = this.averageWeight;
+    data['temperature'] = this.temperature;
+    data['humidity'] = this.humidity;
+    data['cage'] = this.cage;
+    data['notes'] = this.notes;
+    return data;
   }
 }

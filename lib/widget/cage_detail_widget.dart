@@ -28,7 +28,7 @@ class _CageDetailState extends State<CageDetail> {
   final tcRegion = TextEditingController();
   final tcFarm = TextEditingController();
   final tcUnit = TextEditingController();
-//  final tcLivestock = TextEditingController();
+  final tcLivestock = TextEditingController();
 
   void _save() {
     bool confirmSave = false;
@@ -68,9 +68,9 @@ class _CageDetailState extends State<CageDetail> {
         cage.feedingTray = int.parse(tcFeedingTray.text);
         cage.fan = int.parse(tcFan.text);
         cage.notes = tcNotes.text;
-//        LivestockType livestock= LivestockType();
-//        livestock.livestockId = 1;
-//        cage.livestockType
+        LivestockType livestock= LivestockType();
+        livestock.livestockId = int.parse(tcLivestock.text);
+        cage.livestockType = livestock;
 
         _cageDetailController.saveCage(context, cage);
         setState(() {
@@ -92,6 +92,7 @@ class _CageDetailState extends State<CageDetail> {
       tcRegion.text = widget.cage.region.groupCategoryId.toString();
       tcFarm.text = widget.cage.farm.groupCategoryId.toString();
       tcUnit.text = widget.cage.unit.groupCategoryId.toString();
+      tcLivestock.text = widget.cage.livestockType.livestockId.toString();
     }
     return Scaffold(
       appBar: AppBar(
@@ -175,7 +176,7 @@ class _CageDetailState extends State<CageDetail> {
                 ),
               ),
             ),
-            LivestockTypeDropdown(),
+            LivestockTypeDropdown(tcLivestockType: tcLivestock,),
             SizedBox(height: 10.0,),
             ButtonTheme(
               height: raised_button_height,
@@ -205,7 +206,7 @@ class _CageDetailState extends State<CageDetail> {
     tcRegion.dispose();
     tcFarm.dispose();
     tcUnit.dispose();
-
+    tcLivestock.dispose();
     super.dispose();
   }
 }
