@@ -102,6 +102,12 @@ class _DashboardState extends State<Dashboard> {
                         ' ',
                         am
                       ])),
+//              title: Row(
+//                children: <Widget>[
+//                  Container(child: Text(_listDailyCheck[index].cage.tag),),
+//                  Container(child: Text(formatDate(_listDailyCheck[index].checkDate, [dd,'-',mm,'-',yyyy,' ',hh,':',nn,':',ss,' ',am])),)
+//                ],
+//              ),
                   subtitle: Text('Check Number: ' +
                       _listDailyCheck[index].checkNumber +
                       '\n' +
