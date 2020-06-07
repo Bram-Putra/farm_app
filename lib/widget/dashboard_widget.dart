@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/widget/dashboard_detail_widget.dart';
+import 'package:intl/intl.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -15,17 +16,19 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   DashboardController _dController = DashboardController();
   List<DailyCheck> _listDailyCheck;
+  DateFormat df = DateFormat("dd MMM yyyy");
 
   _loadData() async {
     _listDailyCheck = _dController.getList();
 
     var url = url_path + 'v1/reports/dashboard';
     var res = await http.get(url);
-    List decodedJson = jsonDecode(res.body);
-    print(decodedJson);
+
+//    print(decodedJson);
 
     int code = res.statusCode;
     if (code == 200) {
+      List decodedJson = jsonDecode(res.body);
       _listDailyCheck.clear();
       for (int i = 0; i < decodedJson.length; i++) {
         DailyCheck dc = DailyCheck.fromJson(decodedJson[i]);
@@ -61,29 +64,28 @@ class _DashboardState extends State<Dashboard> {
             ),
             child: ListTile(
               title: Text('Kandang: ' + _listDailyCheck[index].cage.tag),
-              subtitle: Text('Check Number: ' +
+              subtitle: Text('Nomor inspeksi: ' +
                   _listDailyCheck[index].checkNumber +
                   '\n' +
-                  'Check Date: ' +
-                  _listDailyCheck[index].checkDate.toString() +
+                  'Tanggal inspeksi: ' +
+                  df.format(_listDailyCheck[index].checkDate) +
                   '\n' +
-                  'Alive: ' +
-                  _listDailyCheck[index].alive.toString() +
+                  'Populasi: ' +
+                  _listDailyCheck[index].alive.toInt().toString() +
                   '\n' +
-                  'Dead: ' +
-                  _listDailyCheck[index].dead.toString() +
+                  'Mortalitas: ' +
+                  _listDailyCheck[index].dead.toInt().toString() +
                   '\n' +
-                  'Harvest: ' +
-                  _listDailyCheck[index].harvest.toString() +
+                  'Panen: ' +
+                  _listDailyCheck[index].harvest.toInt().toString() +
                   '\n' +
-                  'Average Weight: ' +
+                  'Berat rata-rata: ' +
                   _listDailyCheck[index].averageWeight.toString() +
                   '\n' +
-                  'Temperature: ' +
+                  'Suhu ruangan: ' +
                   _listDailyCheck[index].temperature.toString() +
                   '\n' +
-                  'Humidity: ' +
-                  _listDailyCheck[index].humidity.toString()),
+                  'Kelembaban: ' + _listDailyCheck[index].humidity.toString()),
               onTap: () {
                 _callDashboardDetail(_listDailyCheck[index]);
               },

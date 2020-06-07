@@ -17,14 +17,15 @@ class TransaksiController {
   }
 
   StatefulWidget getBody() {
-    if(_bodyNumber == 0) {
-      return DailyCheckList();
-    } else if(_bodyNumber == 1){
-      return MaterialMasterList();
-    } else if(_bodyNumber == 2) {
-      return MateriTypeMasterList();
-    } else {
-      return LivestockTypeMasterList();
-    }
+//    if(_bodyNumber == 0) {
+//      return DailyCheckList();
+//    } else if(_bodyNumber == 1){
+//      return
+//    } else if(_bodyNumber == 2) {
+//      return MateriTypeMasterList();
+//    } else {
+//      return LivestockTypeMasterList();
+//    }
+  return DailyCheckList();
   }
 }

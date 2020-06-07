@@ -1,14 +1,14 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/daily_check_chart.dart';
 import 'package:flutter/material.dart';
 
-/// Example of a line chart rendered with dash patterns.
 class DailyCheckChart extends StatefulWidget {
   final DailyCheckChartModel data;
   final List<charts.Series> seriesList;
-  final bool animate;
+  final bool animate = false;
 
-  DailyCheckChart(this.data, this.seriesList, {this.animate});
+  DailyCheckChart(this.data, this.seriesList);
 
   @override
   _DailyCheckChartState createState() => _DailyCheckChartState();
@@ -21,6 +21,7 @@ class _DailyCheckChartState extends State<DailyCheckChart> {
   @override
   void initState() {
     customTickFormatter = charts.BasicNumericTickFormatterSpec((num value) {
+//      print(value);
       int index = value.toInt();
       if(widget.data.alives!=null && widget.data.alives.length>0) {
         if(index<widget.data.alives.length) {
@@ -36,10 +37,16 @@ class _DailyCheckChartState extends State<DailyCheckChart> {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
-    return new charts.LineChart(widget.seriesList, animate: widget.animate,
-        domainAxis: charts.NumericAxisSpec(tickFormatterSpec: customTickFormatter),
+//    print('build');
+    return Container(
+      height: 450.0,
+      child:
+      new charts.LineChart(widget.seriesList, animate: widget.animate,
+        domainAxis: charts.NumericAxisSpec(tickFormatterSpec: customTickFormatter))
     );
+//    print(widget.seriesList.length.toString());
+//    return new charts.LineChart(widget.seriesList, animate: widget.animate);
+
   }
 }
 

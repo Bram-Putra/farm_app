@@ -3,8 +3,8 @@ library constants;
 import 'package:farmapp/icon/besoft_icons.dart';
 import 'package:flutter/material.dart';
 
-const url_path = 'http://165.22.61.234:9999/barn/';
-//const url_path = 'http://192.168.1.4:9999/barn/';
+//const url_path = 'http://165.22.61.234:9999/barn/';
+const url_path = 'http://192.168.1.4:9999/barn/';
 
 const app_title = 'Farm House';
 

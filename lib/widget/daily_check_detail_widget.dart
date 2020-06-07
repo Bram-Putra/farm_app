@@ -137,7 +137,7 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
             ListTile(
-              title: Text('Daily Check'),
+              title: Text('Inspeksi Harian'),
               subtitle: Text('#'+tcCheckNumber.text+' :: '+tcCheckDate.text),
             ),
 //            Text(
@@ -145,11 +145,11 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
 //            ),
             CageDropdownButton(tcCage: tcCage),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Hidup'),
+              decoration: InputDecoration(labelText: 'Populasi'),
               controller: tcAlive,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Mati'),
+              decoration: InputDecoration(labelText: 'Mortalitas'),
               controller: tcDead,
             ),
             TextFormField(
@@ -157,11 +157,11 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
               controller: tcHarvest,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Berat'),
+              decoration: InputDecoration(labelText: 'Berat rata-rata'),
               controller: tcAverageWeight,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Suhu'),
+              decoration: InputDecoration(labelText: 'Suhu ruangan'),
               controller: tcTemperature,
             ),
             TextFormField(

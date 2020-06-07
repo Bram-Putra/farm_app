@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:farmapp/controller/transaksi_controller.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 
 class Transaksi extends StatefulWidget {
@@ -23,7 +24,9 @@ class _TransaksiState extends State<Transaksi> {
         bottomNavigationBar: ConvexAppBar(
           backgroundColor: const Color(0xFF455A64),
           items: [
-            TabItem(icon: Icons.access_alarm, title: 'Daily Check')
+            TabItem(icon: Icons.access_alarm, title: 'Inspeksi Harian'),
+            TabItem(icon: icon_materi, title: 'Pemberian Material'),
+            TabItem(icon: Icons.swap_vertical_circle, title: 'Mutasi')
           ],
           initialActiveIndex: controller.getBodyNumber(),
           onTap: (int i) {

@@ -9,9 +9,9 @@ class DashboardController {
   List<DailyCheck> _listDailyCheck = [];
   DashboardController() {}
 
-  Future<DailyCheckChartModel> selectDailyCheckChart() async {
+  Future<DailyCheckChartModel> selectDailyCheckChart(String cageId, String period) async {
     DailyCheckChartModel dc;
-    var url = url_path + 'v1/reports/dailyChart?cageId=2&range=3';
+    var url = url_path + 'v1/reports/dailyChart?cageId='+cageId+'&range='+period;
     var res = await http.get(url);
 //    print(res.body);
 
@@ -28,7 +28,7 @@ class DashboardController {
     return [
       new charts.Series<DailyCheckChartValue, int>(
         id: 'Alive',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
         domainFn: (DailyCheckChartValue chartValue, _) => chartValue.axis,
         measureFn: (DailyCheckChartValue chartValue, _) => chartValue.value,
         displayName: 'Alive',
@@ -45,7 +45,7 @@ class DashboardController {
       ),
       new charts.Series<DailyCheckChartValue, int>(
         id: 'Harvest',
-        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
 //        dashPattern: [8, 3, 2, 3],
         domainFn: (DailyCheckChartValue chartValue, _) => chartValue.axis,
         measureFn: (DailyCheckChartValue chartValue, _) => chartValue.value,
@@ -54,7 +54,7 @@ class DashboardController {
       ),
       new charts.Series<DailyCheckChartValue, int>(
         id: 'AverageWeight',
-        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.black,
 //        dashPattern: [8, 3, 2, 3],
         domainFn: (DailyCheckChartValue chartValue, _) => chartValue.axis,
         measureFn: (DailyCheckChartValue chartValue, _) => chartValue.value,
