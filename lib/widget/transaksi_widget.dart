@@ -25,7 +25,7 @@ class _TransaksiState extends State<Transaksi> {
           backgroundColor: const Color(0xFF455A64),
           items: [
             TabItem(icon: Icons.access_alarm, title: 'Inspeksi Harian'),
-            TabItem(icon: icon_materi, title: 'Pemberian Material'),
+            TabItem(icon: icon_materi, title: 'Material'),
             TabItem(icon: Icons.swap_vertical_circle, title: 'Mutasi')
           ],
           initialActiveIndex: controller.getBodyNumber(),
