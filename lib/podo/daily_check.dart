@@ -4,7 +4,7 @@ import 'package:farmapp/podo/user.dart';
 class DailyCheck {
   int checkId;
   String checkNumber;
-  String checkDate;
+  DateTime checkDate;
   double alive;
   double dead;
   double harvest;
@@ -20,7 +20,8 @@ class DailyCheck {
   DailyCheck.fromJson(Map<String, dynamic> json){
     checkId = json['checkId'];
     checkNumber = json['checkNumber'];
-    checkDate = json['checkDate'];
+    String sDate = json['checkDate'];
+    checkDate = DateTime.parse(sDate);
     alive = json['alive'];
     dead = json['dead'];
     harvest = json['harvest'];
