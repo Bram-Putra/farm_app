@@ -1,5 +1,4 @@
 import 'package:farmapp/controller/dashboard_controller.dart';
-import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/podo/daily_check_chart.dart';
 import 'package:farmapp/widget/daily_check_chart_period_widget.dart';
 import 'package:farmapp/widget/daily_check_chart_widget.dart';
@@ -67,7 +66,10 @@ class _DailyCheckParentChartState extends State<DailyCheckParentChart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             DailyCheckPeriodDropdown(tcPeriod: tcPeriod),
-            DailyCheckChart(chartData, dc.createData(chartData.alives, chartData.deads, chartData.harvests, chartData.averageWeights)),
+            Expanded(child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DailyCheckChart(chartData, dc.createData(chartData.alives, chartData.deads, chartData.harvests, chartData.averageWeights)),
+            )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +79,8 @@ class _DailyCheckParentChartState extends State<DailyCheckParentChart> {
                 Text('Panen', style: TextStyle(color: Colors.blue)),
                 Text('Berat rata-rata', style: TextStyle(color: Colors.black))
               ]
-            )
+            ),
+            SizedBox(height: 8.0,),
           ],
         ),
       ),

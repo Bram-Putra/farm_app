@@ -8,12 +8,12 @@ import 'package:http/http.dart' as http;
 import 'package:farmapp/widget/dashboard_detail_widget.dart';
 import 'package:intl/intl.dart';
 
-class Dashboard extends StatefulWidget {
+class ScreenDashboard extends StatefulWidget {
   @override
-  _DashboardState createState() => _DashboardState();
+  _ScreenDashboardState createState() => _ScreenDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _ScreenDashboardState extends State<ScreenDashboard> {
   DashboardController _dController = DashboardController();
   List<DailyCheck> _listDailyCheck;
   DateFormat df = DateFormat("dd MMM yyyy");
@@ -46,6 +46,31 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(color_primary_dark),
+        title: ListTile(
+          leading: Hero(
+            tag: 'icon_dashboard',
+            child: Icon(
+              icon_dashboard,
+              color: Colors.white,
+            ),
+          ),
+          title: Text(
+            'Dashboard',
+            style: appbar_textstyle,
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            tooltip: 'Kembali ke halaman utama',
+            onPressed: () {
+              Navigator.of(context).popUntil(ModalRoute.withName('/'));
+            },
+          ),
+        ],
+      ),
       backgroundColor: const Color(color_primary_light),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

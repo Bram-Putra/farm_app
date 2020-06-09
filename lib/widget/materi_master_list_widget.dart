@@ -1,6 +1,6 @@
 import 'package:farmapp/controller/material_master_list_controller.dart';
 import 'package:farmapp/podo/materi.dart';
-import 'package:farmapp/widget/material_detail_widget.dart';
+import 'package:farmapp/widget/materi_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
@@ -8,16 +8,42 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
 
-class MaterialMasterList extends StatefulWidget {
+class MateriMasterList extends StatefulWidget {
   @override
-  _MaterialMasterListState createState() => _MaterialMasterListState();
+  _MateriMasterListState createState() => _MateriMasterListState();
 }
 
-class _MaterialMasterListState extends State<MaterialMasterList> {
+class _MateriMasterListState extends State<MateriMasterList> {
   MaterialMasterListController mmlController = MaterialMasterListController();
   List<Materi> _listMaterial;
 
-  loadData() async {
+  void goHome() {
+    bool confirmed = false;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Kembali'),
+        content: Text('Kembali ke halaman utama?'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Iya')),
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Tidak')),
+        ],
+      ),
+    ).then((value) {
+      confirmed = value;
+      if (confirmed) {
+        Navigator.of(context).popUntil(
+          ModalRoute.withName('/'),
+        );
+      }
+    });
+  }
+
+  _loadData() async {
     _listMaterial = mmlController.getList();
 
     var url = url_path+'v1/materials/all';
@@ -45,14 +71,14 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Delete'),
-        content: Text('Material $indexX will be deleted'),
+        content: Text('Material $indexX akan dihapus'),
         actions: <Widget>[
           FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Confirm')),
+              child: Text('Konfirmasi')),
           FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancel')),
+              child: Text('Batal')),
         ],
       ),
     ).then((value) {
@@ -68,12 +94,37 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
   @override
   void initState() {
     super.initState();
-    loadData();
+    _loadData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(color_primary_dark),
+          title: ListTile(
+            leading: Hero(
+              tag: 'icon_materi',
+              child: Icon(
+                icon_materi,
+                color: Colors.white,
+              ),
+            ),
+            title: Text(
+              'Material',
+              style: appbar_textstyle,
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.home),
+              tooltip: 'Kembali ke halaman utama',
+              onPressed: () {
+                goHome();
+              },
+            ),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             backgroundColor: const Color(color_primary_dark),
@@ -119,7 +170,7 @@ class _MaterialMasterListState extends State<MaterialMasterList> {
     final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => MaterialDetail(materialX)));
 
     setState(() {
-      loadData();
+      _loadData();
     });
   }
 }

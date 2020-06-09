@@ -55,7 +55,16 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(color_primary_dark),
-        title: Text('Livestock Type'),
+        title: ListTile(
+          leading: Icon(
+            icon_livestock,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Livestock',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
         color: const Color(color_primary_light),

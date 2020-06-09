@@ -3,7 +3,7 @@ import 'package:farmapp/controller/transaksi_controller.dart';
 import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/widget/daily_check_detail_widget.dart';
-import 'package:farmapp/widget/material_detail_widget.dart';
+import 'package:farmapp/widget/materi_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
@@ -53,10 +53,10 @@ class _DailyCheckListState extends State<DailyCheckList> {
         actions: <Widget>[
           FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Confirm')),
+              child: Text('Konfirmasi')),
           FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancel')),
+              child: Text('Batal')),
         ],
       ),
     ).then((value) {
@@ -66,6 +66,32 @@ class _DailyCheckListState extends State<DailyCheckList> {
         _list.removeAt(indexNumber);
         setState(() {
         });
+      }
+    });
+  }
+
+  void goHome() {
+    bool confirmed = false;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Kembali'),
+        content: Text('Kembali ke halaman utama?'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Iya')),
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Tidak')),
+        ],
+      ),
+    ).then((value) {
+      confirmed = value;
+      if (confirmed) {
+        Navigator.of(context).popUntil(
+          ModalRoute.withName('/'),
+        );
       }
     });
   }
@@ -80,9 +106,34 @@ class _DailyCheckListState extends State<DailyCheckList> {
   Widget build(BuildContext context) {
     var df = DateFormat("dd MMM yyyy");
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(color_primary_dark),
+          title: ListTile(
+            leading: Hero(
+              tag: 'icon_inspeksi_harian',
+              child: Icon(
+                icon_inspeksi_harian,
+                color: Colors.white,
+              ),
+            ),
+            title: Text(
+              'Inspeksi Harian',
+              style: appbar_textstyle,
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.home),
+              tooltip: 'Kembali ke halaman utama',
+              onPressed: () {
+                goHome();
+              },
+            ),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: const Color(0xFF455A64),
+          backgroundColor: const Color(color_primary_dark),
           onPressed: (){
             _showDetail(null);
           },

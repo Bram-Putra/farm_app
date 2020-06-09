@@ -49,15 +49,23 @@ class _DashboardDetailState extends State<DashboardDetail> {
       tcCage.text = widget.dailyCheck.cage.cageId.toString();
     }
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF455A64),
-          title: Text('Dashboard'),
+          backgroundColor: const Color(color_primary_dark),
+          title: ListTile(
+            leading: Icon(
+              icon_dashboard,
+              color: Colors.white,
+            ),
+            title: Text(
+              'Dashboard',
+              style: appbar_textstyle,
+            ),
+          ),
           bottom: TabBar(tabs: [
             Tab(icon: Icon(Icons.playlist_add_check)),
-            Tab(icon: Icon(Icons.network_check)),
-            Tab(icon: Icon(Icons.compare))
+            Tab(icon: Icon(Icons.network_check))
           ]),
         ),
         body: TabBarView(
@@ -73,11 +81,7 @@ class _DashboardDetailState extends State<DashboardDetail> {
                   'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
                   'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
             ),
-            DailyCheckParentChart(tcCage.text),
-            ListTile(
-              leading: Icon(Icons.compare),
-              title: Text('Compare'),
-            )
+            DailyCheckParentChart(tcCage.text)
           ],
         ),
       ),

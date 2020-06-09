@@ -96,11 +96,20 @@ class _CageDetailState extends State<CageDetail> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: Text('Kandang'),
+        backgroundColor: const Color(color_primary_dark),
+        title: ListTile(
+          leading: Icon(
+            icon_kandang,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Kandang',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: const Color(color_primary_light),
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[

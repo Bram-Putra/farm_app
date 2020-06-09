@@ -18,6 +18,32 @@ class _MateriTypeMasterListState extends State<MateriTypeMasterList> {
       MateriTypeMasterListController();
   List<MateriType> _listMateriType = [];
 
+  void goHome() {
+    bool confirmed = false;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Kembali'),
+        content: Text('Kembali ke halaman utama?'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Iya')),
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Tidak')),
+        ],
+      ),
+    ).then((value) {
+      confirmed = value;
+      if (confirmed) {
+        Navigator.of(context).popUntil(
+          ModalRoute.withName('/'),
+        );
+      }
+    });
+  }
+
   _loadData() async {
     var url = url_path + 'v1/materialTypes/all';
     var res = await http.get(url);
@@ -41,14 +67,14 @@ class _MateriTypeMasterListState extends State<MateriTypeMasterList> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Delete'),
-        content: Text('Material Type $indexX will be deleted'),
+        content: Text('Material Type $indexX akan dihapus'),
         actions: <Widget>[
           FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Confirm')),
+              child: Text('Konfirmasi')),
           FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancel')),
+              child: Text('Batal')),
         ],
       ),
     ).then((value) {
@@ -70,6 +96,31 @@ class _MateriTypeMasterListState extends State<MateriTypeMasterList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(color_primary_dark),
+        title: ListTile(
+          leading: Hero(
+            tag: 'icon_materi_type',
+            child: Icon(
+              icon_materi_type,
+              color: Colors.white,
+            ),
+          ),
+          title: Text(
+            'Material',
+            style: appbar_textstyle,
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            tooltip: 'Kembali ke halaman utama',
+            onPressed: () {
+              goHome();
+            },
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: const Color(color_primary_dark),
@@ -117,7 +168,7 @@ class _MateriTypeMasterListState extends State<MateriTypeMasterList> {
   }
 
   void _callMateriTypeDetail(MateriType mtX) async {
-    final result = await Navigator.push(context,
+    await Navigator.push(context,
         MaterialPageRoute(builder: (context) => MateriTypeDetail(mtX)));
 
     setState(() {

@@ -61,7 +61,16 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(color_primary_dark),
-        title: Text('Material Type'),
+        title: ListTile(
+          leading: Icon(
+            icon_materi_type,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Material',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
         color: const Color(color_primary_light),

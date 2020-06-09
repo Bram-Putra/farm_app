@@ -77,11 +77,20 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: Text('Material'),
+        backgroundColor: const Color(color_primary_dark),
+        title: ListTile(
+          leading: Icon(
+            icon_materi,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Material',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: const Color(color_primary_light),
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[

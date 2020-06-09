@@ -2,7 +2,7 @@ import 'package:farmapp/controller/group_category_master_list_controller.dart';
 import 'package:farmapp/controller/material_master_list_controller.dart';
 import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/podo/materi.dart';
-import 'package:farmapp/widget/material_detail_widget.dart';
+import 'package:farmapp/widget/materi_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
