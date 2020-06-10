@@ -178,10 +178,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: dropdown_icon_size,
                     elevation: dropdown_elevation,
-                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                     underline: Container(
                       height: 1.2,
-                      color: const Color(color_divider),
+                      color: color_divider,
                     ),
                     onChanged: (GroupCategory newValue) {
                       updateDropdownButton(newValue, null, null);
@@ -211,10 +211,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: dropdown_icon_size,
                     elevation: dropdown_elevation,
-                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                     underline: Container(
                       height: 1.2,
-                      color: const Color(color_divider),
+                      color: color_divider,
                     ),
                     onChanged: (GroupCategory newValue) {
                       updateDropdownButton(null, newValue, null);
@@ -244,10 +244,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: dropdown_icon_size,
                     elevation: dropdown_elevation,
-                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                     underline: Container(
                       height: 1.2,
-                      color: const Color(color_divider),
+                      color: color_divider,
                     ),
                     onChanged: (GroupCategory newValue) {
                       updateDropdownButton(null, null, newValue);

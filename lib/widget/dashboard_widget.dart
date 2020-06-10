@@ -3,7 +3,6 @@ import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/widget/dashboard_detail_widget.dart';
 import 'package:intl/intl.dart';
@@ -46,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(color_primary_light),
+      backgroundColor: color_primary_light,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -58,10 +57,10 @@ class _DashboardState extends State<Dashboard> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: const Color(color_primary_light),
+              color: color_primary_light,
               border: Border(
                 bottom: BorderSide(
-                    color: const Color(color_divider),
+                    color: color_divider,
                     width: 1.0,
                     style: BorderStyle.solid),
               ),
@@ -73,10 +72,10 @@ class _DashboardState extends State<Dashboard> {
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(
-                  color: const Color(color_primary_light),
+                  color: color_primary_light,
                   border: Border(
                     bottom: BorderSide(
-                        color: const Color(color_divider),
+                        color: color_divider,
                         width: 1.0,
                         style: BorderStyle.solid),
                   ),

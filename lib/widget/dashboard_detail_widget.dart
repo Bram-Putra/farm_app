@@ -1,14 +1,8 @@
 import 'package:farmapp/controller/main_controller.dart';
-import 'package:farmapp/controller/cage_detail_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/daily_check.dart';
-import 'package:farmapp/podo/group_category.dart';
-import 'package:farmapp/podo/livestock_type.dart';
 import 'package:farmapp/widget/daily_check_parent_widget.dart';
-import 'package:farmapp/widget/group_category_dropdown_widget.dart';
 import 'package:flutter/material.dart';
-import 'livestock_type_dropdown_widget.dart';
 import 'package:intl/intl.dart';
 
 class DashboardDetail extends StatefulWidget {
@@ -20,7 +14,6 @@ class DashboardDetail extends StatefulWidget {
 
 class _DashboardDetailState extends State<DashboardDetail> {
   MainController mainController = MainController();
-  CageDetailController _cageDetailController = CageDetailController();
   DateFormat df = DateFormat("dd MMM yyyy");
 
   final tcCheckId = TextEditingController();
@@ -52,7 +45,7 @@ class _DashboardDetailState extends State<DashboardDetail> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(color_primary_dark),
+          backgroundColor: color_primary_dark,
           title: ListTile(
             leading: Icon(
               icon_dashboard,

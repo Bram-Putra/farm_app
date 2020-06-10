@@ -100,7 +100,7 @@ class _CageMasterListState extends State<CageMasterList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(color_primary_dark),
+        backgroundColor: color_primary_dark,
         title: ListTile(
           leading: Hero(
             tag: 'icon_kandang',
@@ -109,9 +109,12 @@ class _CageMasterListState extends State<CageMasterList> {
               color: Colors.white,
             ),
           ),
-          title: Text(
-            'Kandang',
-            style: appbar_textstyle,
+          title: Hero(
+            tag: 'text_kandang',
+            child: Text(
+              'Kandang',
+              style: appbar_textstyle,
+            ),
           ),
         ),
         actions: <Widget>[
@@ -126,47 +129,52 @@ class _CageMasterListState extends State<CageMasterList> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: const Color(color_primary_dark),
+        backgroundColor: color_primary_dark,
         onPressed: () {
           _callCageDetail(null);
         },
       ),
-      body: ListView.builder(
-        itemCount: cmlController.getListSize(),
-        itemBuilder: (context, index) {
-          int cageId = cmlController.getCageId(index);
-          return Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color(color_primary_light),
-                border: Border(
-                  bottom: BorderSide(
-                      color: const Color(color_divider),
-                      width: 1.0,
-                      style: BorderStyle.solid),
+      body: Stack(
+        children: <Widget>[
+          Hero(tag: 'body_kandang', child: Container(color: color_primary_white,)),
+          ListView.builder(
+            itemCount: cmlController.getListSize(),
+            itemBuilder: (context, index) {
+              int cageId = cmlController.getCageId(index);
+              return Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: color_primary_light,
+                    border: Border(
+                      bottom: BorderSide(
+                          color: color_divider,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
+                  ),
+                  child: ListTile(
+                    title: Text(cmlController.getCage(index).tag),
+                    subtitle: Text(cmlController.getCageNotes(index)),
+                    onTap: () {
+                      _callCageDetail(cmlController.getCage(index));
+                    },
+                  ),
                 ),
-              ),
-              child: ListTile(
-                title: Text(cmlController.getCage(index).tag),
-                subtitle: Text(cmlController.getCageNotes(index)),
-                onTap: () {
-                  _callCageDetail(cmlController.getCage(index));
-                },
-              ),
-            ),
-            secondaryActions: <Widget>[
-              IconSlideAction(
-                caption: 'Delete',
-                color: const Color(color_delete),
-                icon: Icons.delete,
-                onTap: () {
-                  _deleteRow(context, index);
-                },
-              ),
-            ],
-          );
-        },
+                secondaryActions: <Widget>[
+                  IconSlideAction(
+                    caption: 'Delete',
+                    color: color_delete,
+                    icon: Icons.delete,
+                    onTap: () {
+                      _deleteRow(context, index);
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
       ),
     );
   }

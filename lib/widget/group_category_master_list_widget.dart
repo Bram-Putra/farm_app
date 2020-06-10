@@ -1,12 +1,8 @@
 import 'package:farmapp/controller/group_category_master_list_controller.dart';
-import 'package:farmapp/controller/material_master_list_controller.dart';
 import 'package:farmapp/podo/group_category.dart';
-import 'package:farmapp/podo/materi.dart';
-import 'package:farmapp/widget/materi_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
 
@@ -81,10 +77,10 @@ class _GroupCategoryMasterListState extends State<GroupCategoryMasterList> {
           actionPane: SlidableDrawerActionPane(),
           child: Container(
             decoration: BoxDecoration(
-              color: const Color(color_primary_light),
+              color: color_primary_light,
               border: Border(
                 bottom: BorderSide(
-                    color: const Color(color_divider),
+                    color: color_divider,
                     width: 1.0,
                     style: BorderStyle.solid),
               ),
@@ -98,7 +94,7 @@ class _GroupCategoryMasterListState extends State<GroupCategoryMasterList> {
           secondaryActions: <Widget>[
             IconSlideAction(
               caption: 'Delete',
-              color: const Color(color_delete),
+              color: color_delete,
               icon: Icons.delete,
               onTap: () {
                 _deleteRow(context, index);

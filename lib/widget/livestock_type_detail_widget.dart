@@ -54,7 +54,7 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(color_primary_dark),
+        backgroundColor: color_primary_dark,
         title: ListTile(
           leading: Icon(
             icon_livestock,
@@ -67,7 +67,7 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
         ),
       ),
       body: Container(
-        color: const Color(color_primary_light),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[

@@ -4,7 +4,6 @@ import 'package:farmapp/widget/materi_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
 
@@ -101,7 +100,7 @@ class _MateriMasterListState extends State<MateriMasterList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(color_primary_dark),
+          backgroundColor: color_primary_dark,
           title: ListTile(
             leading: Hero(
               tag: 'icon_materi',
@@ -110,9 +109,12 @@ class _MateriMasterListState extends State<MateriMasterList> {
                 color: Colors.white,
               ),
             ),
-            title: Text(
-              'Material',
-              style: appbar_textstyle,
+            title: Hero(
+              tag: 'text_materi',
+              child: Text(
+                'Material',
+                style: appbar_textstyle,
+              ),
             ),
           ),
           actions: <Widget>[
@@ -127,48 +129,51 @@ class _MateriMasterListState extends State<MateriMasterList> {
         ),
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
-            backgroundColor: const Color(color_primary_dark),
+            backgroundColor: color_primary_dark,
             onPressed: (){_callMaterialDetail(null);},
         ),
-        body:ListView.builder(
-            itemCount: mmlController.getListSize(),
-            itemBuilder: (context, index) {
-            int materialId = mmlController.getMaterialId(index);
-            return Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFCFD8DC),
-                      border: Border(
-                          bottom: BorderSide(
-                            color: const Color(0xFFBDBDBD),
-                            width: 1.0,
-                            style: BorderStyle.solid),
-                      ),
+        body:Stack(
+          children: <Widget>[
+            Hero(tag: 'body_materi', child: Container(color: color_primary_white,)),
+            ListView.builder(
+                itemCount: mmlController.getListSize(),
+                itemBuilder: (context, index) {
+                return Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: color_primary_light,
+                          border: Border(
+                              bottom: BorderSide(
+                                color: color_divider,
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                          ),
+                        ),
+                        child: ListTile(
+                            title: Text('Material: '+mmlController.getMaterial(index).materialName),
+                            subtitle: Text(mmlController.getMaterial(index).uom),
+                            onTap: (){_callMaterialDetail(mmlController.getMaterial(index));},
+                        ),
                     ),
-                    child: ListTile(
-                        title: Text('Material: '+mmlController.getMaterial(index).materialName),
-                        subtitle: Text(mmlController.getMaterial(index).uom),
-                        onTap: (){_callMaterialDetail(mmlController.getMaterial(index));},
+                    secondaryActions: <Widget>[
+                    IconSlideAction(
+                        caption: 'Delete',
+                        color: color_delete,
+                        icon: Icons.delete,
+                        onTap: () {_deleteRow(context, index);},
                     ),
-                ),
-                secondaryActions: <Widget>[
-                IconSlideAction(
-                    caption: 'Delete',
-                    color: const Color(0xFFFF5252),
-                    icon: Icons.delete,
-                    onTap: () {_deleteRow(context, index);},
-                ),
-                ],
-            );
-            },
+                    ],
+                );
+                },
+            ),
+          ],
         )
     );
   }
 
   void _callMaterialDetail(Materi materialX) async {
-    final result = await Navigator.push(context, MaterialPageRoute(builder: (context) => MaterialDetail(materialX)));
-
+    await Navigator.push(context, MaterialPageRoute(builder: (context) => MaterialDetail(materialX)));
     setState(() {
       _loadData();
     });

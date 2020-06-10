@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:flutter/scheduler.dart';
 
 class ScreenMaster extends StatelessWidget {
   void gotoPage(BuildContext context, String s) {
@@ -19,21 +18,24 @@ class ScreenMaster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+//        automaticallyImplyLeading: false,
         title: ListTile(
           leading: Hero(
             tag: 'icon_master',
             child: Icon(
               icon_master,
-              color: Colors.white,
+              color: color_text_white,
             ),
           ),
-          title: Text(
-            'Master',
-            style: appbar_textstyle,
+          title: Hero(
+            tag: 'text_master',
+            child: Text(
+              'Master',
+              style: appbar_textstyle,
+            ),
           ),
         ),
-        backgroundColor: const Color(color_primary_dark),
+        backgroundColor: color_primary_dark,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.home),
@@ -45,226 +47,330 @@ class ScreenMaster extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  child: Container(
-                    child: Material(
-                      color: const Color(color_primary_light),
-                      borderRadius: BorderRadius.circular(8),
-                      child: InkWell(
-                        onTap: () {
-                          gotoPage(context, 'Kandang');
-                        },
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: ListTile(
-                              leading: Hero(
-                                  tag: 'icon_kandang',
-                                  child: Icon(
-                                    icon_kandang,
-                                    size: screenmaster_button_icon_size,
-                                  )),
-                              title: Text(
-                                'Kandang',
-                                style: screenmaster_button_textstyle,
+        child: Stack(
+          children: <Widget>[
+            Hero(
+              tag: 'body_master',
+              child: Container(
+                color: color_primary_light,
+              ),
+            ),
+            Container(
+              child: Column(
+                children: <Widget>[
+                  //Kandang
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      child: Stack(
+                        children: <Widget>[
+                          Hero(
+                            tag: 'body_kandang',
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: color_screen_button_white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.2),
+                                    offset: Offset(0, 10),
+                                    blurRadius: 12,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(.2),
-                          offset: Offset(0, 10),
-                          blurRadius: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  child: Container(
-                    child: Material(
-                      color: const Color(color_primary_light),
-                      borderRadius: BorderRadius.circular(8),
-                      child: InkWell(
-                        onTap: () {
-                          gotoPage(context, 'Materi');
-                        },
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: ListTile(
-                              leading: Hero(
-                                  tag: 'icon_materi',
-                                  child: Icon(
-                                    icon_materi,
-                                    size: screenmaster_button_icon_size,
-                                  )),
-                              title: Text(
-                                'Material',
-                                style: screenmaster_button_textstyle,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(.2),
-                          offset: Offset(0, 10),
-                          blurRadius: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  child: Container(
-                    child: Material(
-                      color: const Color(color_primary_light),
-                      borderRadius: BorderRadius.circular(8),
-                      child: InkWell(
-                        onTap: () {
-                          gotoPage(context, 'Materi Type');
-                        },
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: ListTile(
-                              leading: Hero(
-                                tag: 'icon_materi_type',
-                                child: Icon(
-                                  icon_materi_type,
-                                  size: screenmaster_button_icon_size,
+                          Container(
+                            child: Material(
+                              color: color_screen_button_white,
+                              borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  gotoPage(context, 'Kandang');
+                                },
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: ListTile(
+                                      leading: Hero(
+                                        tag: 'icon_kandang',
+                                        child: Icon(
+                                          icon_kandang,
+                                          size: screenmaster_button_icon_size,
+                                          color: color_text_secondary,
+                                        ),
+                                      ),
+                                      title: Hero(
+                                        tag: 'text_kandang',
+                                        child: Text(
+                                          'Kandang',
+                                          style: screenmaster_button_textstyle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              title: Text(
-                                'Material Type',
-                                style: screenmaster_button_textstyle,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  //Material
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      child: Stack(
+                        children: <Widget>[
+                          Hero(
+                            tag: 'body_materi',
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: color_screen_button_white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.2),
+                                    offset: Offset(0, 10),
+                                    blurRadius: 12,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(.2),
-                          offset: Offset(0, 10),
-                          blurRadius: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  child: Container(
-                    child: Material(
-                      color: const Color(color_primary_light),
-                      borderRadius: BorderRadius.circular(8),
-                      child: InkWell(
-                        onTap: () {
-                          gotoPage(context, 'Livestock');
-                        },
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: ListTile(
-                              leading: Hero(
-                                tag: 'icon_livestock',
-                                child: Icon(
-                                  icon_livestock,
-                                  size: screenmaster_button_icon_size,
+                          Container(
+                            child: Material(
+                              color: color_screen_button_white,
+                              borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  gotoPage(context, 'Materi');
+                                },
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: ListTile(
+                                      leading: Hero(
+                                          tag: 'icon_materi',
+                                          child: Icon(
+                                            icon_materi,
+                                            size: screenmaster_button_icon_size,
+                                            color: color_text_secondary,
+                                          )),
+                                      title: Hero(
+                                        tag: 'text_materi',
+                                        child: Text(
+                                          'Material',
+                                          style: screenmaster_button_textstyle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              title: Text(
-                                'Livestock',
-                                style: screenmaster_button_textstyle,
+                            ),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(.2),
+                                  offset: Offset(0, 10),
+                                  blurRadius: 12,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //Material Type
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      child: Stack(
+                        children: <Widget>[
+                          Hero(
+                            tag: 'body_materi_type',
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: color_screen_button_white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.2),
+                                    offset: Offset(0, 10),
+                                    blurRadius: 12,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Material(
+                              color: color_screen_button_white,
+                              borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  gotoPage(context, 'Materi Type');
+                                },
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: ListTile(
+                                      leading: Hero(
+                                        tag: 'icon_materi_type',
+                                        child: Icon(
+                                          icon_materi_type,
+                                          size: screenmaster_button_icon_size,
+                                          color: color_text_secondary,
+                                        ),
+                                      ),
+                                      title: Hero(
+                                        tag: 'text_materi_type',
+                                        child: Text(
+                                          'Material Type',
+                                          style: screenmaster_button_textstyle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(.2),
+                                  offset: Offset(0, 10),
+                                  blurRadius: 12,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //Livestock
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      child: Stack(
+                        children: <Widget>[
+                          Hero(
+                            tag: 'body_livestock',
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: color_screen_button_white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.2),
+                                    offset: Offset(0, 10),
+                                    blurRadius: 12,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Material(
+                              color: color_screen_button_white,
+                              borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  gotoPage(context, 'Livestock');
+                                },
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: ListTile(
+                                      leading: Hero(
+                                        tag: 'icon_livestock',
+                                        child: Icon(
+                                          icon_livestock,
+                                          size: screenmaster_button_icon_size,
+                                          color: color_text_secondary,
+                                        ),
+                                      ),
+                                      title: Hero(
+                                        tag: 'text_livestock',
+                                        child: Text(
+                                          'Livestock',
+                                          style: screenmaster_button_textstyle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(.2),
+                                  offset: Offset(0, 10),
+                                  blurRadius: 12,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //Group Category
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      child: Container(
+                        child: Material(
+                          color: color_screen_button_white,
+                          borderRadius: BorderRadius.circular(8),
+                          child: InkWell(
+                            onTap: () {
+                              gotoPage(context, 'Group Category');
+                            },
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: ListTile(
+                                  leading: Icon(
+                                    icon_group_category,
+                                    size: screenmaster_button_icon_size,
+                                    color: color_text_secondary,
+                                  ),
+                                  title: Text(
+                                    'Group Category',
+                                    style: screenmaster_button_textstyle,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(.2),
+                              offset: Offset(0, 10),
+                              blurRadius: 12,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(.2),
-                          offset: Offset(0, 10),
-                          blurRadius: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                  )
+                ],
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  child: Container(
-                    child: Material(
-                      color: const Color(color_primary_light),
-                      borderRadius: BorderRadius.circular(8),
-                      child: InkWell(
-                        onTap: () {
-                          gotoPage(context, 'Group Category');
-                        },
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: ListTile(
-                              leading: Icon(
-                                icon_group_category,
-                                size: screenmaster_button_icon_size,
-                              ),
-                              title: Text(
-                                'Group Category',
-                                style: screenmaster_button_textstyle,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(.2),
-                          offset: Offset(0, 10),
-                          blurRadius: 12,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

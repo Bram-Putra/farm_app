@@ -128,7 +128,7 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(color_primary_dark),
+        backgroundColor: color_primary_dark,
         title: ListTile(
           leading: Icon(
             icon_inspeksi_harian,
@@ -141,7 +141,7 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
         ),
       ),
       body: Container(
-        color: const Color(color_primary_light),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[

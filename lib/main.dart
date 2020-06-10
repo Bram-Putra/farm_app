@@ -1,10 +1,8 @@
-import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/widget/screen_home.dart';
 import 'package:farmapp/widget/screen_master.dart';
 import 'package:farmapp/widget/screen_transaksi.dart';
 import 'package:farmapp/widget/screen_dashboard.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:farmapp/widget/cage_master_list_widget.dart';
 import 'package:farmapp/widget/materi_master_list_widget.dart';
@@ -23,7 +21,7 @@ class FarmApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      color: const Color(color_primary_dark),
+      color: color_primary_dark,
       title: 'Farm App',
       initialRoute: '/',
       routes: {
