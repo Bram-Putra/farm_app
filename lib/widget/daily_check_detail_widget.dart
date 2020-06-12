@@ -109,12 +109,12 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
 
   @override
   Widget build(BuildContext context) {
+    var df = DateFormat("dd MMM yyyy");
     if(widget.dailyCheck!=null){
       var nf = NumberFormat("#,###");
       var nfd = NumberFormat("#,###.##");
       tcCheckId.text = widget.dailyCheck.checkId.toString();
       tcCheckNumber.text = widget.dailyCheck.checkNumber;
-      var df = DateFormat("dd MMM yyyy");
       tcCheckDate.text = df.format(widget.dailyCheck.checkDate);
       tcAlive.text = nf.format(widget.dailyCheck.alive);
       tcDead.text = nf.format(widget.dailyCheck.dead);
@@ -124,6 +124,8 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
       tcHumidity.text = nfd.format(widget.dailyCheck.humidity);
       tcNotes.text = widget.dailyCheck.notes;
       tcCage.text = widget.dailyCheck.cage.cageId.toString();
+    } else {
+      tcCheckDate.text = df.format(DateTime.now());
     }
 
     return Scaffold(
