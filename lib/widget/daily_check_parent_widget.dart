@@ -67,7 +67,7 @@ class _DailyCheckParentChartState extends State<DailyCheckParentChart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             DailyCheckPeriodDropdown(tcPeriod: tcPeriod),
-            DailyCheckChart(chartData, dc.createData(chartData.alives, chartData.deads, chartData.harvests, chartData.averageWeights)),
+            DailyCheckChart(chartData, dc.createDailyCheckData(chartData.alives, chartData.deads, chartData.harvests, chartData.averageWeights)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,

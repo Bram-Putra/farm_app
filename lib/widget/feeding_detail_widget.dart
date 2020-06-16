@@ -140,9 +140,9 @@ class _FeedingDetailState extends State<FeedingDetail> {
       tcCage.text = widget.feeding.cage.cageId.toString();
 
       for(int i=0; i<widget.feeding.materials.length; i++){
-        if(tcQty.length>0) {
+//        if(tcQty.length>0) {
           tcQty[i].text = widget.feeding.materials[i].quantity.toString();
-        }
+//        }
       }
     } else {
       tcFeedingDate.text = df.format(DateTime.now());
@@ -177,7 +177,10 @@ class _FeedingDetailState extends State<FeedingDetail> {
                   itemCount: materials.length,
                   itemBuilder: (context, index){
                     return TextFormField(
-                      decoration: InputDecoration(labelText: materials[index].materialName),
+                        decoration: InputDecoration(
+                          labelText: materials[index].materialName,
+                          suffixText: materials[index].uom
+                        ),
                         style: TextStyle(
                           height: 1.8
                         ),

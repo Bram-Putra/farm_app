@@ -6,6 +6,7 @@ import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/podo/livestock_type.dart';
 import 'package:farmapp/widget/daily_check_parent_widget.dart';
+import 'package:farmapp/widget/feeding_parent_widget.dart';
 import 'package:farmapp/widget/group_category_dropdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'livestock_type_dropdown_widget.dart';
@@ -74,10 +75,11 @@ class _DashboardDetailState extends State<DashboardDetail> {
                   'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
             ),
             DailyCheckParentChart(tcCage.text),
-            ListTile(
-              leading: Icon(Icons.compare),
-              title: Text('Compare'),
-            )
+            FeedingParentChart(tcCage.text)
+//            ListTile(
+//              leading: Icon(Icons.compare),
+//              title: Text('Compare'),
+//            )
           ],
         ),
       ),
