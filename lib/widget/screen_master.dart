@@ -11,6 +11,8 @@ class ScreenMaster extends StatelessWidget {
       Navigator.pushNamed(context, '/materi-type');
     } else if (s == 'Livestock') {
       Navigator.pushNamed(context, '/livestock');
+    } else if (s == 'Group Category') {
+      Navigator.pushNamed(context, '/group-category');
     }
   }
 
@@ -299,9 +301,9 @@ class ScreenMaster extends StatelessWidget {
                                         ),
                                       ),
                                       title: Hero(
-                                        tag: 'text_livestock',
+                                        tag: 'text_livestock_type',
                                         child: Text(
-                                          'Livestock',
+                                          'Livestock Type',
                                           style: screenmaster_button_textstyle,
                                         ),
                                       ),
@@ -341,14 +343,20 @@ class ScreenMaster extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
                                 child: ListTile(
-                                  leading: Icon(
-                                    icon_group_category,
-                                    size: screenmaster_button_icon_size,
-                                    color: color_text_secondary,
+                                  leading: Hero(
+                                    tag: 'icon_group_category',
+                                    child: Icon(
+                                      icon_group_category,
+                                      size: screenmaster_button_icon_size,
+                                      color: color_text_secondary,
+                                    ),
                                   ),
-                                  title: Text(
-                                    'Group Category',
-                                    style: screenmaster_button_textstyle,
+                                  title: Hero(
+                                    tag: 'text_group_category',
+                                    child: Text(
+                                      'Group Category',
+                                      style: screenmaster_button_textstyle,
+                                    ),
                                   ),
                                 ),
                               ),

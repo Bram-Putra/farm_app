@@ -1,10 +1,9 @@
-import 'package:farmapp/podo/group_category.dart';
 import 'package:farmapp/widget/materi_master_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:farmapp/widget/cage_master_list_widget.dart';
-import 'package:farmapp/widget/group_category_master_list_widget.dart';
 import 'package:farmapp/widget/materi_type_master_list_widget.dart';
 import 'package:farmapp/widget/livestock_type_master_list_widget.dart';
+import 'package:farmapp/widget/group_category_master_list_widget.dart';
 
 class MasterListController {
   int _bodyNumber = 0;
@@ -24,11 +23,10 @@ class MasterListController {
       return MateriMasterList();
     } else if(_bodyNumber == 2) {
       return MateriTypeMasterList();
-    } else {
+    } else if(_bodyNumber == 3) {
       return LivestockTypeMasterList();
+    } else {
+      return GroupCategoryMasterList();
     }
-//    else {
-//      return GroupCategoryMasterList();
-//    }
   }
 }

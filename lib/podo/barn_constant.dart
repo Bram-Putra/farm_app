@@ -17,6 +17,7 @@ const color_text_primary = const Color(0xFF212121);
 const color_text_secondary = const Color(0xFF757575);
 const color_text_white = const Color(0xFFFFFFFF);
 const color_divider = const Color(0xFFBDBDBD);
+const color_divider_children = const Color(0xFFFFFFFF);
 const color_accent = const Color(0xFF9E9E9E);
 const color_delete = const Color(0xFFFF5252);
 const color_dropdown_text = const Color(0xFF00796B);
@@ -79,5 +80,17 @@ const hero_textstyle_pop = TextStyle(
     color: color_text_primary,
     fontSize: 20.0,
     fontWeight: FontWeight.bold,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
+const listview_textstyle_header = TextStyle(
+    color: color_text_primary,
+    fontSize: 18.0,
+    fontWeight: FontWeight.normal,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
+const listview_textstyle_items = TextStyle(
+    color: color_text_primary,
+    fontSize: 18.0,
+    fontWeight: FontWeight.normal,
     decoration: TextDecoration.none,
     fontFamily: 'Source Sans Pro');

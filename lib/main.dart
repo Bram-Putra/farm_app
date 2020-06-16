@@ -1,4 +1,5 @@
 import 'package:farmapp/podo/barn_constant.dart';
+import 'package:farmapp/widget/group_category_master_list_widget.dart';
 import 'package:farmapp/widget/screen_home.dart';
 import 'package:farmapp/widget/screen_master.dart';
 import 'package:farmapp/widget/screen_transaksi.dart';
@@ -34,6 +35,7 @@ class FarmApp extends StatelessWidget {
         '/materi' : (context) => MateriMasterList(),
         '/materi-type' : (context) => MateriTypeMasterList(),
         '/livestock' : (context) => LivestockTypeMasterList(),
+        '/group-category' : (context) => GroupCategoryMasterList(),
         '/inspeksi-harian' : (context) => DailyCheckList(),
 //        '/pemberian-pakan' : (context) => DailyCheckList(),
 //        '/mutasi' : (context) => DailyCheckList(),

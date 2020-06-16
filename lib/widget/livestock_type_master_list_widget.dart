@@ -109,9 +109,9 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
             ),
           ),
           title: Hero(
-            tag: 'text_livestock',
+            tag: 'text_livestock_type',
             child: Text(
-              'Livestock',
+              'Livestock Type',
               style: appbar_textstyle,
             ),
           ),

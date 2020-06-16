@@ -61,7 +61,7 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
             color: Colors.white,
           ),
           title: Text(
-            'Livestock',
+            'Livestock Type',
             style: appbar_textstyle,
           ),
         ),
@@ -71,17 +71,6 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            Container(
-              height: preferred_height,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Livestock Type ID'),
-                  controller: tcLivestockTypeId,
-                  enabled: false,
-                ),
-              ),
-            ),
             Container(
               height: preferred_height,
               child: Align(

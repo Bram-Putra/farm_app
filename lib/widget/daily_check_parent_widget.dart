@@ -1,4 +1,5 @@
 import 'package:farmapp/controller/dashboard_controller.dart';
+import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/daily_check_chart.dart';
 import 'package:farmapp/widget/daily_check_chart_period_widget.dart';
 import 'package:farmapp/widget/daily_check_chart_widget.dart';
@@ -61,6 +62,7 @@ class _DailyCheckParentChartState extends State<DailyCheckParentChart> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: color_primary_light,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

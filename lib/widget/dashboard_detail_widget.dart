@@ -61,20 +61,25 @@ class _DashboardDetailState extends State<DashboardDetail> {
             Tab(icon: Icon(Icons.network_check))
           ]),
         ),
-        body: TabBarView(
-          children: [
-            ListTile(
-              title: Text('Summary ' + widget.dailyCheck.cage.tag),
-              subtitle: Text('#Nomor inspeksi: ' + widget.dailyCheck.checkNumber + '\n' +
-                  'Tanggal inspeksi: ' + df.format(widget.dailyCheck.checkDate) +'\n' +
-                  'Populasi: ' + widget.dailyCheck.alive.toInt().toString() +'\n' +
-                  'Mortalitas: ' + widget.dailyCheck.dead.toInt().toString() +'\n' +
-                  'Panen: ' + widget.dailyCheck.harvest.toInt().toString() + '\n' +
-                  'Berat rata-rata: ' +widget.dailyCheck.averageWeight.toString() + '\n' +
-                  'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
-                  'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
+        body: Stack(
+          children: <Widget>[
+            Hero(tag: 'dashboard_' + widget.dailyCheck.checkId.toString(), child: Container(color: color_primary_light)),
+            TabBarView(
+              children: [
+                ListTile(
+                  title: Text('Summary ' + widget.dailyCheck.cage.tag),
+                  subtitle: Text('#Nomor inspeksi: ' + widget.dailyCheck.checkNumber + '\n' +
+                      'Tanggal inspeksi: ' + df.format(widget.dailyCheck.checkDate) +'\n' +
+                      'Populasi: ' + widget.dailyCheck.alive.toInt().toString() +'\n' +
+                      'Mortalitas: ' + widget.dailyCheck.dead.toInt().toString() +'\n' +
+                      'Panen: ' + widget.dailyCheck.harvest.toInt().toString() + '\n' +
+                      'Berat rata-rata: ' +widget.dailyCheck.averageWeight.toString() + '\n' +
+                      'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
+                      'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
+                ),
+                DailyCheckParentChart(tcCage.text)
+              ],
             ),
-            DailyCheckParentChart(tcCage.text)
           ],
         ),
       ),
