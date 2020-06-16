@@ -54,25 +54,23 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(color_primary_dark),
-        title: Text('Livestock Type'),
+        backgroundColor: color_primary_dark,
+        title: ListTile(
+          leading: Icon(
+            icon_livestock,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Livestock Type',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
-        color: const Color(color_primary_light),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            Container(
-              height: preferred_height,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Livestock Type ID'),
-                  controller: tcLivestockTypeId,
-                  enabled: false,
-                ),
-              ),
-            ),
             Container(
               height: preferred_height,
               child: Align(

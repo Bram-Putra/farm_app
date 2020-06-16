@@ -1,15 +1,8 @@
 import 'package:farmapp/controller/main_controller.dart';
-import 'package:farmapp/controller/cage_detail_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/daily_check.dart';
-import 'package:farmapp/podo/group_category.dart';
-import 'package:farmapp/podo/livestock_type.dart';
 import 'package:farmapp/widget/daily_check_parent_widget.dart';
-import 'package:farmapp/widget/feeding_parent_widget.dart';
-import 'package:farmapp/widget/group_category_dropdown_widget.dart';
 import 'package:flutter/material.dart';
-import 'livestock_type_dropdown_widget.dart';
 import 'package:intl/intl.dart';
 
 class DashboardDetail extends StatefulWidget {
@@ -21,7 +14,6 @@ class DashboardDetail extends StatefulWidget {
 
 class _DashboardDetailState extends State<DashboardDetail> {
   MainController mainController = MainController();
-  CageDetailController _cageDetailController = CageDetailController();
   DateFormat df = DateFormat("dd MMM yyyy");
 
   final tcCheckId = TextEditingController();
@@ -50,36 +42,44 @@ class _DashboardDetailState extends State<DashboardDetail> {
       tcCage.text = widget.dailyCheck.cage.cageId.toString();
     }
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF455A64),
-          title: Text('Dashboard'),
+          backgroundColor: color_primary_dark,
+          title: ListTile(
+            leading: Icon(
+              icon_dashboard,
+              color: Colors.white,
+            ),
+            title: Text(
+              'Dashboard',
+              style: appbar_textstyle,
+            ),
+          ),
           bottom: TabBar(tabs: [
             Tab(icon: Icon(Icons.playlist_add_check)),
-            Tab(icon: Icon(Icons.network_check)),
-            Tab(icon: Icon(Icons.compare))
+            Tab(icon: Icon(Icons.network_check))
           ]),
         ),
-        body: TabBarView(
-          children: [
-            ListTile(
-              title: Text('Summary ' + widget.dailyCheck.cage.tag),
-              subtitle: Text('#Nomor inspeksi: ' + widget.dailyCheck.checkNumber + '\n' +
-                  'Tanggal inspeksi: ' + df.format(widget.dailyCheck.checkDate) +'\n' +
-                  'Populasi: ' + widget.dailyCheck.alive.toInt().toString() +'\n' +
-                  'Mortalitas: ' + widget.dailyCheck.dead.toInt().toString() +'\n' +
-                  'Panen: ' + widget.dailyCheck.harvest.toInt().toString() + '\n' +
-                  'Berat rata-rata: ' +widget.dailyCheck.averageWeight.toString() + '\n' +
-                  'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
-                  'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
+        body: Stack(
+          children: <Widget>[
+            Hero(tag: 'dashboard_' + widget.dailyCheck.checkId.toString(), child: Container(color: color_primary_light)),
+            TabBarView(
+              children: [
+                ListTile(
+                  title: Text('Summary ' + widget.dailyCheck.cage.tag),
+                  subtitle: Text('#Nomor inspeksi: ' + widget.dailyCheck.checkNumber + '\n' +
+                      'Tanggal inspeksi: ' + df.format(widget.dailyCheck.checkDate) +'\n' +
+                      'Populasi: ' + widget.dailyCheck.alive.toInt().toString() +'\n' +
+                      'Mortalitas: ' + widget.dailyCheck.dead.toInt().toString() +'\n' +
+                      'Panen: ' + widget.dailyCheck.harvest.toInt().toString() + '\n' +
+                      'Berat rata-rata: ' +widget.dailyCheck.averageWeight.toString() + '\n' +
+                      'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
+                      'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
+                ),
+                DailyCheckParentChart(tcCage.text)
+              ],
             ),
-            DailyCheckParentChart(tcCage.text),
-            FeedingParentChart(tcCage.text)
-//            ListTile(
-//              leading: Icon(Icons.compare),
-//              title: Text('Compare'),
-//            )
           ],
         ),
       ),

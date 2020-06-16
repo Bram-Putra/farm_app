@@ -16,18 +16,10 @@ class CageDetailController {
         'Content-Type': 'application/json; charset=UTF-8',
       }
     );
-//    print(res.body);
     int code = res.statusCode;
     print(code);
     if (code == 200) {
-//      setState(() {
-//        Alert(
-//            context: context,
-//            title: 'Notice',
-//            desc: res.body,
-//        ).show();
       Navigator.pop(context);
-//      });
     } else {
       print("Something went wrong");
     }

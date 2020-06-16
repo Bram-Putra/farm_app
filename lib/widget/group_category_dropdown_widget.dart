@@ -27,104 +27,73 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     /* --GET REGION-- */
     List<GroupCategory> regions = [];
     List<GroupCategory> farms = [];
-    List<GroupCategory> units = [];
 
     var url = url_path+'v1/groupCategories?id=1';
     var res = await http.get(url);
-
-//    print(decodedJson);
-
     int code = res.statusCode;
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);
-//      setState(() {
-//        regions.clear();
         for (int i = 0; i < decodedJson.length; i++) {
           GroupCategory r = GroupCategory.fromJson(decodedJson[i]);
           _listGroupCategory.add(r);
           regions.add(r);
         }
-//      });
     } else {
       print("Something went wrong");
     }
-//    print(regions.length.toString());
     /* --GET FARM-- */
     for(int x=0; x<regions.length; x++) {
       GroupCategory r = regions[x];
       url = url_path+'v1/groupCategories?id='+r.groupCategoryId.toString();
       res = await http.get(url);
-
-//      print(decodedJson);
-
       int code = res.statusCode;
       if (code == 200) {
         List decodedJson = jsonDecode(res.body);
-//        setState(() {
-//          farms.clear();
           for (int i = 0; i < decodedJson.length; i++) {
             GroupCategory f = GroupCategory.fromJson(decodedJson[i]);
             _listGroupCategory.add(f);
             farms.add(f);
           }
-//        });
       } else {
         print("Something went wrong");
       }
     }
-//    print(farms.length.toString());
     /* --GET UNIT-- */
     for(int x=0; x<farms.length; x++) {
       GroupCategory f = farms[x];
-//      print(f.groupCategoryId.toString());
       url = url_path+'v1/groupCategories?id='+f.groupCategoryId.toString();
       res = await http.get(url);
-
-//      print(decodedJson);
-
       int code = res.statusCode;
       if (code == 200) {
         List decodedJson = jsonDecode(res.body);
-//        setState(() {
-//          units.clear();
           for (int i = 0; i < decodedJson.length; i++) {
             GroupCategory u = GroupCategory.fromJson(decodedJson[i]);
             _listGroupCategory.add(u);
           }
-//        });
       } else {
         print("Something went wrong");
       }
     }
-//    print(_listGroupCategory);
-//    print('selesai load');
-//    for(int z=0; z<_listGroupCategory.length; z++){
-//      print(_listGroupCategory[z].groupCategoryId.toString()+'=='+_listGroupCategory[z].groupCategoryName+'=='+_listGroupCategory[z].parent.groupCategoryId.toString());
-//    }
 
     setState(() {
-//      GroupCategory parentGroup = GroupCategory(groupCategoryId: 1);
       if(widget.tcRegion.text!=''){
         regionValue = getGroupById(int.parse(widget.tcRegion.text));
       } else {
         regionValue = getGroupCategoryByParent(parentGroup);
         widget.tcRegion.text = regionValue.groupCategoryId.toString();
       }
-//      print('region value: '+regionValue.groupCategoryId.toString());
       if(widget.tcFarm.text!=''){
         farmValue = getGroupById(int.parse(widget.tcFarm.text));
       } else {
         farmValue = getGroupCategoryByParent(regionValue);
         widget.tcFarm.text = farmValue.groupCategoryId.toString();
       }
-//      print('farm value: '+farmValue.groupCategoryId.toString());
       if(widget.tcUnit.text!=''){
         unitValue = getGroupById(int.parse(widget.tcUnit.text));
       } else {
         unitValue = getGroupCategoryByParent(farmValue);
         widget.tcUnit.text = unitValue.groupCategoryId.toString();
       }
-//    print('unit value: '+unitValue.groupCategoryId.toString());
     });
   }
 
@@ -158,7 +127,6 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
   @override
   void initState() {
     super.initState();
-//    GroupCategory regionValue = groupCategoryController.getGroupCategoryByParent(parentGroup);
     loadData();
   }
 
@@ -178,10 +146,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: dropdown_icon_size,
                     elevation: dropdown_elevation,
-                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                     underline: Container(
                       height: 1.2,
-                      color: const Color(color_divider),
+                      color: color_divider,
                     ),
                     onChanged: (GroupCategory newValue) {
                       updateDropdownButton(newValue, null, null);
@@ -211,10 +179,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: dropdown_icon_size,
                     elevation: dropdown_elevation,
-                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                     underline: Container(
                       height: 1.2,
-                      color: const Color(color_divider),
+                      color: color_divider,
                     ),
                     onChanged: (GroupCategory newValue) {
                       updateDropdownButton(null, newValue, null);
@@ -244,10 +212,10 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: dropdown_icon_size,
                     elevation: dropdown_elevation,
-                    style: TextStyle(color: const Color(color_dropdown_text), fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                     underline: Container(
                       height: 1.2,
-                      color: const Color(color_divider),
+                      color: color_divider,
                     ),
                     onChanged: (GroupCategory newValue) {
                       updateDropdownButton(null, null, newValue);
@@ -270,7 +238,6 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
   }
 
   GroupCategory getGroupCategoryByParent(GroupCategory parent) {
-//    print(parent.groupCategoryId);
     GroupCategory result;
     if(_listGroupCategory!=null) {
       for (int i = 0; i < _listGroupCategory.length; i++) {

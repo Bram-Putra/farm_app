@@ -11,7 +11,6 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
 
-
 class GroupCategoryDetail extends StatefulWidget {
   final GroupCategory groupCategory;
   const GroupCategoryDetail(this.groupCategory);
@@ -28,7 +27,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
   final tcGroupName = TextEditingController();
   final tcParent = TextEditingController();
 
-  void save() async {
+  void _save() async {
     GroupCategory entity = GroupCategory();
     entity.groupCategoryId = int.parse(tcGroupCategoryId.text);
     entity.groupCategoryName = tcGroupCategoryName.text;
@@ -37,12 +36,16 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
     parentLocal.groupCategoryId = int.parse(tcParent.text);
     entity.parent = parentLocal;
 
-    var url = url_path+'v1/groupCategories';
+    var url = url_path + 'v1/groupCategories';
     var json = jsonEncode(entity.toJson());
     print(json);
-    var res = await http.post(url, body: json, headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },);
+    var res = await http.post(
+      url,
+      body: json,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
     int code = res.statusCode;
     print(code);
     if (code == 200) {
@@ -62,7 +65,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
     } else {
       gc = widget.groupCategory;
     }
-    if(gc.parent != null) {
+    if (gc.parent != null) {
       parentGlobal = gc.parent;
     } else {
       parentGlobal = GroupCategory();
@@ -74,11 +77,11 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: Text(mainController.getTitle()),
+        backgroundColor: color_primary_dark,
+        title: Text('Group Category'),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
@@ -87,18 +90,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Material'),
-                  initialValue: tcGroupCategoryName.text,
-                  enabled: false,
-                ),
-              ),
-            ),
-            Container(
-              height: preferred_height,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Material Name'),
+                  decoration: InputDecoration(labelText: 'Name'),
                   controller: tcGroupCategoryName,
                 ),
               ),
@@ -108,31 +100,35 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'UOM'),
-                  controller: tcGroupName
-                ),
+                    decoration: InputDecoration(labelText: 'Group Name'),
+                    controller: tcGroupName),
               ),
             ),
-//            MaterialTypeDropdownButton(tipe: tcTipe),
             Container(
               height: preferred_height,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Notes'),
-                  controller: tcParent
-                ),
+                    decoration: InputDecoration(labelText: 'Parent'),
+                    controller: tcParent),
               ),
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(
+              height: 10.0,
+            ),
             ButtonTheme(
               height: raised_button_height,
               child: RaisedButton(
                 onPressed: () {
-                  save();
+                  _save();
                 },
                 color: Colors.teal,
-                child: Text('Save', style: TextStyle(fontSize: raised_button_font_size, color: color_raised_button_text),),
+                child: Text(
+                  'Save',
+                  style: TextStyle(
+                      fontSize: raised_button_font_size,
+                      color: color_raised_button_text),
+                ),
               ),
             ),
           ],

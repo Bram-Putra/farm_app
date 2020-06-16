@@ -3,7 +3,6 @@ import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/widget/dashboard_detail_widget.dart';
 import 'package:intl/intl.dart';
@@ -23,9 +22,6 @@ class _DashboardState extends State<Dashboard> {
 
     var url = url_path + 'v1/reports/dashboard';
     var res = await http.get(url);
-
-//    print(decodedJson);
-
     int code = res.statusCode;
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);
@@ -49,49 +45,73 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: _listDailyCheck.length,
-        itemBuilder: (context, index) {
-          return Container(
+      backgroundColor: color_primary_light,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              child: Text('Daily Check'),
+            ),
+          ),
+          Container(
             decoration: BoxDecoration(
-              color: const Color(color_primary_light),
+              color: color_primary_light,
               border: Border(
                 bottom: BorderSide(
-                    color: const Color(color_divider),
+                    color: color_divider,
                     width: 1.0,
                     style: BorderStyle.solid),
               ),
             ),
-            child: ListTile(
-              title: Text('Kandang: ' + _listDailyCheck[index].cage.tag),
-              subtitle: Text('Nomor inspeksi: ' +
-                  _listDailyCheck[index].checkNumber +
-                  '\n' +
-                  'Tanggal inspeksi: ' +
-                  df.format(_listDailyCheck[index].checkDate) +
-                  '\n' +
-                  'Populasi: ' +
-                  _listDailyCheck[index].alive.toInt().toString() +
-                  '\n' +
-                  'Mortalitas: ' +
-                  _listDailyCheck[index].dead.toInt().toString() +
-                  '\n' +
-                  'Panen: ' +
-                  _listDailyCheck[index].harvest.toInt().toString() +
-                  '\n' +
-                  'Berat rata-rata: ' +
-                  _listDailyCheck[index].averageWeight.toString() +
-                  '\n' +
-                  'Suhu ruangan: ' +
-                  _listDailyCheck[index].temperature.toString() +
-                  '\n' +
-                  'Kelembaban: ' + _listDailyCheck[index].humidity.toString()),
-              onTap: () {
-                _callDashboardDetail(_listDailyCheck[index]);
-              },
-            ),
-          );
-        },
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: _listDailyCheck.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: color_primary_light,
+                  border: Border(
+                    bottom: BorderSide(
+                        color: color_divider,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
+                ),
+                child: ListTile(
+                  title: Text(_listDailyCheck[index].cage.tag +
+                      '\n' +
+                      df.format(_listDailyCheck[index].checkDate)),
+                  subtitle: Text('Nomor inspeksi: ' +
+                      _listDailyCheck[index].checkNumber +
+                      '\n' +
+                      'Populasi: ' +
+                      _listDailyCheck[index].alive.toInt().toString() +
+                      '\n' +
+                      'Mortalitas: ' +
+                      _listDailyCheck[index].dead.toInt().toString() +
+                      '\n' +
+                      'Panen: ' +
+                      _listDailyCheck[index].harvest.toInt().toString() +
+                      '\n' +
+                      'Berat rata-rata: ' +
+                      _listDailyCheck[index].averageWeight.toString() +
+                      '\n' +
+                      'Suhu ruangan: ' +
+                      _listDailyCheck[index].temperature.toString() +
+                      '\n' +
+                      'Kelembaban: ' +
+                      _listDailyCheck[index].humidity.toString()),
+                  onTap: () {
+                    _callDashboardDetail(_listDailyCheck[index]);
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

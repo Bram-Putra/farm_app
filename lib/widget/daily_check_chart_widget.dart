@@ -39,7 +39,6 @@ class _DailyCheckChartState extends State<DailyCheckChart> {
   Widget build(BuildContext context) {
 //    print('build');
     return Container(
-      height: 400.0,
       child:
       new charts.LineChart(widget.seriesList, animate: widget.animate,
         domainAxis: charts.NumericAxisSpec(tickFormatterSpec: customTickFormatter))

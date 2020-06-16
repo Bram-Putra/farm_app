@@ -1,15 +1,11 @@
-import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/podo/materi_type.dart';
 import 'package:farmapp/widget/material_type_dropdownbutton_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
-
 
 class MaterialDetail extends StatefulWidget {
   final Materi material;
@@ -29,7 +25,7 @@ class _MaterialDetailState extends State<MaterialDetail> {
 
   void save() async {
     Materi entity = Materi();
-    if(tcMaterialId.text!='') {
+    if (tcMaterialId.text != '') {
       entity.materialId = int.parse(tcMaterialId.text);
     }
     entity.materialName = tcMaterialName.text;
@@ -41,12 +37,16 @@ class _MaterialDetailState extends State<MaterialDetail> {
     entity.materialType = tipe;
     entity.notes = tcNotes.text;
 
-    var url = url_path+'v1/materials';
+    var url = url_path + 'v1/materials';
     var json = jsonEncode(entity.toJson());
 //    print(json);
-    var res = await http.post(url, body: json, headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },);
+    var res = await http.post(
+      url,
+      body: json,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
     int code = res.statusCode;
 //    print(code);
     if (code == 200) {
@@ -56,7 +56,6 @@ class _MaterialDetailState extends State<MaterialDetail> {
     } else {
       print("Something went wrong");
     }
-
   }
 
   @override
@@ -74,14 +73,22 @@ class _MaterialDetailState extends State<MaterialDetail> {
       tcTipe.text = m.materialType.typeId.toString();
     }
 
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: Text('Material'),
+        backgroundColor: color_primary_dark,
+        title: ListTile(
+          leading: Icon(
+            icon_materi,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Material',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
@@ -111,9 +118,8 @@ class _MaterialDetailState extends State<MaterialDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'UOM'),
-                  controller: tcUom
-                ),
+                    decoration: InputDecoration(labelText: 'UOM'),
+                    controller: tcUom),
               ),
             ),
             MaterialTypeDropdownButton(tipe: tcTipe),
@@ -122,12 +128,13 @@ class _MaterialDetailState extends State<MaterialDetail> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Notes'),
-                  controller: tcNotes
-                ),
+                    decoration: InputDecoration(labelText: 'Notes'),
+                    controller: tcNotes),
               ),
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(
+              height: 10.0,
+            ),
             ButtonTheme(
               height: raised_button_height,
               child: RaisedButton(
@@ -135,7 +142,12 @@ class _MaterialDetailState extends State<MaterialDetail> {
                   save();
                 },
                 color: Colors.teal,
-                child: Text('Save', style: TextStyle(fontSize: raised_button_font_size, color: color_raised_button_text),),
+                child: Text(
+                  'Save',
+                  style: TextStyle(
+                      fontSize: raised_button_font_size,
+                      color: color_raised_button_text),
+                ),
               ),
             ),
           ],

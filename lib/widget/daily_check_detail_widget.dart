@@ -40,10 +40,10 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
         actions: <Widget>[
           FlatButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Confirm')),
+              child: Text('Konfirmasi')),
           FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancel')),
+              child: Text('Batal')),
         ],
       ),
     ).then((value) {
@@ -130,11 +130,20 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
-        title: Text(app_title),
+        backgroundColor: color_primary_dark,
+        title: ListTile(
+          leading: Icon(
+            icon_inspeksi_harian,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Inspeksi Harian',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[

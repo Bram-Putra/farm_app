@@ -3,7 +3,7 @@ import 'package:farmapp/widget/feeding_list_widget.dart';
 import 'package:farmapp/widget/materi_type_master_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:farmapp/widget/cage_master_list_widget.dart';
-import 'package:farmapp/widget/material_master_list_widget.dart';
+import 'package:farmapp/widget/materi_master_list_widget.dart';
 import 'package:farmapp/widget/livestock_type_master_list_widget.dart';
 
 class TransaksiController {

@@ -1,10 +1,7 @@
-import 'package:farmapp/icon/custom_icon_barn.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:farmapp/controller/master_list_controller.dart';
-import 'package:farmapp/widget/cage_detail_widget.dart';
-import 'package:farmapp/podo/cage.dart';
 
 class MasterList extends StatefulWidget {
   @override
@@ -27,7 +24,7 @@ class _MasterListState extends State<MasterList> {
       bottomNavigationBar: ConvexAppBar(
         curveSize: 60.0,
         top: -14.0,
-        backgroundColor: const Color(color_primary_dark),
+        backgroundColor: color_primary_dark,
         items: [
           TabItem(icon: icon_kandang, title: 'Kandang'),
           TabItem(icon: icon_materi, title: 'Material'),

@@ -1,11 +1,6 @@
-import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/cage.dart';
-import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/podo/materi_type.dart';
-import 'package:farmapp/widget/material_type_dropdownbutton_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
@@ -60,11 +55,20 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(color_primary_dark),
-        title: Text('Material Type'),
+        backgroundColor: color_primary_dark,
+        title: ListTile(
+          leading: Icon(
+            icon_materi_type,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Material',
+            style: appbar_textstyle,
+          ),
+        ),
       ),
       body: Container(
-        color: const Color(color_primary_light),
+        color: color_primary_light,
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
