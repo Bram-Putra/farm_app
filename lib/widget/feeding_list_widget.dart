@@ -6,7 +6,7 @@ import 'package:farmapp/podo/feeding.dart';
 import 'package:farmapp/podo/materi.dart';
 import 'package:farmapp/widget/daily_check_detail_widget.dart';
 import 'package:farmapp/widget/feeding_detail_widget.dart';
-import 'package:farmapp/widget/material_detail_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';

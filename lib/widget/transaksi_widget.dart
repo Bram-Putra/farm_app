@@ -12,6 +12,7 @@ class _TransaksiState extends State<Transaksi> {
   TransaksiController controller = TransaksiController();
 
   void _setSelectedIndex(int i) {
+    print(i);
     setState(() {
       controller.setBodyNumber(i);
     });

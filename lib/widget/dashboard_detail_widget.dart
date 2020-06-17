@@ -2,6 +2,7 @@ import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/widget/daily_check_parent_widget.dart';
+import 'package:farmapp/widget/feeding_parent_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -42,7 +43,7 @@ class _DashboardDetailState extends State<DashboardDetail> {
       tcCage.text = widget.dailyCheck.cage.cageId.toString();
     }
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: color_primary_dark,
@@ -58,7 +59,8 @@ class _DashboardDetailState extends State<DashboardDetail> {
           ),
           bottom: TabBar(tabs: [
             Tab(icon: Icon(Icons.playlist_add_check)),
-            Tab(icon: Icon(Icons.network_check))
+            Tab(icon: Icon(Icons.network_check)),
+            Tab(icon: Icon(Icons.swap_vertical_circle))
           ]),
         ),
         body: Stack(
@@ -77,7 +79,8 @@ class _DashboardDetailState extends State<DashboardDetail> {
                       'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
                       'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
                 ),
-                DailyCheckParentChart(tcCage.text)
+                DailyCheckParentChart(tcCage.text),
+                FeedingParentChart(tcCage.text)
               ],
             ),
           ],

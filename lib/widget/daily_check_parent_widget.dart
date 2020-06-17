@@ -70,7 +70,7 @@ class _DailyCheckParentChartState extends State<DailyCheckParentChart> {
             DailyCheckPeriodDropdown(tcPeriod: tcPeriod),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: DailyCheckChart(chartData, dc.createData(chartData.alives, chartData.deads, chartData.harvests, chartData.averageWeights)),
+              child: DailyCheckChart(chartData, dc.createDailyCheckData(chartData.alives, chartData.deads, chartData.harvests, chartData.averageWeights)),
             )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
