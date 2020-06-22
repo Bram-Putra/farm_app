@@ -20,8 +20,6 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
   bool _downloading = false;
   final _urlPath =
       'v1/reports/rptPertambahanBobot?startDate=';
-//      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-//      'http://barbra-coco.dyndns.org/student/learning_android_studio.pdf';
   String _progressPercentage = '';
   BuildContext _buildContext;
   String _dir = '';
