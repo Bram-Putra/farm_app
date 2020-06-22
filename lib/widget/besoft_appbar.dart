@@ -23,7 +23,7 @@ class BesoftAppbar extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: appbar_textstyle,
+          style: textstyle_appbar,
         ),
       ),
       backgroundColor: color_primary_dark,

@@ -63,7 +63,7 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
           ),
           title: Text(
             'Material',
-            style: appbar_textstyle,
+            style: textstyle_appbar,
           ),
         ),
       ),
@@ -73,7 +73,7 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -84,7 +84,7 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
               ),
             ),
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -94,7 +94,7 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
               ),
             ),
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -105,13 +105,13 @@ class _MateriTypeDetailState extends State<MateriTypeDetail> {
             ),
             SizedBox(height: 10.0,),
             ButtonTheme(
-              height: raised_button_height,
+              height: height_button_save,
               child: RaisedButton(
                 onPressed: () {
                   save();
                 },
                 color: Colors.teal,
-                child: Text('Save', style: TextStyle(fontSize: raised_button_font_size, color: color_raised_button_text),),
+                child: Text('Save', style: TextStyle(fontSize: size_button_save_text, color: color_button_save_text),),
               ),
             ),
           ],

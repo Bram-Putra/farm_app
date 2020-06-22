@@ -53,8 +53,8 @@ class _DashboardDetailState extends State<DashboardDetail> {
               color: Colors.white,
             ),
             title: Text(
-              'Dashboard',
-              style: appbar_textstyle,
+              widget.dailyCheck.cage.tag,
+              style: textstyle_appbar,
             ),
           ),
           bottom: TabBar(tabs: [
@@ -69,7 +69,7 @@ class _DashboardDetailState extends State<DashboardDetail> {
             TabBarView(
               children: [
                 ListTile(
-                  title: Text('Summary ' + widget.dailyCheck.cage.tag),
+                  title: Text('Summary'),
                   subtitle: Text('#Nomor inspeksi: ' + widget.dailyCheck.checkNumber + '\n' +
                       'Tanggal inspeksi: ' + df.format(widget.dailyCheck.checkDate) +'\n' +
                       'Populasi: ' + widget.dailyCheck.alive.toInt().toString() +'\n' +
@@ -77,7 +77,8 @@ class _DashboardDetailState extends State<DashboardDetail> {
                       'Panen: ' + widget.dailyCheck.harvest.toInt().toString() + '\n' +
                       'Berat rata-rata: ' +widget.dailyCheck.averageWeight.toString() + '\n' +
                       'Suhu ruangan: ' + widget.dailyCheck.temperature.toString() +'\n' +
-                      'Kelembaban: ' + widget.dailyCheck.humidity.toString()),
+                      'Kelembaban: ' + widget.dailyCheck.humidity.toString(),
+                  ),
                 ),
                 DailyCheckParentChart(tcCage.text),
                 FeedingParentChart(tcCage.text)

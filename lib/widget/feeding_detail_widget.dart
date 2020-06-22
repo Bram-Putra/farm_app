@@ -9,6 +9,8 @@ import 'package:farmapp/widget/cage_dropdownbutton_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class FeedingDetail extends StatefulWidget {
   final Feeding feeding;
@@ -22,6 +24,7 @@ class FeedingDetail extends StatefulWidget {
 class _FeedingDetailState extends State<FeedingDetail> {
   FeedingController fController = FeedingController();
   MaterialMasterListController mController = MaterialMasterListController();
+  Future<http.Response> _futureResponse;
 
   final tcFeedingId = TextEditingController();
   final tcFeedingNumber = TextEditingController();
@@ -30,6 +33,10 @@ class _FeedingDetailState extends State<FeedingDetail> {
   final tcCage = TextEditingController();
   List<Materi> materials = [];
   List<TextEditingController> tcQty = [];
+
+  var df = DateFormat("dd MMM yyyy");
+  var nf = NumberFormat("#,###");
+  var nfd = NumberFormat("#,###.##");
 
   void _save() {
     bool confirmSave = false;
@@ -51,11 +58,11 @@ class _FeedingDetailState extends State<FeedingDetail> {
       confirmSave = value;
       if (confirmSave) {
         Feeding entity = Feeding();
-        if(tcFeedingId.text!=''){
+        if (tcFeedingId.text != '') {
           entity.feedingId = int.parse(tcFeedingId.text);
         }
         entity.feedingNumber = tcFeedingNumber.text;
-        if(tcFeedingDate.text!='') {
+        if (tcFeedingDate.text != '') {
           var df = DateFormat("dd MMM yyyy");
           entity.feedingDate = df.parse(tcFeedingDate.text);
         }
@@ -64,9 +71,9 @@ class _FeedingDetailState extends State<FeedingDetail> {
         cage.cageId = int.parse(tcCage.text);
         entity.cage = cage;
 
-        for(int i=0; i<materials.length; i++){
+        for (int i = 0; i < materials.length; i++) {
           FeedingMaterial m = FeedingMaterial();
-          m.orderNumber = (i+1);
+          m.orderNumber = (i + 1);
           m.material = materials[i];
           m.quantity = double.parse(tcQty[i].text);
           entity.materials.add(m);
@@ -74,7 +81,8 @@ class _FeedingDetailState extends State<FeedingDetail> {
 
         Future<String> result = fController.saveFeeding(context, entity);
         result.then((value) => {
-          if(value==''){
+              if (value == '')
+                {
 //            showDialog(
 //              context: context,
 //              builder: (context) => AlertDialog(
@@ -87,22 +95,22 @@ class _FeedingDetailState extends State<FeedingDetail> {
 //                ],
 //              ),
 //            )
-            Navigator.pop(context)
-          } else {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Notifikasi'),
-                content: Text(value),
-                actions: <Widget>[
-                  FlatButton(
-                      child: Text('OK')),
-                ],
-              ),
-            )
-          }
-
-        });
+                  Navigator.pop(context)
+                }
+              else
+                {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Notifikasi'),
+                      content: Text(value),
+                      actions: <Widget>[
+                        FlatButton(child: Text('OK')),
+                      ],
+                    ),
+                  )
+                }
+            });
 
 //        setState(() {
 //        });
@@ -110,94 +118,110 @@ class _FeedingDetailState extends State<FeedingDetail> {
     });
   }
 
+  _loadData() async {
+    Future<List> list = mController.selectMaterials();
+    list.then((value) => {
+          if (value.length > 0)
+            {
+              for (int i = 0; i < value.length; i++)
+                {
+                  materials.add(value[i]),
+                  tcQty.add(new TextEditingController()),
+                  tcQty[i].text = '0'
+                }
+            },
+          if (widget.feeding != null)
+            {
+              tcFeedingId.text = widget.feeding.feedingId.toString(),
+              tcFeedingNumber.text = widget.feeding.feedingNumber,
+              tcFeedingDate.text = df.format(widget.feeding.feedingDate),
+              tcNotes.text = widget.feeding.notes,
+              tcCage.text = widget.feeding.cage.cageId.toString(),
+              for (int i = 0; i < widget.feeding.materials.length; i++)
+                {
+                  tcQty[i].text =
+                      widget.feeding.materials[i].quantity.toString(),
+                }
+            }
+          else
+            {
+              tcFeedingDate.text = df.format(DateTime.now()),
+            },
+          setState(() {})
+        });
+  }
+
   @override
   void initState() {
     super.initState();
-    Future<List> list = mController.selectMaterials();
-    list.then((value) => {
-      if(value.length>0){
-        for(int i=0; i<value.length; i++){
-          materials.add(value[i]),
-          tcQty.add(new TextEditingController()),
-          tcQty[i].text = '0'
-        }
-      },
-      setState(() {})
-    });
+    _loadData();
+    _futureResponse = http.get(url_path + 'v1/materials/all');
   }
 
   @override
   Widget build(BuildContext context) {
-    var df = DateFormat("dd MMM yyyy");
-    if(widget.feeding!=null){
-      var nf = NumberFormat("#,###");
-      var nfd = NumberFormat("#,###.##");
-      tcFeedingId.text = widget.feeding.feedingId.toString();
-      tcFeedingNumber.text = widget.feeding.feedingNumber;
-      
-      tcFeedingDate.text = df.format(widget.feeding.feedingDate);
-      tcNotes.text = widget.feeding.notes;
-      tcCage.text = widget.feeding.cage.cageId.toString();
-
-      for(int i=0; i<widget.feeding.materials.length; i++){
-//        if(tcQty.length>0) {
-          tcQty[i].text = widget.feeding.materials[i].quantity.toString();
-//        }
-      }
-    } else {
-      tcFeedingDate.text = df.format(DateTime.now());
-    }
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF455A64),
+        backgroundColor: color_primary_dark,
         title: Text(app_title),
       ),
       body: Container(
-        color: const Color(0xFFCFD8DC),
+        color: color_primary_light,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             ListTile(
               title: Text('Pemberian Material'),
-              subtitle: Text('#'+tcFeedingNumber.text+' :: '+tcFeedingDate.text),
+              subtitle: Text(
+                  '#' + tcFeedingNumber.text + ' :: ' + tcFeedingDate.text),
             ),
-//            Text(
-//              tcCheckDate.text
-//            ),
-            CageDropdownButton(tcCage: tcCage),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Notes'),
-              controller: tcNotes,
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: CageDropdownButton(tcCage: tcCage),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: 'Notes'),
+                controller: tcNotes,
+              ),
             ),
             Expanded(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  itemCount: materials.length,
-                  itemBuilder: (context, index){
-                    return TextFormField(
-                        decoration: InputDecoration(
-                          labelText: materials[index].materialName,
-                          suffixText: materials[index].uom
-                        ),
-                        style: TextStyle(
-                          height: 1.8
-                        ),
-                        controller: tcQty[index]
-                      );
-                  },
-                )
+              child: Container(
+                child: ListView.builder(
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    itemCount: materials.length,
+                    itemBuilder: (context, index){
+                      return TextFormField(
+                          decoration: InputDecoration(
+                            labelText: materials[index].materialName,
+                            suffixText: materials[index].uom
+                          ),
+                          style: TextStyle(
+                            height: 1.8
+                          ),
+                          controller: tcQty[index]
+                        );
+                    },
+                  ),
+              ),
             ),
             SizedBox(
               height: 20.0,
             ),
-            RaisedButton(
-              onPressed: () {
-                _save();
-              },
-              color: Colors.teal,
-              child: Text('Save'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+              child: ButtonTheme(
+                buttonColor: color_button_save,
+                height: height_button_save,
+                child: RaisedButton(
+                  onPressed: () {
+                    _save();
+                  },
+                  child: Text('Save', style: textstyle_button_save,),
+                ),
+              ),
             ),
           ],
         ),

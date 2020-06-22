@@ -60,7 +60,7 @@ class _ScreenDashboardState extends State<ScreenDashboard> {
             tag: 'text_dashboard',
             child: Text(
               'Dashboard',
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),

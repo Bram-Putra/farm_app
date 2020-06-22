@@ -47,8 +47,8 @@ class _DailyCheckPeriodDropdownState extends State<DailyCheckPeriodDropdown> {
     return DropdownButton<String>(
         value: selectedPeriod,
         icon: Icon(icon_dropdown),
-        iconSize: dropdown_icon_size,
-        elevation: dropdown_elevation,
+        iconSize: size_dropdown_icon,
+        elevation: elevation_dropdown,
         style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
         underline: Container(
           height: 1.2,

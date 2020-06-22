@@ -1,35 +1,28 @@
 import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/cage.dart';
 import 'package:farmapp/podo/group_category.dart';
-import 'package:farmapp/podo/materi.dart';
-import 'package:farmapp/podo/materi_type.dart';
-import 'package:farmapp/widget/material_type_dropdownbutton_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
 
 class GroupCategoryDetail extends StatefulWidget {
   final GroupCategory groupCategory;
-  const GroupCategoryDetail(this.groupCategory);
+  final GroupCategory parent;
+  const GroupCategoryDetail({this.groupCategory, this.parent});
   @override
   _GroupCategoryDetailState createState() => _GroupCategoryDetailState();
 }
 
 class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
+  GroupCategory gc;
   MainController mainController = MainController();
-
-  GroupCategory parentGlobal;
-  final tcGroupCategoryId = TextEditingController();
   final tcGroupCategoryName = TextEditingController();
   final tcGroupName = TextEditingController();
   final tcParent = TextEditingController();
 
   void _save() async {
     GroupCategory entity = GroupCategory();
-    entity.groupCategoryId = int.parse(tcGroupCategoryId.text);
     entity.groupCategoryName = tcGroupCategoryName.text;
     entity.groupName = tcGroupName.text;
     GroupCategory parentLocal = GroupCategory();
@@ -58,23 +51,26 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    GroupCategory gc;
-    if (widget.groupCategory == null) {
+  void initState() {
+    super.initState();
+    if (widget.groupCategory == null && widget.parent == null) {
       gc = GroupCategory();
-    } else {
+    } else if (widget.groupCategory == null && widget.parent != null) {
+      gc = GroupCategory();
+      gc.parent = widget.parent;
+    } else if (widget.groupCategory != null && widget.parent != null) {
+      gc = widget.groupCategory;
+      gc.parent = widget.parent;
+    } else if (widget.groupCategory != null && widget.parent == null) {
       gc = widget.groupCategory;
     }
-    if (gc.parent != null) {
-      parentGlobal = gc.parent;
-    } else {
-      parentGlobal = GroupCategory();
-    }
-    tcGroupCategoryId.text = gc.groupCategoryId.toString();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     tcGroupCategoryName.text = gc.groupCategoryName;
     tcGroupName.text = gc.groupName;
     tcParent.text = gc.parent.groupCategoryName;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color_primary_dark,
@@ -86,7 +82,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -96,7 +92,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
               ),
             ),
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -105,7 +101,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
               ),
             ),
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -117,7 +113,7 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
               height: 10.0,
             ),
             ButtonTheme(
-              height: raised_button_height,
+              height: height_button_save,
               child: RaisedButton(
                 onPressed: () {
                   _save();
@@ -126,8 +122,8 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
                 child: Text(
                   'Save',
                   style: TextStyle(
-                      fontSize: raised_button_font_size,
-                      color: color_raised_button_text),
+                      fontSize: size_button_save_text,
+                      color: color_button_save_text),
                 ),
               ),
             ),
@@ -139,7 +135,6 @@ class _GroupCategoryDetailState extends State<GroupCategoryDetail> {
 
   @override
   void dispose() {
-    tcGroupCategoryId.dispose();
     tcGroupCategoryName.dispose();
     tcGroupName.dispose();
     tcParent.dispose();

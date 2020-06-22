@@ -33,7 +33,7 @@ class ScreenMaster extends StatelessWidget {
             tag: 'text_master',
             child: Text(
               'Master',
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),
@@ -99,7 +99,7 @@ class ScreenMaster extends StatelessWidget {
                                         tag: 'icon_kandang',
                                         child: Icon(
                                           icon_kandang,
-                                          size: screenmaster_button_icon_size,
+                                          size: size_screenmaster_button_icon,
                                           color: color_text_secondary,
                                         ),
                                       ),
@@ -107,7 +107,7 @@ class ScreenMaster extends StatelessWidget {
                                         tag: 'text_kandang',
                                         child: Text(
                                           'Kandang',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),
@@ -159,14 +159,14 @@ class ScreenMaster extends StatelessWidget {
                                           tag: 'icon_materi',
                                           child: Icon(
                                             icon_materi,
-                                            size: screenmaster_button_icon_size,
+                                            size: size_screenmaster_button_icon,
                                             color: color_text_secondary,
                                           )),
                                       title: Hero(
                                         tag: 'text_materi',
                                         child: Text(
                                           'Material',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),
@@ -227,7 +227,7 @@ class ScreenMaster extends StatelessWidget {
                                         tag: 'icon_materi_type',
                                         child: Icon(
                                           icon_materi_type,
-                                          size: screenmaster_button_icon_size,
+                                          size: size_screenmaster_button_icon,
                                           color: color_text_secondary,
                                         ),
                                       ),
@@ -235,7 +235,7 @@ class ScreenMaster extends StatelessWidget {
                                         tag: 'text_materi_type',
                                         child: Text(
                                           'Material Type',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),
@@ -296,7 +296,7 @@ class ScreenMaster extends StatelessWidget {
                                         tag: 'icon_livestock',
                                         child: Icon(
                                           icon_livestock,
-                                          size: screenmaster_button_icon_size,
+                                          size: size_screenmaster_button_icon,
                                           color: color_text_secondary,
                                         ),
                                       ),
@@ -304,7 +304,7 @@ class ScreenMaster extends StatelessWidget {
                                         tag: 'text_livestock_type',
                                         child: Text(
                                           'Livestock Type',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),
@@ -347,7 +347,7 @@ class ScreenMaster extends StatelessWidget {
                                     tag: 'icon_group_category',
                                     child: Icon(
                                       icon_group_category,
-                                      size: screenmaster_button_icon_size,
+                                      size: size_screenmaster_button_icon,
                                       color: color_text_secondary,
                                     ),
                                   ),
@@ -355,7 +355,7 @@ class ScreenMaster extends StatelessWidget {
                                     tag: 'text_group_category',
                                     child: Text(
                                       'Group Category',
-                                      style: screenmaster_button_textstyle,
+                                      style: textstyle_screenmaster_button,
                                     ),
                                   ),
                                 ),

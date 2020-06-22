@@ -138,7 +138,7 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
           ),
           title: Text(
             'Inspeksi Harian',
-            style: appbar_textstyle,
+            style: textstyle_appbar,
           ),
         ),
       ),
@@ -186,12 +186,15 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
             SizedBox(
               height: 20.0,
             ),
-            RaisedButton(
-              onPressed: () {
-                _save();
-              },
-              color: Colors.teal,
-              child: Text('Save'),
+            ButtonTheme(
+              height: height_button_save,
+              child: RaisedButton(
+                onPressed: () {
+                  _save();
+                },
+                color: color_button_save,
+                child: Text('Save', style: textstyle_button_save,),
+              ),
             ),
           ],
         ),

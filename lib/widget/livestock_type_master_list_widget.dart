@@ -112,7 +112,7 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
             tag: 'text_livestock_type',
             child: Text(
               'Livestock Type',
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),

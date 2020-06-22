@@ -113,7 +113,7 @@ class _CageMasterListState extends State<CageMasterList> {
             tag: 'text_kandang',
             child: Text(
               'Kandang',
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),
@@ -136,7 +136,12 @@ class _CageMasterListState extends State<CageMasterList> {
       ),
       body: Stack(
         children: <Widget>[
-          Hero(tag: 'body_kandang', child: Container(color: color_primary_white,)),
+          Hero(
+            tag: 'body_kandang',
+            child: Container(
+              color: color_primary_white,
+            ),
+          ),
           ListView.builder(
             itemCount: cmlController.getListSize(),
             itemBuilder: (context, index) {
@@ -156,18 +161,15 @@ class _CageMasterListState extends State<CageMasterList> {
                   child: ListTile(
                     title: Text(cmlController.getCage(index).tag),
                     subtitle: Text(cmlController.getCageNotes(index)),
-                    onTap: () {
-                      _callCageDetail(cmlController.getCage(index));
-                    },
                   ),
                 ),
-                secondaryActions: <Widget>[
+                actions: <Widget>[
                   IconSlideAction(
-                    caption: 'Delete',
-                    color: color_delete,
-                    icon: Icons.delete,
+                    caption: 'Edit',
+                    color: color_edit,
+                    icon: icon_edit,
                     onTap: () {
-                      _deleteRow(context, index);
+                      _callCageDetail(cmlController.getCage(index));
                     },
                   ),
                 ],

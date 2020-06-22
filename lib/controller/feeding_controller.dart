@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/daily_check.dart';
 import 'package:farmapp/podo/feeding.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +13,9 @@ class FeedingController {
     List<Feeding> list = [];
     var url = url_path+'v1/feedings/all';
     var res = await http.get(url);
-//    print(res.body);
-
     int code = res.statusCode;
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);
-//      print(decodedJson);
       for (int i = 0; i < decodedJson.length; i++) {
         Feeding f = Feeding.fromJson(decodedJson[i]);
         list.add(f);
@@ -40,7 +35,6 @@ class FeedingController {
           'Content-Type': 'application/json; charset=UTF-8',
         }
     );
-//    print(res.body);
     int code = res.statusCode;
     print(code);
     if (code == 200) {
@@ -49,8 +43,4 @@ class FeedingController {
       return res.body;
     }
   }
-
-//  void deleteFeeding(BuildContext context, int indexNumber) {
-//    print('delete daily check');
-//  }
 }

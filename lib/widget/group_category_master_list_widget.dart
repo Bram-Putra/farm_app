@@ -36,7 +36,7 @@ class _GroupCategoryMasterListState extends State<GroupCategoryMasterList> {
             tag: 'text_group_category',
             child: Text(
               'Group Category',
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),

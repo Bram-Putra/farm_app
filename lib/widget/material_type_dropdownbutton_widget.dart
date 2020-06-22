@@ -51,7 +51,7 @@ class _MaterialTypeDropdownButtonState extends State<MaterialTypeDropdownButton>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: preferred_height,
+      height: height_textformfield,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -60,8 +60,8 @@ class _MaterialTypeDropdownButtonState extends State<MaterialTypeDropdownButton>
               child: DropdownButton<MateriType>(
                 value: selectedValue,
                 icon: Icon(icon_dropdown),
-                iconSize: dropdown_icon_size,
-                elevation: dropdown_elevation,
+                iconSize: size_dropdown_icon,
+                elevation: elevation_dropdown,
                 style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
                 underline: Container(
                   height: 1.2,

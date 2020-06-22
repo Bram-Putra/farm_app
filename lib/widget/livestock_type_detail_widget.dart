@@ -62,7 +62,7 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
           ),
           title: Text(
             'Livestock Type',
-            style: appbar_textstyle,
+            style: textstyle_appbar,
           ),
         ),
       ),
@@ -72,7 +72,7 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -82,7 +82,7 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
               ),
             ),
             Container(
-              height: preferred_height,
+              height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -95,17 +95,17 @@ class _LivestockTypeDetailState extends State<LivestockTypeDetail> {
               height: 10.0,
             ),
             ButtonTheme(
-              height: raised_button_height,
+              height: height_button_save,
               child: RaisedButton(
                 onPressed: () {
                   save();
                 },
-                color: color_raised_button,
+                color: color_button_save,
                 child: Text(
                   'Save',
                   style: TextStyle(
-                      fontSize: raised_button_font_size,
-                      color: color_raised_button_text),
+                      fontSize: size_button_save_text,
+                      color: color_button_save_text),
                 ),
               ),
             ),

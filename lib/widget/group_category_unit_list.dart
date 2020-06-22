@@ -56,7 +56,7 @@ class _GroupCategoryUnitListState extends State<GroupCategoryUnitList> {
             tag: 'text_wilayah'+widget.parent['groupCategoryName'],
             child: Text(
               widget.parent['groupCategoryName'],
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),

@@ -26,7 +26,6 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-//          automaticallyImplyLeading: false,
         title: ListTile(
           leading: Hero(
             tag: 'icon_transaksi',
@@ -39,7 +38,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
             tag: 'text_transaksi',
             child: Text(
               'Transaksi',
-              style: appbar_textstyle,
+              style: textstyle_appbar,
             ),
           ),
         ),
@@ -106,7 +105,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
                                         tag: 'icon_inspeksi_harian',
                                         child: Icon(
                                           icon_inspeksi_harian,
-                                          size: screenmaster_button_icon_size,
+                                          size: size_screenmaster_button_icon,
                                           color: color_text_secondary,
                                         ),
                                       ),
@@ -114,7 +113,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
                                         tag: 'text_inspeksi_harian',
                                         child: Text(
                                           'Inspeksi Harian',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),
@@ -166,7 +165,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
                                         tag: 'icon_pemberian_pakan',
                                         child: Icon(
                                           icon_pemberian_pakan,
-                                          size: screenmaster_button_icon_size,
+                                          size: size_screenmaster_button_icon,
                                           color: color_text_secondary,
                                         ),
                                       ),
@@ -174,7 +173,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
                                         tag: 'text_pemberian_pakan',
                                         child: Text(
                                           'Pemberian Pakan',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),
@@ -226,7 +225,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
                                         tag: 'icon_mutasi',
                                         child: Icon(
                                           icon_mutasi,
-                                          size: screenmaster_button_icon_size,
+                                          size: size_screenmaster_button_icon,
                                           color: color_text_secondary,
                                         ),
                                       ),
@@ -234,7 +233,7 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
                                         tag: 'text_mutasi',
                                         child: Text(
                                           'Mutasi',
-                                          style: screenmaster_button_textstyle,
+                                          style: textstyle_screenmaster_button,
                                         ),
                                       ),
                                     ),

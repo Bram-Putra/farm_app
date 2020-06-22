@@ -46,8 +46,7 @@ class MaterialMasterListController {
     List<Materi> list = [];
     var url = url_path+'v1/materials/all';
     var res = await http.get(url);
-    print(res.body);
-
+//    print(res.body);
     int code = res.statusCode;
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);

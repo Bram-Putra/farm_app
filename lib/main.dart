@@ -5,6 +5,7 @@ import 'package:farmapp/widget/screen_home.dart';
 import 'package:farmapp/widget/screen_master.dart';
 import 'package:farmapp/widget/screen_transaksi.dart';
 import 'package:farmapp/widget/screen_dashboard.dart';
+import 'package:farmapp/widget/screen_laporan.dart';
 import 'package:flutter/material.dart';
 import 'package:farmapp/widget/cage_master_list_widget.dart';
 import 'package:farmapp/widget/materi_master_list_widget.dart';
@@ -30,7 +31,7 @@ class FarmApp extends StatelessWidget {
         '/': (context) => ScreenHome(),
         '/master': (context) => ScreenMaster(),
         '/transaksi' : (context) => ScreenTransaksi(),
-//        '/laporan' : (context) => ScreenLaporan(),
+        '/laporan' : (context) => ScreenLaporan(),
         '/dashboard' : (context) => ScreenDashboard(),
         '/kandang' : (context) => CageMasterList(),
         '/materi' : (context) => MateriMasterList(),

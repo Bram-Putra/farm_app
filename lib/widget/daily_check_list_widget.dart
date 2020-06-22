@@ -114,7 +114,7 @@ class _DailyCheckListState extends State<DailyCheckList> {
               tag: 'text_inspeksi_harian',
               child: Text(
                 'Inspeksi Harian',
-                style: appbar_textstyle,
+                style: textstyle_appbar,
               ),
             ),
           ),

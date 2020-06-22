@@ -113,7 +113,7 @@ class _MateriMasterListState extends State<MateriMasterList> {
               tag: 'text_materi',
               child: Text(
                 'Material',
-                style: appbar_textstyle,
+                style: textstyle_appbar,
               ),
             ),
           ),

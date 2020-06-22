@@ -72,7 +72,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'icon_master',
                                           child: Icon(
                                             icon_master,
-                                            size: screenhome_button_icon_size,
+                                            size: size_screenhome_button_icon,
                                             color: color_text_primary,
                                           ),
                                         ),
@@ -82,7 +82,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'text_master',
                                           child: Text(
                                             'Master',
-                                            style: screenhome_button_textstyle,
+                                            style: textstyle_screenhome_button,
                                           ),
                                         ),
                                       ),
@@ -133,7 +133,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'icon_transaksi',
                                           child: Icon(
                                             icon_transaksi,
-                                            size: screenhome_button_icon_size,
+                                            size: size_screenhome_button_icon,
                                           ),
                                         ),
                                       ),
@@ -142,7 +142,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'text_transaksi',
                                           child: Text(
                                             'Transaksi',
-                                            style: screenhome_button_textstyle,
+                                            style: textstyle_screenhome_button,
                                           ),
                                         ),
                                       ),
@@ -192,7 +192,7 @@ class ScreenHome extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                                 child: InkWell(
                                   onTap: () {
-//                                gotoPage(context, 'Laporan');
+                                gotoPage(context, 'Laporan');
                                   },
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -202,7 +202,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'icon_laporan',
                                           child: Icon(
                                             icon_laporan,
-                                            size: screenhome_button_icon_size,
+                                            size: size_screenhome_button_icon,
                                           ),
                                         ),
                                       ),
@@ -211,7 +211,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'text_laporan',
                                           child: Text(
                                             'Laporan',
-                                            style: screenhome_button_textstyle,
+                                            style: textstyle_screenhome_button,
                                           ),
                                         ),
                                       ),
@@ -262,7 +262,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'icon_dashboard',
                                           child: Icon(
                                             icon_dashboard,
-                                            size: screenhome_button_icon_size,
+                                            size: size_screenhome_button_icon,
                                           ),
                                         ),
                                       ),
@@ -271,7 +271,7 @@ class ScreenHome extends StatelessWidget {
                                           tag: 'text_dashboard',
                                           child: Text(
                                             'Dashboard',
-                                            style: screenhome_button_textstyle,
+                                            style: textstyle_screenhome_button,
                                           ),
                                         ),
                                       ),
