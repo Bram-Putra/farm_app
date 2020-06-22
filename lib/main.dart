@@ -14,7 +14,7 @@ import 'package:farmapp/widget/livestock_type_master_list_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:farmapp/widget/daily_check_list_widget.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(FarmApp()));
 }
