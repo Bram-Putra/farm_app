@@ -22,11 +22,14 @@ const color_accent = const Color(0xFF9E9E9E);
 const color_delete = const Color(0xFFFF5252);
 const color_edit = const Color(0xFF00796B);
 const color_dropdown_text = const Color(0xFF00796B);
+const color_appbar_icon = Colors.white;
 const color_button_save = Colors.teal;
 const color_button_save_text = Colors.white;
 const color_button_download = const Color(0xFF455A64);
 const color_button_download_disabled = const Color(0xFFCFD8DC);
 const color_button_download_text = Colors.white;
+const color_button_open_text = Colors.white;
+const color_button_open = const Color(0xFF455A64);
 const color_screen_button_white = Colors.white;
 
 //Icon:
@@ -53,8 +56,10 @@ const double height_textformfield = 60.0;
 const double size_dropdown_icon = 40.0;
 const double height_button_save = 48.0;
 const double height_button_download = 48.0;
+const double height_button_open = 48.0;
 const double size_button_save_text = 20.0;
 const double size_button_download_text = 20.0;
+const double size_button_open_text = 20.0;
 const int elevation_dropdown = 16;
 
 //Master Button Style:
@@ -99,6 +104,12 @@ const textstyle_button_save = TextStyle(
 const textstyle_button_download = TextStyle(
     color: color_button_download_text,
     fontSize: size_button_download_text,
+    fontWeight: FontWeight.normal,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
+const textstyle_button_open = TextStyle(
+    color: color_button_open_text,
+    fontSize: size_button_open_text,
     fontWeight: FontWeight.normal,
     decoration: TextDecoration.none,
     fontFamily: 'Source Sans Pro');

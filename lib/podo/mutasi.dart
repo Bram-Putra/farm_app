@@ -33,12 +33,11 @@ class Mutasi {
     if(this.movementId!=null) {
       data['movementId'] = this.movementId;
     }
-    data['movementNumber'] = this.movementNumber;
-    data['movementDate'] = this.movementDate;
+//    data['movementNumber'] = this.movementNumber;
+//    data['movementDate'] = this.movementDate;
     data['source'] = this.source;
     data['destination'] = this.destination;
     data['quantity'] = this.quantity;
     return data;
   }
 }
-

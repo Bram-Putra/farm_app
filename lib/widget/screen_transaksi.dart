@@ -16,9 +16,8 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
       Navigator.pushNamed(context, '/inspeksi-harian');
     } else if (s == 'Pemberian Pakan') {
       Navigator.pushNamed(context, '/pemberian-pakan');
-//    } else if (s == 'Mutasi') {
-//      Navigator.pushNamed(context, '/mutasi');
-//    }
+    } else if (s == 'Mutasi') {
+      Navigator.pushNamed(context, '/mutasi');
     }
   }
 
@@ -252,7 +251,6 @@ class _ScreenTransaksiState extends State<ScreenTransaksi> {
           ],
         ),
       ),
-//        body: controller.getBody(),
     );
   }
 }

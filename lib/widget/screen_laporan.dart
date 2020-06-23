@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:farmapp/widget/full_pdf_viewer_screen_widget.dart';
+import 'package:farmapp/widget/pdf_screen_widget.dart';
 
 class ScreenLaporan extends StatefulWidget {
   @override
@@ -14,22 +14,23 @@ class ScreenLaporan extends StatefulWidget {
 }
 
 class _ScreenLaporanState extends State<ScreenLaporan> {
-  DateFormat df = DateFormat("dd-MM-yyyy");
+  DateFormat _df = DateFormat("dd-MM-yyyy");
   DateTime _selectedDate;
-  String _stringSelectedDate;
-  bool _downloading = false;
-  final _urlPath =
-      'v1/reports/rptPertambahanBobot?startDate=';
+  bool _downloading;
+  bool _downloadComplete;
+  final _urlReport = 'v1/reports/rptPertambahanBobot?startDate=';
   String _progressPercentage = '';
   BuildContext _buildContext;
   String _dir = '';
+  String _pathPDF = '';
+  String _urlPDF = '';
 
   @override
   void initState() {
     super.initState();
     _selectedDate = DateTime.now();
-    _stringSelectedDate = _selectedDate.toString().substring(0, 10);
     _downloading = false;
+    _downloadComplete = false;
   }
 
   @override
@@ -106,7 +107,6 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
                             mode: CupertinoDatePickerMode.date,
                             onDateTimeChanged: (dateTime) {
                               _selectedDate = dateTime;
-                              _stringSelectedDate = df.format(_selectedDate);
                             },
                           ),
                         ),
@@ -115,6 +115,30 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
                         padding: const EdgeInsets.all(16.0),
                         child: ButtonDownload(),
                       ),
+                      _downloadComplete
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                              child: ButtonTheme(
+                                height: height_button_open,
+                                buttonColor: color_button_open,
+                                child: RaisedButton(
+                                  child: Text('Open',
+                                      style: textstyle_button_open),
+                                  onPressed: (){
+                                    createFileOfPdfUrl().then((f) {
+                                      _pathPDF = f.path;
+                                      setState(() {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => PDFScreen(_pathPDF)));
+                                      });
+                                    });
+                                  },
+                                ),
+                              ),
+                            )
+                          : Container(),
                       _downloading
                           ? AspectRatio(
                               aspectRatio: 3,
@@ -152,9 +176,7 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
             'Download',
             style: textstyle_button_download,
           ),
-          onPressed: () {
-            _showSnackBarDownloading();
-          },
+          onPressed: () {},
         ),
       );
     } else {
@@ -174,39 +196,13 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
     }
   }
 
-  void _showSnackBarDownloading() {
-    Scaffold.of(_buildContext).showSnackBar(
-      SnackBar(
-        content: Text('Harap menunggu sampai download selesai'),
-      ),
-    );
-    setState(() {});
-  }
-
   void _showSnackBarFinished() {
     Scaffold.of(_buildContext).showSnackBar(
       SnackBar(
         content: Text('Proses download telah selesai'),
-        action: SnackBarAction(
-            label: 'Open',
-            onPressed: () {
-//              _openDownloadedReport();
-            }),
       ),
     );
     setState(() {});
-  }
-
-  void _openDownloadedReport() {
-    print('Ini alamat file yang seharusnya dibuka: '+_dir);
-    prepareTestPdf().then((path) {
-      print(path);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => FullPdfViewerScreen(path)),
-      );
-    });
   }
 
   Future<void> _downloadFile() async {
@@ -214,8 +210,8 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
     try {
       var savePath = await getExternalStorageDirectory();
       _dir = savePath.path + '/laporan.pdf';
-      String downloadPath = url_path+_urlPath+df.format(_selectedDate);
-      print(downloadPath);
+      String downloadPath = url_path + _urlReport + _df.format(_selectedDate);
+      _urlPDF = downloadPath;
       await dio.download(
         downloadPath,
         _dir,
@@ -233,21 +229,21 @@ class _ScreenLaporanState extends State<ScreenLaporan> {
       print(e);
     }
     _downloading = false;
+    _downloadComplete = true;
     setState(() {
       _showSnackBarFinished();
     });
   }
 
-  Future<String> prepareTestPdf() async {
-    final ByteData bytes =
-    await DefaultAssetBundle.of(context).load(_dir);
-    final Uint8List list = bytes.buffer.asUint8List();
-
-    final tempDir = await getTemporaryDirectory();
-    final tempDocumentPath = '${tempDir.path}'+_dir;
-
-    final file = await File(tempDocumentPath).create(recursive: true);
-    file.writeAsBytesSync(list);
-    return tempDocumentPath;
+  Future<File> createFileOfPdfUrl() async {
+    final url = _urlPDF;
+    final filename = url.substring(url.lastIndexOf("/") + 1);
+    var request = await HttpClient().getUrl(Uri.parse(url));
+    var response = await request.close();
+    var bytes = await consolidateHttpClientResponseBytes(response);
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    File file = new File('$dir/$filename');
+    await file.writeAsBytes(bytes);
+    return file;
   }
 }
