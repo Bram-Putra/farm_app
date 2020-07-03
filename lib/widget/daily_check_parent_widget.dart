@@ -24,8 +24,6 @@ class _DailyCheckParentChartState extends State<DailyCheckParentChart> {
   @override
   void initState() {
     super.initState();
-//    print(widget.cageId);
-//    print(tcPeriod.text);
     tcPeriod.text='1';
     tcPeriod.addListener(_onPeriodChange);
     _onPeriodChange();

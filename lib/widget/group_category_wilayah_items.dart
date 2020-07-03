@@ -25,7 +25,7 @@ class _GroupCategoryWilayahItemsState extends State<GroupCategoryWilayahItems> {
   void initState() {
     super.initState();
     _futureResponse =
-        http.get(url_path + 'v1/groupCategories?id=${widget.gcId}');
+        http.get(url_path + 'v1/groupCategories?parentId=${widget.gcId}');
   }
 
   @override

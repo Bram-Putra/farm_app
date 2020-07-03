@@ -1,6 +1,4 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:farmapp/podo/barn_constant.dart';
-import 'package:farmapp/podo/daily_check_chart.dart';
 import 'package:farmapp/podo/feeding_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +21,13 @@ class _FeedingChartState extends State<FeedingChart> {
   void initState() {
     customTickFormatter = charts.BasicNumericTickFormatterSpec((num value) {
       int index = value.toInt();
-      print('index '+index.toString());
-      print('data length '+widget.chartModel.data.length.toString());
+//      print('index '+index.toString());
+//      print('data length '+widget.chartModel.data.length.toString());
       if(widget.chartModel.data!=null && widget.chartModel.data.length>0) {
 //        if(index<widget.chartModel.data.length) {
         List<FeedingChartValue> list = widget.chartModel.data.values.toList()[0];
         if(index<list.length){
-          print('list length '+list.length.toString());
+//          print('list length '+list.length.toString());
           return list[index].series;
         } else {
           return '';
@@ -42,16 +40,10 @@ class _FeedingChartState extends State<FeedingChart> {
 
   @override
   Widget build(BuildContext context) {
-//    print('build');
     return Expanded(
       child: new charts.LineChart(widget.seriesList, animate: widget.animate,
         domainAxis: charts.NumericAxisSpec(tickFormatterSpec: customTickFormatter))
       );
-//    print(widget.seriesList.length.toString());
-//    return Expanded(
-//      child: new charts.LineChart(widget.seriesList, animate: widget.animate)
-//        );
-
   }
 }
 

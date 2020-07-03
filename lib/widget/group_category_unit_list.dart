@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:farmapp/podo/group_category.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:farmapp/podo/barn_constant.dart';
@@ -12,38 +11,38 @@ class GroupCategoryUnitList extends StatefulWidget {
 }
 
 class _GroupCategoryUnitListState extends State<GroupCategoryUnitList> {
-  List<GroupCategory> _listUnit = [];
-  PageStorageKey _key;
+//  List<GroupCategory> _listUnit = [];
+//  PageStorageKey _key;
   Future<http.Response> _futureResponse;
 
-  _loadData() async {
-    /* --GET UNIT-- */
-    var url = url_path + 'v1/groupCategories?id=' + widget.parent.toString();
-    var res = await http.get(url);
-    int code = res.statusCode;
-    if (code == 200) {
-      List decodedJson = jsonDecode(res.body);
-      _listUnit.clear();
-      for (int i = 0; i < decodedJson.length; i++) {
-        GroupCategory gc = GroupCategory.fromJson(decodedJson[i]);
-        _listUnit.add(gc);
-        print(gc.groupCategoryName + '\n');
-      }
-    } else {
-      print("Something went wrong when trying to load Unit" + '\n');
-    }
-  }
+//  _loadData() async {
+//    /* --GET UNIT-- */
+//    var url = url_path + 'v1/groupCategories?parentId=' + widget.parent.toString();
+//    var res = await http.get(url);
+//    int code = res.statusCode;
+//    if (code == 200) {
+//      List decodedJson = jsonDecode(res.body);
+//      _listUnit.clear();
+//      for (int i = 0; i < decodedJson.length; i++) {
+//        GroupCategory gc = GroupCategory.fromJson(decodedJson[i]);
+//        _listUnit.add(gc);
+//        print(gc.groupCategoryName + '\n');
+//      }
+//    } else {
+//      print("Something went wrong when trying to load Unit" + '\n');
+//    }
+//  }
 
   @override
   void initState() {
     super.initState();
     _futureResponse = http.get(
-        url_path + 'v1/groupCategories?id=${widget.parent['groupCategoryId']}');
+        url_path + 'v1/groupCategories?parentId=${widget.parent['groupCategoryId']}');
   }
 
   @override
   Widget build(BuildContext context) {
-    _key = PageStorageKey('${widget.parent['groupCategoryId']}');
+//    _key = PageStorageKey('${widget.parent['groupCategoryId']}');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color_primary_dark,

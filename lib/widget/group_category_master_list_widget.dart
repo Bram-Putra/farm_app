@@ -16,7 +16,7 @@ class _GroupCategoryMasterListState extends State<GroupCategoryMasterList> {
   @override
   void initState() {
     super.initState();
-    _futureResponse = http.get(url_path + 'v1/groupCategories?id=1');
+    _futureResponse = http.get(url_path + 'v1/groupCategories?parentId=1');
   }
 
   @override

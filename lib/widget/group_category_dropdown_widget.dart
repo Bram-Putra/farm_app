@@ -28,8 +28,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     List<GroupCategory> regions = [];
     List<GroupCategory> farms = [];
 
-    var url = url_path+'v1/groupCategories?id=1';
-//    var url = url_path+'v1/groupCategories?groupCategoryId=1';
+    var url = url_path+'v1/groupCategories?parentId=1';
     var res = await http.get(url);
     int code = res.statusCode;
     print(code);
@@ -47,7 +46,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     /* --GET FARM-- */
     for(int x=0; x<regions.length; x++) {
       GroupCategory r = regions[x];
-      url = url_path+'v1/groupCategories?id='+r.groupCategoryId.toString();
+      url = url_path+'v1/groupCategories?parentId='+r.groupCategoryId.toString();
       res = await http.get(url);
       int code = res.statusCode;
       if (code == 200) {
@@ -64,7 +63,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     /* --GET UNIT-- */
     for(int x=0; x<farms.length; x++) {
       GroupCategory f = farms[x];
-      url = url_path+'v1/groupCategories?id='+f.groupCategoryId.toString();
+      url = url_path+'v1/groupCategories?parentId='+f.groupCategoryId.toString();
       res = await http.get(url);
       int code = res.statusCode;
       if (code == 200) {

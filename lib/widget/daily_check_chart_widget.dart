@@ -1,5 +1,4 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/daily_check_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,6 @@ class _DailyCheckChartState extends State<DailyCheckChart> {
   @override
   void initState() {
     customTickFormatter = charts.BasicNumericTickFormatterSpec((num value) {
-//      print(value);
       int index = value.toInt();
       if(widget.data.alives!=null && widget.data.alives.length>0) {
         if(index<widget.data.alives.length) {

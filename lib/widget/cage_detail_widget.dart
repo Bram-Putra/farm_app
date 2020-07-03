@@ -68,7 +68,7 @@ class _CageDetailState extends State<CageDetail> {
       body: Container(
         color: color_primary_light,
         child: ListView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
           children: <Widget>[
             GroupCategoryDropdown(tcRegion: this.tcRegion, tcFarm: this.tcFarm, tcUnit: this.tcUnit),
             Container(
