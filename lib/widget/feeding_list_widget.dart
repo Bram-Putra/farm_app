@@ -16,6 +16,7 @@ class _FeedingListState extends State<FeedingList> {
   TransaksiController trController = TransaksiController();
   FeedingController fController = FeedingController();
   List<Feeding> _list = [];
+  var df = DateFormat("dd MMM yyyy");
 
   loadData() async {
     Future<List> result = fController.selectFeedingList();
@@ -44,7 +45,6 @@ class _FeedingListState extends State<FeedingList> {
 
   @override
   Widget build(BuildContext context) {
-    var df = DateFormat("dd MMM yyyy");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color_primary_dark,

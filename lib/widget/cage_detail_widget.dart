@@ -1,4 +1,3 @@
-import 'package:farmapp/controller/main_controller.dart';
 import 'package:farmapp/controller/cage_detail_controller.dart';
 import 'package:farmapp/podo/barn_constant.dart';
 import 'package:farmapp/podo/cage.dart';
@@ -17,6 +16,7 @@ class CageDetail extends StatefulWidget {
 
 class _CageDetailState extends State<CageDetail> {
   CageDetailController _cageDetailController = CageDetailController();
+  String _title = 'Kandang Baru';
 
   final tcCageId = TextEditingController();
   final tcTag = TextEditingController();
@@ -30,56 +30,9 @@ class _CageDetailState extends State<CageDetail> {
   final tcUnit = TextEditingController();
   final tcLivestock = TextEditingController();
 
-  void _save() {
-    bool confirmSave = false;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Save'),
-        content: Text('Save data?'),
-        actions: <Widget>[
-          FlatButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Confirm')),
-          FlatButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancel')),
-        ],
-      ),
-    ).then((value) {
-      confirmSave = value;
-      if (confirmSave) {
-        Cage cage = Cage();
-        print(tcCageId.text);
-        cage.cageId = tcCageId.text==''? null: int.parse(tcCageId.text);
-        cage.tag = tcTag.text;
-        GroupCategory region = GroupCategory();
-        region.groupCategoryId = int.parse(tcRegion.text);
-        cage.region = region;
-        GroupCategory farm = GroupCategory();
-        farm.groupCategoryId = int.parse(tcFarm.text);
-        cage.farm = farm;
-        GroupCategory unit = GroupCategory();
-        unit.groupCategoryId = int.parse(tcUnit.text);
-        cage.unit = unit;
-        cage.size = double.parse(tcSize.text);
-        cage.drinkingCup = int.parse(tcDrinkingCup.text);
-        cage.feedingTray = int.parse(tcFeedingTray.text);
-        cage.fan = int.parse(tcFan.text);
-        cage.notes = tcNotes.text;
-        LivestockType livestock= LivestockType();
-        livestock.livestockId = int.parse(tcLivestock.text);
-        cage.livestockType = livestock;
-
-        _cageDetailController.saveCage(context, cage);
-        setState(() {
-        });
-      }
-    });
-  }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     if(widget.cage!=null){
       tcCageId.text = widget.cage.cageId.toString();
       tcTag.text = widget.cage.tag;
@@ -92,7 +45,12 @@ class _CageDetailState extends State<CageDetail> {
       tcFarm.text = widget.cage.farm.groupCategoryId.toString();
       tcUnit.text = widget.cage.unit.groupCategoryId.toString();
       tcLivestock.text = widget.cage.livestockType.livestockId.toString();
+      _title = widget.cage.tag;
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color_primary_dark,
@@ -102,7 +60,7 @@ class _CageDetailState extends State<CageDetail> {
             color: Colors.white,
           ),
           title: Text(
-            'Kandang',
+            _title,
             style: textstyle_appbar,
           ),
         ),
@@ -112,24 +70,13 @@ class _CageDetailState extends State<CageDetail> {
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            Container(
-              height: height_textformfield,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Nama Kandang'),
-                  initialValue: tcTag.text,
-                  enabled: false,
-                ),
-              ),
-            ),
             GroupCategoryDropdown(tcRegion: this.tcRegion, tcFarm: this.tcFarm, tcUnit: this.tcUnit),
             Container(
               height: height_textformfield,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Tag'),
+                  decoration: InputDecoration(labelText: 'Nama Kandang'),
                   controller: tcTag,
                 ),
               ),
@@ -216,5 +163,53 @@ class _CageDetailState extends State<CageDetail> {
     tcUnit.dispose();
     tcLivestock.dispose();
     super.dispose();
+  }
+
+  void _save() {
+    bool confirmSave = false;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Save'),
+        content: Text('Save data?'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Confirm')),
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel')),
+        ],
+      ),
+    ).then((value) {
+      confirmSave = value;
+      if (confirmSave) {
+        Cage cage = Cage();
+        print(tcCageId.text);
+        cage.cageId = tcCageId.text==''? null: int.parse(tcCageId.text);
+        cage.tag = tcTag.text;
+        GroupCategory region = GroupCategory();
+        region.groupCategoryId = int.parse(tcRegion.text);
+        cage.region = region;
+        GroupCategory farm = GroupCategory();
+        farm.groupCategoryId = int.parse(tcFarm.text);
+        cage.farm = farm;
+        GroupCategory unit = GroupCategory();
+        unit.groupCategoryId = int.parse(tcUnit.text);
+        cage.unit = unit;
+        cage.size = double.parse(tcSize.text);
+        cage.drinkingCup = int.parse(tcDrinkingCup.text);
+        cage.feedingTray = int.parse(tcFeedingTray.text);
+        cage.fan = int.parse(tcFan.text);
+        cage.notes = tcNotes.text;
+        LivestockType livestock= LivestockType();
+        livestock.livestockId = int.parse(tcLivestock.text);
+        cage.livestockType = livestock;
+
+        _cageDetailController.saveCage(context, cage);
+        setState(() {
+        });
+      }
+    });
   }
 }

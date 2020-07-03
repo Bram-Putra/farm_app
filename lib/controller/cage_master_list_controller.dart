@@ -34,4 +34,9 @@ class CageMasterListController {
         .showSnackBar(SnackBar(content: Text('Kandang $indexX is deleted'),
     behavior: SnackBarBehavior.floating,));
   }
+
+  String getCageGroup(int index) {
+    String group = 'Region: ' + _listCage[index].region.groupCategoryName + '\n' + 'Farm: ' + _listCage[index].farm.groupCategoryName + '\n' + 'Unit: ' + _listCage[index].unit.groupCategoryName;
+    return group;
+  }
 }

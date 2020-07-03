@@ -2,9 +2,9 @@ import 'package:farmapp/podo/barn_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 
-class PDFScreen extends StatelessWidget {
+class LaporanPertambahanBobot extends StatelessWidget {
   String pathPDF = "";
-  PDFScreen(this.pathPDF);
+  LaporanPertambahanBobot(this.pathPDF);
 
   @override
   Widget build(BuildContext context) {

@@ -29,10 +29,13 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
     List<GroupCategory> farms = [];
 
     var url = url_path+'v1/groupCategories?id=1';
+//    var url = url_path+'v1/groupCategories?groupCategoryId=1';
     var res = await http.get(url);
     int code = res.statusCode;
+    print(code);
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);
+      print(decodedJson);
         for (int i = 0; i < decodedJson.length; i++) {
           GroupCategory r = GroupCategory.fromJson(decodedJson[i]);
           _listGroupCategory.add(r);
@@ -146,7 +149,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: size_dropdown_icon,
                     elevation: elevation_dropdown,
-                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: size_dropdown_font),
                     underline: Container(
                       height: 1.2,
                       color: color_divider,
@@ -179,7 +182,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: size_dropdown_icon,
                     elevation: elevation_dropdown,
-                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: size_dropdown_font),
                     underline: Container(
                       height: 1.2,
                       color: color_divider,
@@ -212,7 +215,7 @@ class _GroupCategoryDropdownState extends State<GroupCategoryDropdown> {
                     icon: Icon(icon_dropdown),
                     iconSize: size_dropdown_icon,
                     elevation: elevation_dropdown,
-                    style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
+                    style: TextStyle(color: color_dropdown_text, fontSize: size_dropdown_font),
                     underline: Container(
                       height: 1.2,
                       color: color_divider,

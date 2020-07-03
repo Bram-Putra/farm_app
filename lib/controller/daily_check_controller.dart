@@ -15,7 +15,6 @@ class DailyCheckController {
     var url = url_path+'v1/dailyChecks/all';
     var res = await http.get(url);
 //    print(res.body);
-
     int code = res.statusCode;
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);

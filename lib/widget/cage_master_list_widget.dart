@@ -5,7 +5,6 @@ import 'package:farmapp/widget/cage_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:convert';
-import 'dart:ui';
 import 'package:http/http.dart' as http;
 
 class CageMasterList extends StatefulWidget {
@@ -19,11 +18,8 @@ class _CageMasterListState extends State<CageMasterList> {
 
   loadData() async {
     _listCage = cmlController.getList();
-
     var url = url_path + 'v1/cages/all';
     var res = await http.get(url);
-//    print(decodedJson);
-
     int code = res.statusCode;
     if (code == 200) {
       List decodedJson = jsonDecode(res.body);
@@ -160,16 +156,19 @@ class _CageMasterListState extends State<CageMasterList> {
                   ),
                   child: ListTile(
                     title: Text(cmlController.getCage(index).tag),
-                    subtitle: Text(cmlController.getCageNotes(index)),
-                  ),
-                ),
-                actions: <Widget>[
-                  IconSlideAction(
-                    caption: 'Edit',
-                    color: color_edit,
-                    icon: icon_edit,
+                    subtitle: Text(cmlController.getCageNotes(index) + '\n' + cmlController.getCageGroup(index)),
                     onTap: () {
                       _callCageDetail(cmlController.getCage(index));
+                    },
+                  ),
+                ),
+                secondaryActions: <Widget>[
+                  IconSlideAction(
+                    caption: 'Hapus',
+                    color: color_delete,
+                    icon: icon_delete,
+                    onTap: () {
+                      _deleteRow(context, index);
                     },
                   ),
                 ],

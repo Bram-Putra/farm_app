@@ -3,7 +3,8 @@ library constants;
 import 'package:farmapp/icon/besoft_icons.dart';
 import 'package:flutter/material.dart';
 
-const url_path = 'http://165.22.61.234:9999/barn/';
+const url_path = 'http://128.199.173.31:9999/barn/';
+//const url_path = 'http://165.22.61.234:9999/barn/';
 //const url_path = 'http://192.168.1.4:9999/barn/';
 
 const app_title = 'Farm House';
@@ -51,8 +52,8 @@ const IconData icon_delete = Icons.delete;
 const IconData icon_edit = Icons.edit;
 
 //Size:
-const double preferred_font_size = 16.0;
 const double height_textformfield = 60.0;
+const double size_dropdown_font = 16.0;
 const double size_dropdown_icon = 40.0;
 const double height_button_save = 48.0;
 const double height_button_download = 48.0;
@@ -62,7 +63,7 @@ const double size_button_download_text = 20.0;
 const double size_button_open_text = 20.0;
 const int elevation_dropdown = 16;
 
-//Master Button Style:
+//TextStyle:
 const textstyle_screenhome_button = TextStyle(
     color: color_text_primary,
     fontSize: 20.0,
@@ -111,5 +112,12 @@ const textstyle_button_open = TextStyle(
     color: color_button_open_text,
     fontSize: size_button_open_text,
     fontWeight: FontWeight.normal,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
+const textstyle_column = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    fontStyle: FontStyle.italic,
     decoration: TextDecoration.none,
     fontFamily: 'Source Sans Pro');

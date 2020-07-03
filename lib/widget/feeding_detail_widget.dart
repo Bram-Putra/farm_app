@@ -24,7 +24,8 @@ class FeedingDetail extends StatefulWidget {
 class _FeedingDetailState extends State<FeedingDetail> {
   FeedingController fController = FeedingController();
   MaterialMasterListController mController = MaterialMasterListController();
-  Future<http.Response> _futureResponse;
+  String _title = 'Data Baru';
+  bool _isEdit = false;
 
   final tcFeedingId = TextEditingController();
   final tcFeedingNumber = TextEditingController();
@@ -37,6 +38,99 @@ class _FeedingDetailState extends State<FeedingDetail> {
   var df = DateFormat("dd MMM yyyy");
   var nf = NumberFormat("#,###");
   var nfd = NumberFormat("#,###.##");
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: color_primary_dark,
+        title: ListTile(
+          leading: Icon(
+            icon_pemberian_pakan,
+            color: color_appbar_icon,
+          ),
+          title: Text(
+            _title,
+            style: textstyle_appbar,
+          ),
+        ),
+      ),
+      body: Container(
+        color: color_primary_light,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ListTile(
+              title: Text('Pemberian Pakan'),
+              subtitle: _isEdit
+                  ? Text(
+                      '#' + tcFeedingNumber.text + ' :: ' + tcFeedingDate.text)
+                  : Text(tcFeedingDate.text),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: CageDropdownButton(tcCage: tcCage),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: 'Notes'),
+                controller: tcNotes,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  itemCount: materials.length,
+                  itemBuilder: (context, index) {
+                    return TextFormField(
+                        decoration: InputDecoration(
+                            labelText: materials[index].materialName,
+                            suffixText: materials[index].uom),
+                        style: TextStyle(height: 1.8),
+                        controller: tcQty[index]);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ButtonTheme(
+                buttonColor: color_button_save,
+                height: height_button_save,
+                child: RaisedButton(
+                  onPressed: () {
+                    _save();
+                  },
+                  child: Text(
+                    'Save',
+                    style: textstyle_button_save,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    tcFeedingId.dispose();
+    tcFeedingNumber.dispose();
+    tcFeedingDate.dispose();
+    tcCage.dispose();
+    tcNotes.dispose();
+    super.dispose();
+  }
 
   void _save() {
     bool confirmSave = false;
@@ -132,6 +226,8 @@ class _FeedingDetailState extends State<FeedingDetail> {
             },
           if (widget.feeding != null)
             {
+              _isEdit = true,
+              _title = 'Edit',
               tcFeedingId.text = widget.feeding.feedingId.toString(),
               tcFeedingNumber.text = widget.feeding.feedingNumber,
               tcFeedingDate.text = df.format(widget.feeding.feedingDate),
@@ -149,93 +245,5 @@ class _FeedingDetailState extends State<FeedingDetail> {
             },
           setState(() {})
         });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadData();
-    _futureResponse = http.get(url_path + 'v1/materials/all');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: color_primary_dark,
-        title: Text(app_title),
-      ),
-      body: Container(
-        color: color_primary_light,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            ListTile(
-              title: Text('Pemberian Material'),
-              subtitle: Text(
-                  '#' + tcFeedingNumber.text + ' :: ' + tcFeedingDate.text),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: CageDropdownButton(tcCage: tcCage),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: TextFormField(
-                decoration: InputDecoration(labelText: 'Notes'),
-                controller: tcNotes,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                child: ListView.builder(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    itemCount: materials.length,
-                    itemBuilder: (context, index){
-                      return TextFormField(
-                          decoration: InputDecoration(
-                            labelText: materials[index].materialName,
-                            suffixText: materials[index].uom
-                          ),
-                          style: TextStyle(
-                            height: 1.8
-                          ),
-                          controller: tcQty[index]
-                        );
-                    },
-                  ),
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-              child: ButtonTheme(
-                buttonColor: color_button_save,
-                height: height_button_save,
-                child: RaisedButton(
-                  onPressed: () {
-                    _save();
-                  },
-                  child: Text('Save', style: textstyle_button_save,),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    tcFeedingId.dispose();
-    tcFeedingNumber.dispose();
-    tcFeedingDate.dispose();
-    tcCage.dispose();
-    tcNotes.dispose();
-    super.dispose();
   }
 }

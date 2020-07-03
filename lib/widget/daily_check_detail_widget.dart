@@ -17,6 +17,9 @@ class DailyCheckDetail extends StatefulWidget {
 
 class _DailyCheckDetailState extends State<DailyCheckDetail> {
   DailyCheckController dcController = DailyCheckController();
+  String _title = 'Data Baru';
+  bool _isEdit = false;
+  var df = DateFormat("dd MMM yyyy");
 
   final tcCheckId = TextEditingController();
   final tcCheckNumber = TextEditingController();
@@ -30,87 +33,10 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
   final tcCage = TextEditingController();
   final tcNotes = TextEditingController();
 
-  void _save() {
-    bool confirmSave = false;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Save'),
-        content: Text('Apakah Anda yakin akan menyimpan data?'),
-        actions: <Widget>[
-          FlatButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Konfirmasi')),
-          FlatButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Batal')),
-        ],
-      ),
-    ).then((value) {
-      confirmSave = value;
-      if (confirmSave) {
-        DailyCheck entity = DailyCheck();
-        if(tcCheckId.text!=''){
-          entity.checkId = int.parse(tcCheckId.text);
-        }
-        entity.checkNumber = tcCheckNumber.text;
-        if(tcCheckDate.text!='') {
-          var df = DateFormat("dd MMM yyyy");
-          entity.checkDate = df.parse(tcCheckDate.text);
-        }
-        entity.alive = double.parse(tcAlive.text);
-        entity.dead = double.parse(tcDead.text);
-        entity.harvest = double.parse(tcHarvest.text);
-        entity.averageWeight = double.parse(tcAverageWeight.text);
-        entity.temperature = double.parse(tcTemperature.text);
-        entity.humidity = double.parse(tcHumidity.text);
-        entity.notes = tcNotes.text;
-        Cage cage = Cage();
-        cage.cageId = int.parse(tcCage.text);
-        entity.cage = cage;
-
-        Future<String> result = dcController.saveDailyCheck(context, entity);
-        result.then((value) => {
-          if(value==''){
-//            showDialog(
-//              context: context,
-//              builder: (context) => AlertDialog(
-//                title: Text('Notifikasi'),
-//                content: Text('Data berhasil disimpan!'),
-//                actions: <Widget>[
-//                  FlatButton(
-//                      onPressed: () => Navigator.pop(context),
-//                      child: Text('OK')),
-//                ],
-//              ),
-//            )
-            Navigator.pop(context)
-          } else {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Notifikasi'),
-                content: Text(value),
-                actions: <Widget>[
-                  FlatButton(
-                      child: Text('OK')),
-                ],
-              ),
-            )
-          }
-
-        });
-
-//        setState(() {
-//        });
-      }
-    });
-  }
-
   @override
-  Widget build(BuildContext context) {
-    var df = DateFormat("dd MMM yyyy");
-    if(widget.dailyCheck!=null){
+  void initState() {
+    super.initState();
+    if (widget.dailyCheck != null) {
       var nf = NumberFormat("#,###");
       var nfd = NumberFormat("#,###.##");
       tcCheckId.text = widget.dailyCheck.checkId.toString();
@@ -124,10 +50,15 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
       tcHumidity.text = nfd.format(widget.dailyCheck.humidity);
       tcNotes.text = widget.dailyCheck.notes;
       tcCage.text = widget.dailyCheck.cage.cageId.toString();
+      _isEdit = true;
+      _title = 'Edit';
     } else {
       tcCheckDate.text = df.format(DateTime.now());
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color_primary_dark,
@@ -137,7 +68,7 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
             color: Colors.white,
           ),
           title: Text(
-            'Inspeksi Harian',
+            _title,
             style: textstyle_appbar,
           ),
         ),
@@ -145,15 +76,15 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
       body: Container(
         color: color_primary_light,
         child: ListView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
           children: <Widget>[
             ListTile(
+              contentPadding: const EdgeInsets.all(0),
               title: Text('Inspeksi Harian'),
-              subtitle: Text('#'+tcCheckNumber.text+' :: '+tcCheckDate.text),
+              subtitle: _isEdit
+                  ? Text('#' + tcCheckNumber.text + ' :: ' + tcCheckDate.text)
+                  : Text(tcCheckDate.text),
             ),
-//            Text(
-//              tcCheckDate.text
-//            ),
             CageDropdownButton(tcCage: tcCage),
             TextFormField(
               decoration: InputDecoration(labelText: 'Populasi'),
@@ -193,7 +124,10 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
                   _save();
                 },
                 color: color_button_save,
-                child: Text('Save', style: textstyle_button_save,),
+                child: Text(
+                  'Save',
+                  style: textstyle_button_save,
+                ),
               ),
             ),
           ],
@@ -216,5 +150,80 @@ class _DailyCheckDetailState extends State<DailyCheckDetail> {
     tcCage.dispose();
     tcNotes.dispose();
     super.dispose();
+  }
+
+  void _save() {
+    bool confirmSave = false;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Save'),
+        content: Text('Apakah Anda yakin akan menyimpan data?'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Konfirmasi')),
+          FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Batal')),
+        ],
+      ),
+    ).then((value) {
+      confirmSave = value;
+      if (confirmSave) {
+        DailyCheck entity = DailyCheck();
+        if (tcCheckId.text != '') {
+          entity.checkId = int.parse(tcCheckId.text);
+        }
+        entity.checkNumber = tcCheckNumber.text;
+        if (tcCheckDate.text != '') {
+          var df = DateFormat("dd MMM yyyy");
+          entity.checkDate = df.parse(tcCheckDate.text);
+        }
+        entity.alive = double.parse(tcAlive.text);
+        entity.dead = double.parse(tcDead.text);
+        entity.harvest = double.parse(tcHarvest.text);
+        entity.averageWeight = double.parse(tcAverageWeight.text);
+        entity.temperature = double.parse(tcTemperature.text);
+        entity.humidity = double.parse(tcHumidity.text);
+        entity.notes = tcNotes.text;
+        Cage cage = Cage();
+        cage.cageId = int.parse(tcCage.text);
+        entity.cage = cage;
+
+        Future<String> result = dcController.saveDailyCheck(context, entity);
+        result.then((value) => {
+              if (value == '')
+                {
+//            showDialog(
+//              context: context,
+//              builder: (context) => AlertDialog(
+//                title: Text('Notifikasi'),
+//                content: Text('Data berhasil disimpan!'),
+//                actions: <Widget>[
+//                  FlatButton(
+//                      onPressed: () => Navigator.pop(context),
+//                      child: Text('OK')),
+//                ],
+//              ),
+//            )
+                  Navigator.pop(context)
+                }
+              else
+                {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Notifikasi'),
+                      content: Text(value),
+                      actions: <Widget>[
+                        FlatButton(child: Text('OK')),
+                      ],
+                    ),
+                  )
+                }
+            });
+      }
+    });
   }
 }

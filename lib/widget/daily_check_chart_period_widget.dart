@@ -49,7 +49,7 @@ class _DailyCheckPeriodDropdownState extends State<DailyCheckPeriodDropdown> {
         icon: Icon(icon_dropdown),
         iconSize: size_dropdown_icon,
         elevation: elevation_dropdown,
-        style: TextStyle(color: color_dropdown_text, fontSize: preferred_font_size),
+        style: TextStyle(color: color_dropdown_text, fontSize: size_dropdown_font),
         underline: Container(
           height: 1.2,
           color: color_divider,

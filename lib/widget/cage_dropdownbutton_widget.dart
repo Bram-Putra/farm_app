@@ -50,20 +50,20 @@ class _CageDropdownButtonState extends State<CageDropdownButton> {
   @override
   void initState() {
     super.initState();
-      loadData();
+    loadData();
   }
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<Cage>(
       value: selectedValue,
-      icon: Icon(Icons.expand_more),
-      iconSize: 24,
-      elevation: 16,
-      style: TextStyle(color: const Color(0xFF00796B)),
+      icon: Icon(icon_dropdown),
+      iconSize: size_dropdown_icon,
+      elevation: elevation_dropdown,
+      style: TextStyle(color: color_dropdown_text, fontSize: size_dropdown_font),
       underline: Container(
-        height: 2,
-        color: const Color(0xFF00796B),
+        height: 1,
+        color: color_divider,
       ),
       onChanged: (Cage newValue) {
         setState(() {

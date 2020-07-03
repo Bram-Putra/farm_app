@@ -1,5 +1,4 @@
 import 'package:farmapp/podo/cage.dart';
-import 'package:intl/intl.dart';
 
 class DailyCheck {
   int checkId;
@@ -14,7 +13,6 @@ class DailyCheck {
   Cage cage;
   String notes;
 //  User user;
-
 
   DailyCheck() {}
 
