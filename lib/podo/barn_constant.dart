@@ -32,6 +32,8 @@ const color_button_download_text = Colors.white;
 const color_button_open_text = Colors.white;
 const color_button_open = const Color(0xFF455A64);
 const color_screen_button_white = Colors.white;
+const color_button_login = const Color(0xFFFFFFFF);
+const color_button_login_text = const Color(0xFF455A64);
 
 //Icon:
 const IconData icon_dashboard = BeSoftIcons.gauge;
@@ -57,10 +59,12 @@ const double size_dropdown_font = 16.0;
 const double size_dropdown_icon = 40.0;
 const double height_button_save = 48.0;
 const double height_button_download = 48.0;
+const double height_button_login = 48.0;
 const double height_button_open = 48.0;
 const double size_button_save_text = 20.0;
 const double size_button_download_text = 20.0;
 const double size_button_open_text = 20.0;
+const double size_button_login_text = 20.0;
 const int elevation_dropdown = 16;
 
 //TextStyle:
@@ -119,5 +123,11 @@ const textstyle_column = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
     fontStyle: FontStyle.italic,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
+const textstyle_button_login = TextStyle(
+    color: color_button_login_text,
+    fontSize: size_button_login_text,
+    fontWeight: FontWeight.normal,
     decoration: TextDecoration.none,
     fontFamily: 'Source Sans Pro');

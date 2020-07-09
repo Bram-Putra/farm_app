@@ -9,7 +9,6 @@ class CageDetailController {
    saveCage(BuildContext context, Cage cage) async {
     var url = url_path+'v1/cages';
     var json = jsonEncode(cage.toJson());
-    print(json);
     var res = await http.post(url,
       body: json,
       headers: <String, String>{
@@ -17,7 +16,6 @@ class CageDetailController {
       }
     );
     int code = res.statusCode;
-    print(code);
     if (code == 200) {
       Navigator.pop(context);
     } else {

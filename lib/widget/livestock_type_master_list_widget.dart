@@ -18,7 +18,7 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
       LivestockTypeMasterListController();
   List<LivestockType> _listLivestockType;
 
-  void goHome() {
+  void _goHome() {
     bool confirmed = false;
     showDialog(
       context: context,
@@ -121,7 +121,7 @@ class _LivestockTypeMasterListState extends State<LivestockTypeMasterList> {
             icon: const Icon(Icons.home),
             tooltip: 'Kembali ke halaman utama',
             onPressed: () {
-              goHome();
+              _goHome();
             },
           ),
         ],

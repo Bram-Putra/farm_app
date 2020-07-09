@@ -35,7 +35,7 @@ class _CageMasterListState extends State<CageMasterList> {
     }
   }
 
-  void goHome() {
+  void _goHome() {
     bool confirmed = false;
     showDialog(
       context: context,
@@ -115,10 +115,10 @@ class _CageMasterListState extends State<CageMasterList> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.home),
+            icon: Icon(Icons.home),
             tooltip: 'Kembali ke halaman utama',
             onPressed: () {
-              goHome();
+              _goHome();
             },
           ),
         ],
