@@ -12,26 +12,50 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isLogin = false;
   LoginController _loginController = LoginController();
   TextEditingController tcUserName = TextEditingController();
   TextEditingController tcPassword = TextEditingController();
 
   void _login() async {
+    _isLogin = true;
+    setState(() {});
     Login login =
         Login(userName: tcUserName.text, userPassword: tcPassword.text);
     await _loginController.login(login);
-    tcUserName.text = '';
-    tcPassword.text = '';
     _loadToken();
   }
 
   void _loadToken() {
+    _isLogin = false;
+    setState(() {});
     Future<String> token = _loginController.getToken();
     token.then((value) => {
-      print('login_screen token:'),
-      print(value),
-      Navigator.of(context).popUntil(ModalRoute.withName('/'))
-    });
+          if (value == null)
+            {
+              print('if null'),
+              print(value),
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Informasi'),
+                  content:
+                      Text('Harap gunakan User Name dan Password yang tepat'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Ok')),
+                  ],
+                ),
+              ),
+            }
+          else
+            {
+              tcUserName.text = '',
+              tcPassword.text = '',
+              Navigator.of(context).popUntil(ModalRoute.withName('/'))
+            }
+        });
   }
 
   @override
@@ -100,19 +124,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 )),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
-              child: ButtonTheme(
-                height: height_button_login,
-                buttonColor: color_button_login,
-                child: RaisedButton(
-                  child: Text(
-                    'Login',
-                    style: textstyle_button_login,
-                  ),
-                  onPressed: () {
-                    _login();
-                  },
-                ),
-              ),
+              child: _isLogin
+                  ? ButtonTheme(
+                      height: height_button_login,
+                      buttonColor: color_button_login_disabled,
+                      child: RaisedButton(
+                        child: Text(
+                          'Login',
+                          style: textstyle_button_login,
+                        ),
+                        onPressed: () {
+                          null;
+                        },
+                      ),
+                    )
+                  : ButtonTheme(
+                      height: height_button_login,
+                      buttonColor: color_button_login,
+                      child: RaisedButton(
+                        child: Text(
+                          'Login',
+                          style: textstyle_button_login,
+                        ),
+                        onPressed: () {
+                          _login();
+                        },
+                      ),
+                    ),
             ),
           ],
         ),

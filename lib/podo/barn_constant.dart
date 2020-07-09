@@ -33,6 +33,7 @@ const color_button_open_text = Colors.white;
 const color_button_open = const Color(0xFF455A64);
 const color_screen_button_white = Colors.white;
 const color_button_login = const Color(0xFFFFFFFF);
+const color_button_login_disabled = const Color(0xFFCFD8DC);
 const color_button_login_text = const Color(0xFF455A64);
 
 //Icon:
