@@ -30,32 +30,32 @@ class _LoginScreenState extends State<LoginScreen> {
     _isLogin = false;
     setState(() {});
     Future<String> token = _loginController.getToken();
-    token.then((value) => {
-          if (value == null)
-            {
-              print('if null'),
-              print(value),
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text('Informasi'),
-                  content:
-                      Text('Harap gunakan User Name dan Password yang tepat'),
-                  actions: <Widget>[
-                    FlatButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Ok')),
-                  ],
-                ),
+    token.then(
+      (value) => {
+        if (value == null)
+          {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text('Informasi'),
+                content:
+                    Text('Harap gunakan User Name dan Password yang tepat'),
+                actions: <Widget>[
+                  FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('Ok')),
+                ],
               ),
-            }
-          else
-            {
-              tcUserName.text = '',
-              tcPassword.text = '',
-              Navigator.of(context).popUntil(ModalRoute.withName('/'))
-            }
-        });
+            ),
+          }
+        else
+          {
+            tcUserName.text = '',
+            tcPassword.text = '',
+            Navigator.of(context).popUntil(ModalRoute.withName('/'))
+          }
+      },
+    );
   }
 
   @override

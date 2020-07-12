@@ -1,4 +1,5 @@
 import 'package:farmapp/podo/login.dart';
+import 'package:farmapp/podo/role.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -17,6 +18,10 @@ class LoginController {
     return token;
   }
 
+  void _setUserName(String userName) async {
+    await _secureStorage.write(key: "userName", value: userName);
+  }
+
   void login(Login login) async {
     var url = url_path + 'v1/security/login';
     var json = jsonEncode(login.toJson());
@@ -25,28 +30,27 @@ class LoginController {
     });
     int code = res.statusCode;
     if (code == 200) {
-      print('res.body:');
-      print(res.body);
+      _setUserName(login.userName);
       String s = res.body;
       _setToken(s);
       Future<String> token = getToken();
       token.then((value) => {
-        print('token:'),
-        print(value),
-        _selectMenu(value),
+        getRole(),
       });
     } else {
       print("Gagal Login");
     }
   }
 
-  _selectMenu(String token) async {
-    var url = url_path + 'v1/users/role?userName=' + 'user';
+  Future<Role> getRole() async {
+    var userName = await _secureStorage.read(key: "userName");
+    var url = url_path + 'v1/users/role?userName=' + userName;
     var res = await http.get(url);
     int code = res.statusCode;
     if (code == 200) {
-      print('menu: ');
-      print(res.body);
+      var decodedJson = jsonDecode(res.body);
+      Role r = Role.fromJson(decodedJson);
+      return r;
     }
     else {
       print('gagal mendapatkan menu');
@@ -55,7 +59,12 @@ class LoginController {
 
   void logout() async {
     await _secureStorage.delete(key: "token");
-    print('Logout');
-    exit(0);
+    await _secureStorage.delete(key: "userName");
+    Future<String> s = _secureStorage.read(key: "token");
+    s.then((value) => {
+      if(value == null) {
+        exit(0)
+      }
+    });
   }
 }

@@ -16,6 +16,7 @@ const color_primary_light = const Color(0xFFCFD8DC);
 const color_primary_white = Colors.white;
 const color_text_primary = const Color(0xFF212121);
 const color_text_secondary = const Color(0xFF757575);
+const color_text_light = const Color(0xFFCFD8DC);
 const color_text_white = const Color(0xFFFFFFFF);
 const color_divider = const Color(0xFFBDBDBD);
 const color_divider_children = const Color(0xFFFFFFFF);
@@ -37,6 +38,7 @@ const color_button_login_disabled = const Color(0xFFCFD8DC);
 const color_button_login_text = const Color(0xFF455A64);
 
 //Icon:
+const IconData icon_app = BeSoftIcons.app_icon_2;
 const IconData icon_dashboard = BeSoftIcons.gauge;
 const IconData icon_kandang = BeSoftIcons.barn;
 const IconData icon_laporan = Icons.library_books;
@@ -55,6 +57,7 @@ const IconData icon_delete = Icons.delete;
 const IconData icon_edit = Icons.edit;
 
 //Size:
+const double size_icon_app = 160.0;
 const double height_textformfield = 60.0;
 const double size_dropdown_font = 16.0;
 const double size_dropdown_icon = 40.0;
@@ -62,15 +65,44 @@ const double height_button_save = 48.0;
 const double height_button_download = 48.0;
 const double height_button_login = 48.0;
 const double height_button_open = 48.0;
+const double height_button_continue = 64.0;
+const double width_button_continue = 160.0;
 const double size_button_save_text = 20.0;
 const double size_button_download_text = 20.0;
 const double size_button_open_text = 20.0;
 const double size_button_login_text = 20.0;
+const double size_button_continue_text = 32.0;
 const int elevation_dropdown = 16;
 
 //TextStyle:
+const textstyle_version_title = TextStyle(
+    color: color_primary_medium,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.none,
+    letterSpacing: 0.0,
+    fontFamily: 'Source Sans Pro');
+const textstyle_version = TextStyle(
+    color: color_primary_medium,
+    fontSize: 12.0,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.none,
+    letterSpacing: 2.0,
+    fontFamily: 'Source Sans Pro');
+const textstyle_agree_button = TextStyle(
+    color: color_primary_dark,
+    fontSize: 24.0,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
 const textstyle_screenhome_button = TextStyle(
     color: color_text_primary,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.none,
+    fontFamily: 'Source Sans Pro');
+const textstyle_screenhome_button_disabled = TextStyle(
+    color: color_text_white,
     fontSize: 20.0,
     fontWeight: FontWeight.bold,
     decoration: TextDecoration.none,
